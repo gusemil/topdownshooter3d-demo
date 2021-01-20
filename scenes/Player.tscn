@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
-[ext_resource path="res://scripts/Weapon.gd" type="Script" id=3]
 
 [sub_resource type="CapsuleMesh" id=1]
 mid_height = 2.0
@@ -9,9 +8,9 @@ mid_height = 2.0
 [sub_resource type="SpatialMaterial" id=2]
 albedo_color = Color( 1, 0.0235294, 0.643137, 1 )
 
-[sub_resource type="CubeMesh" id=4]
+[sub_resource type="CubeMesh" id=3]
 
-[sub_resource type="CapsuleShape" id=3]
+[sub_resource type="CapsuleShape" id=4]
 height = 2.0
 
 [sub_resource type="SphereMesh" id=5]
@@ -30,23 +29,21 @@ mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
 [node name="WeaponManager" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="Weapons" type="Spatial" parent="WeaponManager"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.24315, 0 )
 
 [node name="MachineGun" type="Spatial" parent="WeaponManager/Weapons"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -1 )
-script = ExtResource( 3 )
 
 [node name="MachineGunGraphics" type="MeshInstance" parent="WeaponManager/Weapons/MachineGun"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 1, 0, 0, 0 )
-mesh = SubResource( 4 )
+mesh = SubResource( 3 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="CameraRig" type="Position3D" parent="."]
 

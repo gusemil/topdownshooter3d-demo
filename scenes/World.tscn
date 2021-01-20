@@ -1,18 +1,23 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://graphics/textures/metal.jpg" type="Texture" id=1]
+[ext_resource path="res://scenes/HitScanBulletSpawner.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 
-[sub_resource type="SpatialMaterial" id=4]
+[sub_resource type="SpatialMaterial" id=1]
 flags_unshaded = true
-albedo_texture = ExtResource( 1 )
+albedo_color = Color( 0.419608, 0.419608, 0.419608, 1 )
 
-[sub_resource type="PlaneMesh" id=1]
-material = SubResource( 4 )
+[sub_resource type="PlaneMesh" id=2]
+material = SubResource( 1 )
 size = Vector2( 100, 100 )
 
-[sub_resource type="ConcavePolygonShape" id=5]
+[sub_resource type="ConcavePolygonShape" id=3]
 data = PoolVector3Array( 50, 0, 50, -50, 0, 50, 50, 0, -50, -50, 0, 50, -50, 0, -50, 50, 0, -50 )
+
+[sub_resource type="CubeMesh" id=4]
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 1.02186, 1, 1 )
 
 [node name="World" type="Spatial"]
 
@@ -22,13 +27,76 @@ __meta__ = {
 }
 
 [node name="Ground" type="MeshInstance" parent="Environment"]
-mesh = SubResource( 1 )
+mesh = SubResource( 2 )
 material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="Environment/Ground"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Environment/Ground/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="CSGMesh" type="CSGMesh" parent="Environment"]
+transform = Transform( 7.94732, 0, 0, 0, 3.75747, 0, 0, 0, 1, 0, 4.1333, -15.1333 )
+mesh = SubResource( 4 )
+
+[node name="StaticBody" type="StaticBody" parent="Environment/CSGMesh"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Environment/CSGMesh/StaticBody"]
+shape = SubResource( 5 )
+
+[node name="CSGMesh2" type="CSGMesh" parent="Environment"]
+transform = Transform( 0.591039, 0, -0.997231, 0, 3.75747, 0, 7.92531, 0, 0.0743696, 16.2865, 4.1333, -14.5777 )
+mesh = SubResource( 4 )
+
+[node name="StaticBody" type="StaticBody" parent="Environment/CSGMesh2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Environment/CSGMesh2/StaticBody"]
 shape = SubResource( 5 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+
+[node name="HitScanBulletSpawner" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.999958, -0.00607994, 0.00690167, 0, 0.750365, 0.661024, -0.00919776, -0.660996, 0.750333, 1.15179, 0.550723, -11.2665 )
+
+[node name="Timer" type="Timer" parent="HitScanBulletSpawner"]
+wait_time = 0.001
+one_shot = true
+autostart = true
+
+[node name="HitScanBulletSpawner2" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.999958, -0.00607994, 0.00690167, 0, 0.750365, 0.661024, -0.00919776, -0.660996, 0.750333, 1.15179, 0.550723, -11.2665 )
+
+[node name="Timer" type="Timer" parent="HitScanBulletSpawner2"]
+wait_time = 0.001
+one_shot = true
+autostart = true
+
+[node name="HitScanBulletSpawner3" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.999958, -0.00607994, 0.00690167, 0, 0.750365, 0.661024, -0.00919776, -0.660996, 0.750333, -3.23462, 0.550723, -11.2665 )
+
+[node name="Timer" type="Timer" parent="HitScanBulletSpawner3"]
+wait_time = 0.001
+one_shot = true
+autostart = true
+
+[node name="HitScanBulletSpawner4" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.999958, -0.00607994, 0.00690167, 0, 0.750365, 0.661024, -0.00919776, -0.660996, 0.750333, 1.15179, 3.0838, -11.2665 )
+
+[node name="Timer" type="Timer" parent="HitScanBulletSpawner4"]
+wait_time = 0.001
+one_shot = true
+autostart = true
+
+[node name="HitScanBulletSpawner5" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.999958, -0.00607994, 0.00690167, 0, 0.750365, 0.661024, -0.00919776, -0.660996, 0.750333, 5.17566, 0.550723, -11.2665 )
+
+[node name="Timer" type="Timer" parent="HitScanBulletSpawner5"]
+wait_time = 0.001
+one_shot = true
+autostart = true
+[connection signal="timeout" from="HitScanBulletSpawner/Timer" to="HitScanBulletSpawner" method="fire"]
+[connection signal="timeout" from="HitScanBulletSpawner2/Timer" to="HitScanBulletSpawner2" method="fire"]
+[connection signal="timeout" from="HitScanBulletSpawner3/Timer" to="HitScanBulletSpawner3" method="fire"]
+[connection signal="timeout" from="HitScanBulletSpawner4/Timer" to="HitScanBulletSpawner4" method="fire"]
+[connection signal="timeout" from="HitScanBulletSpawner5/Timer" to="HitScanBulletSpawner5" method="fire"]
