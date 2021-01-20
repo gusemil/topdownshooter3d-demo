@@ -11,17 +11,22 @@ var velocity = Vector3()
 onready var camera = $CameraRig/Camera
 onready var camera_rig = $CameraRig
 onready var cursor= $Cursor
+onready var weapon_manager = $WeaponManager
 
 
 func _ready():
 	camera_rig.set_as_toplevel(true)
 	cursor.set_as_toplevel(true)
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	weapon_manager.init($WeaponManager/FirePoint, [self]) #exlude player from bullet collisions
 
 
 func _input(event):
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
+		
+func _process(_delta):
+	weapon_manager.shoot(Input.is_action_just_pressed("shoot"), Input.is_action_pressed("shoot"))
 
 
 func _physics_process(delta):
