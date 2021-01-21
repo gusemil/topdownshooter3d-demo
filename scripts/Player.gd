@@ -12,18 +12,24 @@ onready var camera = $CameraRig/Camera
 onready var camera_rig = $CameraRig
 onready var cursor= $Cursor
 onready var weapon_manager = $WeaponManager
+onready var health_manager = $HealthManager
+
+var dead = false
 
 
 func _ready():
 	camera_rig.set_as_toplevel(true)
 	cursor.set_as_toplevel(true)
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	weapon_manager.init($WeaponManager/FirePoint, [self]) #exlude player from bullet collisions
+	weapon_manager.init($WeaponManager/FirePoint, [self]) #exclude player from bullet collisions
+	health_manager.connect("dead", self, "death") #Kun healthmanagerin dead emitataan niin pelaajan death funktio aktivoituu
 
 
 func _input(event):
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
+	if Input.is_action_just_pressed("restart"):
+		get_tree().reload_current_scene()
 		
 func _process(_delta):
 	weapon_manager.shoot(Input.is_action_just_pressed("shoot"), Input.is_action_pressed("shoot"))
@@ -86,3 +92,10 @@ func move(delta):
 	move_direction = move_direction.normalized()
 	
 	velocity += move_direction*speed*delta
+
+func take_damage(dmg : int):
+	health_manager.take_damage(dmg)
+
+func death():
+	dead = true
+	print("Player is dead")
