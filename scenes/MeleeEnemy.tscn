@@ -37,6 +37,7 @@ transform = Transform( 1, 2.27374e-13, -1.47882e-13, 0, 0.342021, 0.939694, 0, -
 shape = SubResource( 2 )
 
 [node name="HealthManager" parent="." instance=ExtResource( 4 )]
+max_health = 10
 [connection signal="dead" from="HealthManager" to="." method="set_state" binds= [ 3 ]]
 
 [editable path="Graphics"]

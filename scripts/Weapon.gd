@@ -33,20 +33,20 @@ func init(_fire_point: Spatial, _collision_bodies_to_ignore: Array):
 		bullet_spawner.set_bodies_to_exclude(collision_bodies_to_ignore)
 
 func shoot(shoot_input_just_pressed: bool, shoot_input_held: bool):
-	if !can_shoot:
+	if(!can_shoot):
 		return
-	if automatic_fire and !shoot_input_held:
+	if(automatic_fire and !shoot_input_held):
 		return
-	elif !automatic_fire and !shoot_input_just_pressed:
+	elif(!automatic_fire and !shoot_input_just_pressed):
 		return
 	
 	
-	if ammo == 0:
-		if shoot_input_just_pressed:
+	if(ammo == 0):
+		if(shoot_input_just_pressed):
 			emit_signal("out_of_ammo")
 		return
 	
-	if ammo > 0:
+	if(ammo > 0):
 		ammo -= 1
 	
 	var start_transform = bullet_spawners_base.global_transform

@@ -24,12 +24,6 @@ func _ready():
 	weapon_manager.init($WeaponManager/FirePoint, [self]) #exclude player from bullet collisions
 	health_manager.connect("dead", self, "death") #Kun healthmanagerin dead emitataan niin pelaajan death funktio aktivoituu
 
-
-func _input(event):
-	if Input.is_action_just_pressed("ui_cancel"):
-		get_tree().quit()
-	if Input.is_action_just_pressed("restart"):
-		get_tree().reload_current_scene()
 		
 func _process(_delta):
 	weapon_manager.shoot(Input.is_action_just_pressed("shoot"), Input.is_action_pressed("shoot"))

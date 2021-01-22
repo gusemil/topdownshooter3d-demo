@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/MeleeEnemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/GameManager.gd" type="Script" id=3]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_unshaded = true
@@ -24,6 +25,7 @@ vertices = PoolVector3Array( -38.6, 0.4, -49.4, -49.4, 0.4, -49.4, -49.4, 0.4, -
 polygons = [ PoolIntArray( 2, 1, 0 ), PoolIntArray( 5, 4, 3 ), PoolIntArray( 8, 7, 9 ), PoolIntArray( 9, 7, 6 ), PoolIntArray( 11, 10, 12 ), PoolIntArray( 12, 10, 13 ), PoolIntArray( 15, 14, 16 ), PoolIntArray( 16, 14, 17 ), PoolIntArray( 17, 14, 18 ), PoolIntArray( 18, 14, 19 ), PoolIntArray( 21, 20, 22 ), PoolIntArray( 22, 20, 23 ), PoolIntArray( 25, 24, 26 ), PoolIntArray( 26, 24, 27 ), PoolIntArray( 30, 29, 28 ), PoolIntArray( 32, 31, 33 ), PoolIntArray( 33, 31, 34 ), PoolIntArray( 34, 31, 35 ), PoolIntArray( 38, 37, 36 ), PoolIntArray( 40, 39, 41 ), PoolIntArray( 42, 45, 43 ), PoolIntArray( 43, 45, 44 ), PoolIntArray( 47, 46, 48 ), PoolIntArray( 48, 46, 49 ), PoolIntArray( 51, 50, 52 ), PoolIntArray( 52, 50, 55 ), PoolIntArray( 52, 55, 54 ), PoolIntArray( 52, 54, 53 ), PoolIntArray( 59, 58, 56 ), PoolIntArray( 56, 58, 57 ), PoolIntArray( 63, 62, 60 ), PoolIntArray( 60, 62, 61 ), PoolIntArray( 66, 65, 64 ), PoolIntArray( 68, 67, 69 ), PoolIntArray( 69, 67, 70 ), PoolIntArray( 70, 67, 71 ), PoolIntArray( 73, 72, 74 ), PoolIntArray( 74, 72, 75 ), PoolIntArray( 75, 72, 76 ), PoolIntArray( 79, 78, 77 ), PoolIntArray( 83, 82, 80 ), PoolIntArray( 80, 82, 81 ), PoolIntArray( 87, 86, 84 ), PoolIntArray( 84, 86, 85 ), PoolIntArray( 91, 90, 88 ), PoolIntArray( 88, 90, 89 ), PoolIntArray( 95, 94, 92 ), PoolIntArray( 92, 94, 93 ), PoolIntArray( 97, 96, 98 ), PoolIntArray( 98, 96, 99 ), PoolIntArray( 101, 100, 102 ), PoolIntArray( 102, 100, 103 ), PoolIntArray( 106, 105, 104 ), PoolIntArray( 108, 107, 109 ), PoolIntArray( 109, 107, 111 ), PoolIntArray( 109, 111, 110 ), PoolIntArray( 114, 113, 112 ), PoolIntArray( 117, 116, 115 ), PoolIntArray( 119, 118, 120 ), PoolIntArray( 120, 118, 121 ), PoolIntArray( 123, 122, 124 ), PoolIntArray( 124, 122, 125 ), PoolIntArray( 125, 122, 126 ), PoolIntArray( 128, 127, 129 ), PoolIntArray( 129, 127, 130 ), PoolIntArray( 132, 131, 133 ), PoolIntArray( 133, 131, 134 ), PoolIntArray( 137, 136, 135 ), PoolIntArray( 139, 138, 140 ), PoolIntArray( 140, 138, 141 ), PoolIntArray( 144, 143, 142 ), PoolIntArray( 147, 146, 145 ), PoolIntArray( 149, 148, 150 ), PoolIntArray( 150, 148, 151 ), PoolIntArray( 153, 152, 154 ), PoolIntArray( 154, 152, 156 ), PoolIntArray( 154, 156, 155 ), PoolIntArray( 158, 157, 159 ), PoolIntArray( 159, 157, 160 ), PoolIntArray( 163, 162, 161 ), PoolIntArray( 166, 165, 167 ), PoolIntArray( 167, 165, 164 ), PoolIntArray( 169, 168, 170 ), PoolIntArray( 170, 168, 171 ) ]
 
 [node name="World" type="Spatial"]
+script = ExtResource( 3 )
 
 [node name="Environment" type="Spatial" parent="."]
 __meta__ = {
@@ -57,7 +59,9 @@ mesh = SubResource( 4 )
 [node name="CollisionShape" type="CollisionShape" parent="Environment/CSGMesh2/StaticBody"]
 shape = SubResource( 5 )
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
+[node name="Player" parent="." groups=[
+"player",
+] instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
 [node name="Navigation" type="Navigation" parent="."]
