@@ -3,31 +3,28 @@ extends KinematicBody
 enum STATE {IDLE, CHASE, ATTACK, DEAD}
 var current_state = STATE.IDLE
 
-export var body_removes_after_seconds = 5
-var body_removal_timer : Timer
-
 onready var animation_player = $Graphics/AnimationPlayer
 onready var health_manager = $HealthManager
 
-#Movement
+# Movement
 export var turn_speed_per_second = 360.0
-var movement_vector : Vector3
-export var speed = 300
-#export var friction = 0.875
-export var gravity = 80
-export var move_accel = 4
+export var gravity = 100
+export var move_acceleration = 5
 var drag = 0.0
 export var max_speed = 25
-
+var movement_vector : Vector3
 var move_direction = Vector3()
 var velocity = Vector3()
 
-#Navigation and player sensing
+# Navigation and player sensing
 var player = null #reference to the player
 var path = []
 export var sight_cone_degrees = 45.0
 onready var nav : Navigation = get_parent() # enemy must be a child of navigation node
 
+# Body removal
+export var body_removes_after_seconds = 5
+var body_removal_timer : Timer
 func _ready():
 	player = get_tree().get_nodes_in_group("player")[0] # When multiplayer is implemented take the nearest player object with the tag/group "player"
 	var bone_attachments = $Graphics/Armature/Skeleton.get_children()
@@ -36,16 +33,15 @@ func _ready():
 			if child is HitBox:
 				child.connect("hurt", self, "hurt") #Hitboxin hurt signal yhdistetään tämän hurt signaliin
 	
-	#health_manager.connect("dead", self, "set_state", )
 	set_state(STATE.IDLE)
+
+	drag = float(move_acceleration) / max_speed
 
 	#body removal stuff. Started on death
 	body_removal_timer = Timer.new()
 	body_removal_timer.wait_time = body_removes_after_seconds
 	body_removal_timer.connect("timeout", self, "remove_body")
 	add_child(body_removal_timer)
-
-	drag = float(move_accel) / max_speed
 
 func _process(delta):
 	#print(has_player_in_line_of_sight())
@@ -66,8 +62,8 @@ func _process(delta):
 		var direction = goal_position - my_position
 		direction.y = 0
 		set_movement_vector(direction)
-		move(delta)
 		face_direction(direction, delta)
+		move(delta)
 	elif(current_state == STATE.ATTACK):
 		#state_attack(delta)
 		pass
@@ -142,14 +138,5 @@ func set_movement_vector(_movement_vector : Vector3):
 func move(delta):
 	move_direction = movement_vector
 	move_direction.y = 0
-	move_direction = move_direction.normalized()
-	
-	movement_vector = movement_vector.rotated(Vector3.UP, rotation.y) #Ignores rotation so it follows the player properly
-
-	velocity += move_accel * movement_vector - velocity * Vector3(drag, 0, drag) + gravity * Vector3.DOWN * delta
+	velocity += move_acceleration * movement_vector - velocity * Vector3(drag, 0, drag) + gravity * Vector3.DOWN * delta
 	velocity = move_and_slide_with_snap(velocity, Vector3.DOWN, Vector3.UP)
-
-	#velocity += move_direction*speed*delta
-	#print("VELOCITY: ", velocity, " MOVEDIRECTION: ", move_direction)
-	#velocity = move_and_slide_with_snap(velocity, Vector3.DOWN, Vector3.UP)
-
