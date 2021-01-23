@@ -16,11 +16,20 @@ var movement_vector : Vector3
 var move_direction = Vector3()
 var velocity = Vector3()
 
+# Attack
+export var attack_range = 5.0
+export var attack_rate = 1.0
+var attack_timer : Timer
+var can_attack = true
+export var face_towards_player_when_attacking = false
+
 # Navigation and player sensing
 var player = null #reference to the player
 var path = []
 export var sight_cone_degrees = 45.0
 onready var nav : Navigation = get_parent() # enemy must be a child of navigation node
+
+signal attack
 
 # Body removal
 export var body_removes_after_seconds = 5
@@ -43,36 +52,12 @@ func _ready():
 	body_removal_timer.connect("timeout", self, "remove_body")
 	add_child(body_removal_timer)
 
-func _process(delta):
-	#print(has_player_in_line_of_sight())
-	print(can_see_player())
-	if(current_state == STATE.IDLE):
-		if(can_see_player()):
-			set_state(STATE.CHASE)
-		pass
-	elif(current_state == STATE.CHASE):
-		var player_position = player.global_transform.origin
-		var my_position = global_transform.origin
-		path = nav.get_simple_path(my_position, player_position)
-		var goal_position = player_position
-
-		if path.size() > 1: #0 positio on vihollinen oma sijainti
-			goal_position = path[1]
-
-		var direction = goal_position - my_position
-		direction.y = 0
-		set_movement_vector(direction)
-		face_direction(direction, delta)
-		move(delta)
-	elif(current_state == STATE.ATTACK):
-		#state_attack(delta)
-		pass
-	elif(current_state == STATE.DEAD):
-		#print("DEAD")
-		pass
-
-#func _physics_process(delta):
-#	move(delta)
+	# Attack
+	attack_timer = Timer.new()
+	attack_timer.wait_time = attack_rate
+	attack_timer.connect("timeout", self, "finish_attack")
+	attack_timer.one_shot = true
+	add_child(attack_timer)
 
 func set_state(state: int):
 	current_state = state
@@ -87,13 +72,6 @@ func set_state(state: int):
 func hurt(damage: int, dir : Vector3): #refactor this. Vector3 is unnecessary
 	print("enemy got hit!")
 	health_manager.take_damage(damage)
-
-func state_chase(delta):
-	print("CHASING")
-	
-func state_attack(delta):
-	print("ATTACKING")
-	
 func disable_all_collisions():
 	$CollisionShape.disabled = true #Much better collision disabling
 
@@ -140,3 +118,51 @@ func move(delta):
 	move_direction.y = 0
 	velocity += move_acceleration * movement_vector - velocity * Vector3(drag, 0, drag) + gravity * Vector3.DOWN * delta
 	velocity = move_and_slide_with_snap(velocity, Vector3.DOWN, Vector3.UP)
+
+func start_attack():
+	can_attack = false
+	animation_player.play("attack")
+	attack_timer.start()
+
+func finish_attack():
+	can_attack = true
+
+func within_distance_of_player(distance: float):
+	return global_transform.origin.distance_to(player.global_transform.origin) < attack_range
+
+func _process(delta):
+	#print(can_see_player())
+	if(current_state == STATE.IDLE):
+		if(can_see_player()):
+			set_state(STATE.CHASE)
+		pass
+
+	elif(current_state == STATE.CHASE):
+		print(within_distance_of_player(attack_range), " ", has_player_in_line_of_sight())
+		if within_distance_of_player(attack_range) and has_player_in_line_of_sight():
+			current_state = STATE.ATTACK
+		var player_position = player.global_transform.origin
+		var my_position = global_transform.origin
+		path = nav.get_simple_path(my_position, player_position)
+		var goal_position = player_position
+
+		if path.size() > 1: #0 positio on vihollinen oma sijainti
+			goal_position = path[1]
+
+		var direction = goal_position - my_position
+		direction.y = 0
+		set_movement_vector(direction)
+		face_direction(direction, delta)
+		move(delta)
+
+	elif(current_state == STATE.ATTACK):
+		set_movement_vector(Vector3.ZERO)
+		if face_towards_player_when_attacking:
+			face_direction(global_transform.origin.direction_to(player.global_transform.origin),delta) #always face towards player during attack
+		if can_attack:
+			start_attack()
+		if !within_distance_of_player(attack_range) or !can_see_player():
+			current_state = STATE.CHASE
+
+	elif(current_state == STATE.DEAD):
+		pass
