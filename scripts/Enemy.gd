@@ -5,6 +5,7 @@ var current_state = STATE.IDLE
 
 onready var animation_player = $Graphics/AnimationPlayer
 onready var health_manager = $HealthManager
+onready var damage_area = $AttackArea/DamageArea
 
 # Movement
 export var turn_speed_per_second = 360.0
@@ -19,9 +20,12 @@ var velocity = Vector3()
 # Attack
 export var attack_range = 5.0
 export var attack_rate = 1.0
+export var attack_animation_speed = 0.5
 var attack_timer : Timer
 var can_attack = true
 export var face_towards_player_when_attacking = false
+export var stop_moving_when_attacking = true
+export var attack_damage = 10
 
 # Navigation and player sensing
 var player = null #reference to the player
@@ -58,6 +62,7 @@ func _ready():
 	attack_timer.connect("timeout", self, "finish_attack")
 	attack_timer.one_shot = true
 	add_child(attack_timer)
+	damage_area.set_damage(attack_damage)
 
 func set_state(state: int):
 	current_state = state
@@ -121,26 +126,31 @@ func move(delta):
 
 func start_attack():
 	can_attack = false
-	animation_player.play("attack")
+	animation_player.play("attack", -1, attack_animation_speed)
 	attack_timer.start()
 
 func finish_attack():
 	can_attack = true
+
+func emit_attack_signal():
+	emit_signal("attack")
 
 func within_distance_of_player(distance: float):
 	return global_transform.origin.distance_to(player.global_transform.origin) < attack_range
 
 func _process(delta):
 	#print(can_see_player())
+	#IDLE
 	if(current_state == STATE.IDLE):
 		if(can_see_player()):
 			set_state(STATE.CHASE)
 		pass
 
+		#CHASE
 	elif(current_state == STATE.CHASE):
-		print(within_distance_of_player(attack_range), " ", has_player_in_line_of_sight())
+		#print(within_distance_of_player(attack_range), " ", has_player_in_line_of_sight())
 		if within_distance_of_player(attack_range) and has_player_in_line_of_sight():
-			current_state = STATE.ATTACK
+			set_state(STATE.ATTACK)
 		var player_position = player.global_transform.origin
 		var my_position = global_transform.origin
 		path = nav.get_simple_path(my_position, player_position)
@@ -155,14 +165,23 @@ func _process(delta):
 		face_direction(direction, delta)
 		move(delta)
 
+		#ATTACK
 	elif(current_state == STATE.ATTACK):
 		set_movement_vector(Vector3.ZERO)
 		if face_towards_player_when_attacking:
 			face_direction(global_transform.origin.direction_to(player.global_transform.origin),delta) #always face towards player during attack
-		if can_attack:
-			start_attack()
-		if !within_distance_of_player(attack_range) or !can_see_player():
-			current_state = STATE.CHASE
+		if stop_moving_when_attacking:
+			if can_attack:
+				if !within_distance_of_player(attack_range) or !can_see_player():
+					set_state(STATE.CHASE)
+				else:
+					start_attack()
+		else:
+			if can_attack:
+				start_attack()
+			if !within_distance_of_player(attack_range) or !can_see_player():
+				set_state(STATE.CHASE)
 
+		#DEAD
 	elif(current_state == STATE.DEAD):
 		pass
