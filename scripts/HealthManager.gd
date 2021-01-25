@@ -5,7 +5,7 @@ onready var current_health : int = max_health
 
 #signal healed
 signal dead
-signal hurt
+signal take_damage
 signal health_changed
 #signal gibbed
 
@@ -22,7 +22,7 @@ func take_damage(dmg : int):
 	elif(current_health <= 0):
 		emit_signal("dead") #connectataan mm. pelaajan death funktioon
 	else:
-		emit_signal("hurt")
+		emit_signal("take_damage")
 
 	emit_signal("health_changed", current_health)
 	print("damage ", dmg, " taken. Current health: ", current_health)

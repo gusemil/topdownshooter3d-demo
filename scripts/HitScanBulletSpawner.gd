@@ -17,8 +17,8 @@ func fire():
 	var our_pos = global_transform.origin
 	var result = space_state.intersect_ray(our_pos, our_pos - global_transform.basis.z * distance, 
 		bodies_to_exclude, 1 + 4, true, true) # world layer + character layer + hitbox layer
-	if result and result.collider.has_method("hurt"):
-		result.collider.hurt(damage, result.normal)
+	if result and result.collider.has_method("take_damage"):
+		result.collider.take_damage(damage)
 		print(result.collider.name)
 	elif result:
 		var hit_effect_inst = hit_effect.instance()

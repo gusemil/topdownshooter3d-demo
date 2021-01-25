@@ -2,7 +2,7 @@ extends Area
 
 class_name HitBox
 
-signal hurt
+signal take_damage
 
-func hurt(damage: int, direction: Vector3):
-	emit_signal("hurt", damage, direction)
+func take_damage(damage: int):
+	emit_signal("take_damage", damage)

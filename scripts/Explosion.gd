@@ -16,7 +16,3 @@ func explode():
 	for data in results:
 		if data.collider.has_method("take_damage"):
 			data.collider.take_damage(damage)
-
-	for data in results:
-		if data.collider.has_method("hurt"):
-			data.collider.hurt(damage, Vector3(0,0,0))

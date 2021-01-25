@@ -32,8 +32,8 @@ func _physics_process(delta):
 
 	if collision:
 		var collider = collision.collider
-		if collider.has_method("hurt"):
-			collider.hurt(damage_on_hit, -global_transform.basis.z)
+		if collider.has_method("take_damage"):
+			collider.take_damage(damage_on_hit)
 		speed = 0
 		$Graphics.hide()
 		$CollisionShape.disabled = true

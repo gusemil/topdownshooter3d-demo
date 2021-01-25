@@ -44,7 +44,7 @@ func _ready():
 	for bone_attachment in bone_attachments:
 		for child in bone_attachment.get_children():
 			if child is HitBox:
-				child.connect("hurt", self, "hurt") #Hitboxin hurt signal yhdistetään tämän hurt signaliin
+				child.connect("take_damage", self, "take_damage") #Hitboxin hurt signal yhdistetään tämän hurt signaliin
 	
 	set_state(STATE.IDLE)
 
@@ -74,7 +74,7 @@ func set_state(state: int):
 	elif current_state == STATE.DEAD :
 		on_death()
 
-func hurt(damage: int, dir : Vector3): #refactor this. Vector3 is unnecessary
+func take_damage(damage: int): #refactor this. Vector3 is unnecessary
 	print("enemy got hit!")
 	health_manager.take_damage(damage)
 func disable_all_collisions():
