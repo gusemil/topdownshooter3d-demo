@@ -54,7 +54,11 @@ albedo_texture = ExtResource( 2 )
 material = SubResource( 8 )
 
 [node name="Projectile" type="KinematicBody"]
+collision_layer = 0
+collision_mask = 2147483655
 script = ExtResource( 3 )
+speed = 50
+is_exploding_projectile = false
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )

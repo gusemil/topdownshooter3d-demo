@@ -6,20 +6,20 @@ export var is_exploding_projectile = true
 var damage_on_hit = 10
 var has_exploded = false
 
-var explosion_prefab = preload("res://scenes/Explosion.tscn")
+onready var explosion_prefab = preload("res://scenes/Explosion.tscn")
 
 var remove_projectile_on_hit_timer : Timer
 var remove_projectile_lifetime_timer : Timer
 
 func _ready():
 	remove_projectile_on_hit_timer = Timer.new()
-	remove_projectile_on_hit_timer.wait_time = 1
+	remove_projectile_on_hit_timer.wait_time = 0.001
 	remove_projectile_on_hit_timer.connect("timeout", self, "remove_projectile")
 	add_child(remove_projectile_on_hit_timer)
 
 	remove_projectile_lifetime_timer = Timer.new()
 	remove_projectile_lifetime_timer.wait_time = projectile_life_time
-	remove_projectile_lifetime_timer.connect("timeout", self, "remove_projectile")
+	remove_projectile_lifetime_timer.connect("timeout", self, "remove_projectile_lifetime")
 	add_child(remove_projectile_lifetime_timer)
 	remove_projectile_lifetime_timer.start()
 
@@ -37,17 +37,23 @@ func _physics_process(delta):
 		speed = 0
 		$Graphics.hide()
 		$CollisionShape.disabled = true
-		remove_projectile_on_hit_timer.start()
-		
+		if is_exploding_projectile:
+			explode()
+		remove_projectile_on_hit_timer.start()            		
 func remove_projectile():
 	queue_free()
-	#explode()
+	
+func remove_projectile_lifetime():
+	if is_exploding_projectile:
+		explode()
+	queue_free()
 
 func explode():
 	if has_exploded:
 		return
 	has_exploded = true
-	var explosion_instance = explosion_prefab.instance
+	var explosion_instance = explosion_prefab.instance()
 	get_tree().get_root().add_child(explosion_instance)
 	explosion_instance.global_transform.origin = global_transform.origin
 	explosion_instance.explode()
+

@@ -25,9 +25,6 @@ shape = SubResource( 1 )
 
 [node name="Graphics" parent="." instance=ExtResource( 1 )]
 
-[node name="Skeleton" parent="Graphics/Armature" index="0"]
-bones/1/bound_children = [ NodePath("BoneAttachment") ]
-
 [node name="BoneAttachment" type="BoneAttachment" parent="Graphics/Armature/Skeleton" index="1"]
 transform = Transform( 1, 0, 2.38418e-07, -8.6824e-08, 0.931334, 0.364166, -2.22047e-07, -0.364166, 0.931334, 0, 1.13977, 0 )
 bone_name = "body"
