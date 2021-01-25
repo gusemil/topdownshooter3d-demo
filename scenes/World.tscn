@@ -114,7 +114,7 @@ max_speed = 20
 attack_range = 4.5
 
 [node name="ProjectileSpawner" parent="." instance=ExtResource( 4 )]
-transform = Transform( -0.0971143, 0.150141, 0.983884, -0.870782, -0.491548, -0.0109403, 0.481984, -0.85781, 0.178477, -13.6091, 7.71284, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.18779, 2.28989, 0 )
 
 [node name="Timer" type="Timer" parent="ProjectileSpawner"]
 autostart = true

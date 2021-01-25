@@ -3,7 +3,8 @@ extends KinematicBody
 export var speed = 20
 export var projectile_life_time = 5
 export var is_exploding_projectile = true
-var damage_on_hit = 10
+var damage_on_hit = 1
+var explosion_damage = 1
 var has_exploded = false
 
 onready var explosion_prefab = preload("res://scenes/Explosion.tscn")
@@ -23,10 +24,16 @@ func _ready():
 	add_child(remove_projectile_lifetime_timer)
 	remove_projectile_lifetime_timer.start()
 
+func set_is_exploding_projectile(var _is_exploding : bool):
+	is_exploding_projectile = _is_exploding
+func set_projectile_damage_on_hit(var _damage :int):
+	damage_on_hit = _damage
 func set_bodies_to_exclude(_bodies_to_exclude: Array):
 	for body in _bodies_to_exclude:
 		add_collision_exception_with(body)
 
+func set_explosion_damage(var _damage: int):
+	explosion_damage = _damage
 func _physics_process(delta):
 	var collision : KinematicCollision = move_and_collide(-global_transform.basis.z * speed * delta)
 
@@ -53,6 +60,7 @@ func explode():
 		return
 	has_exploded = true
 	var explosion_instance = explosion_prefab.instance()
+	explosion_instance.set_damage(explosion_damage)
 	get_tree().get_root().add_child(explosion_instance)
 	explosion_instance.global_transform.origin = global_transform.origin
 	explosion_instance.explode()
