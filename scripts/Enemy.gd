@@ -6,6 +6,7 @@ var current_state = STATE.IDLE
 onready var animation_player = $Graphics/AnimationPlayer
 onready var health_manager = $HealthManager
 onready var damage_area = $AttackArea/DamageArea
+export var is_melee : bool
 
 # Movement
 export var turn_speed_per_second = 360.0
@@ -62,7 +63,8 @@ func _ready():
 	attack_timer.connect("timeout", self, "finish_attack")
 	attack_timer.one_shot = true
 	add_child(attack_timer)
-	damage_area.set_damage(attack_damage)
+	if is_melee:
+		damage_area.set_damage(attack_damage)
 
 func set_state(state: int):
 	current_state = state
@@ -90,10 +92,15 @@ func on_death():
 	#TODO STOP MOVEMENT
 	body_removal_timer.start() #tarvitaan start obviously
 
-func can_see_player(): #unnecessary probably
+func can_see_player():
 	var direction_to_player = global_transform.origin.direction_to(player.global_transform.origin) #player.(global)transform.position
 	var forward = global_transform.basis.z
 	return rad2deg(forward.angle_to(direction_to_player)) < sight_cone_degrees and has_player_in_line_of_sight()
+
+func player_within_angle(angle: float):
+	var direction_to_player = global_transform.origin.direction_to(player.global_transform.origin) #player.(global)transform.position
+	var forward = global_transform.basis.z
+	return rad2deg(forward.angle_to(direction_to_player)) < sight_cone_degrees
 
 func has_player_in_line_of_sight():
 	var my_position = global_transform.origin + Vector3.UP #is Vector3.UP necessary?

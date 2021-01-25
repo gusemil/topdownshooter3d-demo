@@ -28,19 +28,19 @@ color_ramp = SubResource( 4 )
 
 [sub_resource type="QuadMesh" id=6]
 
-[sub_resource type="Gradient" id=10]
+[sub_resource type="Gradient" id=7]
 offsets = PoolRealArray( 0, 0.992593 )
 colors = PoolColorArray( 0.588235, 0.588235, 0.588235, 1, 0, 0, 0, 0 )
 
-[sub_resource type="GradientTexture" id=11]
-gradient = SubResource( 10 )
+[sub_resource type="GradientTexture" id=8]
+gradient = SubResource( 7 )
 
-[sub_resource type="ParticlesMaterial" id=7]
+[sub_resource type="ParticlesMaterial" id=9]
 gravity = Vector3( 0, 0, 0 )
 scale = 0.3
-color_ramp = SubResource( 11 )
+color_ramp = SubResource( 8 )
 
-[sub_resource type="SpatialMaterial" id=8]
+[sub_resource type="SpatialMaterial" id=10]
 flags_transparent = true
 flags_unshaded = true
 vertex_color_use_as_albedo = true
@@ -50,12 +50,11 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 albedo_texture = ExtResource( 2 )
 
-[sub_resource type="QuadMesh" id=9]
-material = SubResource( 8 )
+[sub_resource type="QuadMesh" id=11]
+material = SubResource( 10 )
 
 [node name="Projectile" type="KinematicBody"]
-collision_layer = 0
-collision_mask = 2147483655
+collision_mask = 2147483653
 script = ExtResource( 3 )
 speed = 50
 
@@ -79,5 +78,5 @@ draw_pass_1 = SubResource( 6 )
 [node name="SmokeTrail" type="Particles" parent="Particles"]
 amount = 16
 local_coords = false
-process_material = SubResource( 7 )
-draw_pass_1 = SubResource( 9 )
+process_material = SubResource( 9 )
+draw_pass_1 = SubResource( 11 )

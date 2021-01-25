@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/birdmonster.glb-1867d0bda79d120b8144106d94c7cac4.scn"
+path="res://.import/birdmonster.glb-b37ee35e711e5855d0ae543203f1e660.scn"
 
 [deps]
 
-source_file="res://graphics/models/enemies/birdmonster.glb"
-dest_files=[ "res://.import/birdmonster.glb-1867d0bda79d120b8144106d94c7cac4.scn" ]
+source_file="res://graphics/models/enemies/melee_enemy/birdmonster.glb"
+dest_files=[ "res://.import/birdmonster.glb-b37ee35e711e5855d0ae543203f1e660.scn" ]
 
 [params]
 
