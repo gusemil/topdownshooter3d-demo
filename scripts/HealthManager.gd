@@ -7,7 +7,7 @@ onready var current_health : int = max_health
 signal dead
 signal hurt
 signal health_changed
-signal gibbed
+#signal gibbed
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,7 +17,8 @@ func take_damage(dmg : int):
 	current_health -= dmg
 
 	if(current_health <= -10):
-		emit_signal("gibbed")
+		#emit_signal("gibbed")
+		emit_signal("dead") #connectataan mm. pelaajan death funktioon
 	elif(current_health <= 0):
 		emit_signal("dead") #connectataan mm. pelaajan death funktioon
 	else:

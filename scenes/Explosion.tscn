@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://graphics/textures/dot.png" type="Texture" id=1]
+[ext_resource path="res://scripts/Explosion.gd" type="Script" id=2]
+
+[sub_resource type="SphereShape" id=1]
+radius = 3.5
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_texture = ExtResource( 1 )
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0, 0.644444, 0.82963, 0.985185 )
+colors = PoolColorArray( 0.96582, 0.723533, 0.0188637, 1, 1, 1, 1, 1, 0.00784314, 0.00784314, 0.00784314, 1, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+emission_shape = 1
+emission_sphere_radius = 3.0
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 1.5
+color_ramp = SubResource( 5 )
+
+[sub_resource type="QuadMesh" id=3]
+
+[node name="Explosion" type="Area"]
+collision_layer = 2147483648
+collision_mask = 2
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 1 )
+
+[node name="Particles" type="Particles" parent="."]
+material_override = SubResource( 2 )
+emitting = false
+amount = 100
+one_shot = true
+speed_scale = 0.7
+explosiveness = 0.9
+visibility_aabb = AABB( -40, -40, -40, 100, 100, 100 )
+process_material = SubResource( 6 )
+draw_pass_1 = SubResource( 3 )
+
+[node name="RemoveTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+[connection signal="timeout" from="RemoveTimer" to="." method="queue_free"]
