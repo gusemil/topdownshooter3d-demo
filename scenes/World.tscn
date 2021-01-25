@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/MeleeEnemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/GameManager.gd" type="Script" id=3]
-[ext_resource path="res://scenes/Projectile.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/ProjectileSpawner.tscn" type="PackedScene" id=4]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_unshaded = true
@@ -113,6 +113,9 @@ move_acceleration = 10
 max_speed = 20
 attack_range = 4.5
 
-[node name="Projectile" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.29869, 3, 18.6989 )
-is_exploding_projectile = true
+[node name="ProjectileSpawner" parent="." instance=ExtResource( 4 )]
+transform = Transform( -0.0971143, 0.150141, 0.983884, -0.870782, -0.491548, -0.0109403, 0.481984, -0.85781, 0.178477, -13.6091, 7.71284, 0 )
+
+[node name="Timer" type="Timer" parent="ProjectileSpawner"]
+autostart = true
+[connection signal="timeout" from="ProjectileSpawner/Timer" to="ProjectileSpawner" method="fire_projectile"]
