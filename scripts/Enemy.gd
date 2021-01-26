@@ -1,6 +1,6 @@
 extends KinematicBody
 
-enum STATE {IDLE, CHASE, ATTACK, DEAD}
+enum STATE {IDLE, CHASE, ATTACK, PAIN, DEAD}
 var current_state = STATE.IDLE
 
 onready var animation_player = $Graphics/AnimationPlayer
@@ -28,6 +28,18 @@ export var face_towards_player_when_attacking = false
 export var stop_moving_when_attacking = true
 export var attack_damage = 10
 
+#Pain state ala Doom
+export var pain_chance : int = 3 #1/3 chance for pain state
+export var pain_length : float = 0.3
+#export var pain_speed_modifier : float = 0.33
+#export var pain_animation_speed = 1.0
+var in_pain : bool = false
+var pain_timer : Timer
+var is_dead : bool = false
+
+# RNG
+var rng = RandomNumberGenerator.new()
+
 # Navigation and player sensing
 var player = null #reference to the player
 var path = []
@@ -40,6 +52,7 @@ signal attack
 export var body_removes_after_seconds = 5
 var body_removal_timer : Timer
 func _ready():
+	rng.randomize() #setting up the seed
 	player = get_tree().get_nodes_in_group("player")[0] # When multiplayer is implemented take the nearest player object with the tag/group "player"
 	var bone_attachments = $Graphics/Armature/Skeleton.get_children()
 	for bone_attachment in bone_attachments:
@@ -57,6 +70,13 @@ func _ready():
 	body_removal_timer.connect("timeout", self, "remove_body")
 	add_child(body_removal_timer)
 
+	# Pain
+	pain_timer = Timer.new()
+	pain_timer.wait_time = pain_length
+	pain_timer.connect("timeout", self, "end_pain")
+	pain_timer.one_shot = true
+	add_child(pain_timer)
+
 	# Attack
 	attack_timer = Timer.new()
 	attack_timer.wait_time = attack_rate
@@ -65,6 +85,8 @@ func _ready():
 	add_child(attack_timer)
 	if is_melee:
 		damage_area.set_damage(attack_damage)
+
+	health_manager.connect("dead", self, "death") #Kun healthmanagerin dead emitataan niin pelaajan death funktio aktivoituu
 
 func set_state(state: int):
 	current_state = state
@@ -77,8 +99,14 @@ func set_state(state: int):
 		on_death()
 
 func take_damage(damage: int): #refactor this. Vector3 is unnecessary
-	print("enemy got hit!")
-	health_manager.take_damage(damage)
+	if !is_dead:
+		print("enemy got hit!")
+		health_manager.take_damage(damage)
+
+		var pain = rng.randi_range(1,pain_chance)
+		print(pain, "/", pain_chance)
+		if pain == pain_chance:
+			set_state(STATE.PAIN)
 func disable_all_collisions():
 	$CollisionShape.disabled = true #Much better collision disabling
 
@@ -87,6 +115,8 @@ func remove_body():
 	queue_free()
 
 func on_death():
+	is_dead = true
+	print("Enemy is dead")
 	animation_player.play("die")
 	disable_all_collisions()
 	#TODO STOP MOVEMENT
@@ -142,6 +172,23 @@ func finish_attack():
 func emit_attack_signal():
 	emit_signal("attack")
 
+func start_pain():
+	if !is_dead:
+		in_pain = true
+		print("START PAIN")
+		#animation_player.play("pain", -1, pain_animation_speed)
+		pain_timer.start()
+	
+
+func end_pain():
+	if !is_dead:
+		in_pain = false
+		set_state(STATE.CHASE)
+		print("END PAIN")
+
+func death():
+	set_state(STATE.DEAD)
+
 func within_distance_of_player(distance: float):
 	return global_transform.origin.distance_to(player.global_transform.origin) < attack_range
 
@@ -175,8 +222,10 @@ func _process(delta):
 		#ATTACK
 	elif(current_state == STATE.ATTACK):
 		set_movement_vector(Vector3.ZERO)
+
 		if face_towards_player_when_attacking:
 			face_direction(global_transform.origin.direction_to(player.global_transform.origin),delta) #always face towards player during attack
+
 		if stop_moving_when_attacking:
 			if can_attack:
 				if !within_distance_of_player(attack_range) or !can_see_player():
@@ -192,3 +241,11 @@ func _process(delta):
 		#DEAD
 	elif(current_state == STATE.DEAD):
 		pass
+
+		#PAIN
+	elif(current_state == STATE.PAIN):
+		if !in_pain and !is_dead:
+				set_movement_vector(Vector3.ZERO)
+				start_pain()
+			
+
