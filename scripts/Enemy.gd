@@ -176,6 +176,8 @@ func start_pain():
 	if !is_dead:
 		in_pain = true
 		print("START PAIN")
+		animation_player.stop(true)
+		animation_player.play("idle_loop")
 		#TODO: Pain state animation
 		#animation_player.play("pain", -1, pain_animation_speed)
 		pain_timer.start()

@@ -14,11 +14,13 @@ radius = 0.5
 height = 0.8
 
 [node name="MeleeEnemy" type="KinematicBody"]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0 )
 collision_layer = 2147483650
 collision_mask = 2147483649
 script = ExtResource( 3 )
 is_melee = true
 turn_speed_per_second = 180.0
+sight_cone_degrees = 360.0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 1, 0 )
@@ -37,7 +39,7 @@ transform = Transform( 1, 2.27374e-13, -1.47882e-13, 0, 0.342021, 0.939694, 0, -
 shape = SubResource( 2 )
 
 [node name="HealthManager" parent="." instance=ExtResource( 4 )]
-max_health = 5
+max_health = 25
 
 [node name="AttackArea" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.53433 )
