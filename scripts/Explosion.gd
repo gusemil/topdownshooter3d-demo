@@ -1,6 +1,6 @@
 extends Area
 
-export var damage = 1 #TODO LATER, Modify this by weapon/enemy damage
+export var damage = 1 #modified by set_damage
 onready var particles = $Particles
 
 func set_damage(var _damage : int):

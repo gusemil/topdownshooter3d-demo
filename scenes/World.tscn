@@ -115,3 +115,6 @@ attack_range = 4.5
 
 [node name="RangedEnemy" parent="Navigation" instance=ExtResource( 5 )]
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 14.0658 )
+attack_angle = 5.0
+always_face_towards_player_when_attacking = true
+sight_cone_degrees = 45.0

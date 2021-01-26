@@ -6,11 +6,11 @@
 [ext_resource path="res://scenes/HealthManager.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/ProjectileSpawner.tscn" type="PackedScene" id=5]
 
-[sub_resource type="CapsuleShape" id=2]
+[sub_resource type="CapsuleShape" id=1]
 radius = 0.5
 height = 0.8
 
-[sub_resource type="CapsuleShape" id=1]
+[sub_resource type="CapsuleShape" id=2]
 radius = 0.5
 
 [node name="RangedEnemy" type="KinematicBody"]
@@ -33,11 +33,11 @@ bone_name = "body"
 
 [node name="CollisionShape" type="CollisionShape" parent="Graphics/Armature/Skeleton/BoneAttachment/Hitbox"]
 transform = Transform( 1, -8.84278e-08, 9.33282e-09, -9.33274e-09, -0.0391446, -0.995872, -8.84278e-08, 0.629109, 0.0391445, 2.1322e-08, -0.122411, 0.0894311 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -0.677412, -1.10365e-07, 0, 1, 0.0297427 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="HealthManager" parent="." instance=ExtResource( 4 )]
 max_health = 10
@@ -46,6 +46,7 @@ max_health = 10
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 1.5, 1 )
 
 [node name="ProjectileSpawner" parent="AttackArea" instance=ExtResource( 5 )]
+projectile_speed = 10.0
 [connection signal="dead" from="HealthManager" to="." method="set_state" binds= [ 3 ]]
 
 [editable path="Graphics"]

@@ -1,6 +1,6 @@
 extends KinematicBody
 
-export var speed = 20
+export var speed = 1
 export var projectile_life_time = 5
 export var is_exploding_projectile = true
 var damage_on_hit = 1
@@ -26,6 +26,8 @@ func _ready():
 
 func set_is_exploding_projectile(var _is_exploding : bool):
 	is_exploding_projectile = _is_exploding
+func set_projectile_speed(var _speed: float):
+	speed = _speed
 func set_projectile_damage_on_hit(var _damage :int):
 	damage_on_hit = _damage
 func set_bodies_to_exclude(_bodies_to_exclude: Array):

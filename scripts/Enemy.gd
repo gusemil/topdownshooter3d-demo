@@ -22,9 +22,10 @@ var velocity = Vector3()
 export var attack_range = 5.0
 export var attack_rate = 1.0
 export var attack_animation_speed = 0.5
+export var attack_angle = 5.0
 var attack_timer : Timer
 var can_attack = true
-export var face_towards_player_when_attacking = false
+export var always_face_towards_player_when_attacking = false
 export var stop_moving_when_attacking = true
 export var attack_damage = 10
 
@@ -119,7 +120,6 @@ func on_death():
 	print("Enemy is dead")
 	animation_player.play("die")
 	disable_all_collisions()
-	#TODO STOP MOVEMENT
 	body_removal_timer.start() #tarvitaan start obviously
 
 func can_see_player():
@@ -176,6 +176,7 @@ func start_pain():
 	if !is_dead:
 		in_pain = true
 		print("START PAIN")
+		#TODO: Pain state animation
 		#animation_player.play("pain", -1, pain_animation_speed)
 		pain_timer.start()
 	
@@ -223,20 +224,22 @@ func _process(delta):
 	elif(current_state == STATE.ATTACK):
 		set_movement_vector(Vector3.ZERO)
 
-		if face_towards_player_when_attacking:
+		if always_face_towards_player_when_attacking:
 			face_direction(global_transform.origin.direction_to(player.global_transform.origin),delta) #always face towards player during attack
 
-		if stop_moving_when_attacking:
-			if can_attack:
-				if !within_distance_of_player(attack_range) or !can_see_player():
-					set_state(STATE.CHASE)
-				else:
-					start_attack()
-		else:
-			if can_attack:
-				start_attack()
+		#if stop_moving_when_attacking:
+		if can_attack:
 			if !within_distance_of_player(attack_range) or !can_see_player():
 				set_state(STATE.CHASE)
+			elif !player_within_angle(attack_angle) and !always_face_towards_player_when_attacking:
+				face_direction(global_transform.origin.direction_to(player.global_transform.origin),delta)
+			else:
+				start_attack()
+		#else:
+		#	if can_attack:
+		#		start_attack()
+		#	if !within_distance_of_player(attack_range) or !can_see_player():
+		#		set_state(STATE.CHASE)
 
 		#DEAD
 	elif(current_state == STATE.DEAD):
