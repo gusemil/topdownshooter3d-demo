@@ -30,7 +30,7 @@ func take_damage(dmg : int):
 func spawn_blood_spray(dmg : int, blood_modifier = 2.0):
 	var blood_spray_instance = blood_spray_prefab.instance()
 	var particles = blood_spray_instance.get_child(0)
-	print(particles.name)
+	#print(particles.name)
 	particles.set_amount(dmg * blood_modifier)
 	get_tree().get_root().add_child(blood_spray_instance)
 	blood_spray_instance.global_transform.origin = global_transform.origin + Vector3(0,2,0)

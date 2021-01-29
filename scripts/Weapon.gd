@@ -11,6 +11,7 @@ var collision_bodies_to_ignore : Array = []
 
 export var damage = 5
 export var ammo = 100
+export var is_hitscan = true
 
 export var fire_rate = 0.2
 var shoot_timer : Timer
@@ -39,7 +40,6 @@ func shoot(shoot_input_just_pressed: bool, shoot_input_held: bool):
 		return
 	elif(!automatic_fire and !shoot_input_just_pressed):
 		return
-	
 	
 	if(ammo == 0):
 		if(shoot_input_just_pressed):

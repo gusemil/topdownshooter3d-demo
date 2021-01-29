@@ -34,7 +34,7 @@ func spawn_random_normal_enemy():
 	var direction = rng.randi_range(0,3)
 	var spawn_point : Vector3
 
-	print("DIRECTION: ", direction)
+	#print("DIRECTION: ", direction)
 	if(direction == 0):
 		spawn_point = Vector3(rng.randi_range(-47,47),0,rng.randi_range(-47,-40))
 	elif(direction == 1):
@@ -45,7 +45,7 @@ func spawn_random_normal_enemy():
 		spawn_point = Vector3(rng.randi_range(40,47),0,rng.randi_range(-47,47))
 
 	var enemy_choice = rng.randi_range(0,ranged_enemy_chance)
-	print(enemy_choice)
+	#print(enemy_choice)
 	var enemy_instance
 	if enemy_choice == ranged_enemy_chance:
 		enemy_instance = enemy_prefabs[1].instance()

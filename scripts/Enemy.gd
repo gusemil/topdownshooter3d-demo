@@ -101,7 +101,7 @@ func set_state(state: int):
 
 func take_damage(damage: int): #refactor this. Vector3 is unnecessary
 	if !is_dead:
-		print("enemy got hit!")
+		#print("enemy got hit!")
 		health_manager.take_damage(damage)
 
 		var pain = rng.randi_range(1,pain_chance)
@@ -112,12 +112,12 @@ func disable_all_collisions():
 	$CollisionShape.disabled = true #Much better collision disabling
 
 func remove_body():
-	print("remove body!")
+	#print("remove body!")
 	queue_free()
 
 func on_death():
 	is_dead = true
-	print("Enemy is dead")
+	#print("Enemy is dead")
 	animation_player.play("die")
 	disable_all_collisions()
 	body_removal_timer.start() #tarvitaan start obviously
@@ -175,7 +175,7 @@ func emit_attack_signal():
 func start_pain():
 	if !is_dead:
 		in_pain = true
-		print("START PAIN")
+		#print("START PAIN")
 		animation_player.stop(true)
 		animation_player.play("idle_loop")
 		#TODO: Pain state animation
@@ -187,7 +187,7 @@ func end_pain():
 	if !is_dead:
 		in_pain = false
 		set_state(STATE.CHASE)
-		print("END PAIN")
+		#print("END PAIN")
 
 func death():
 	set_state(STATE.DEAD)
