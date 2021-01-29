@@ -95,6 +95,3 @@ func take_damage(dmg : int):
 func death():
 	dead = true
 	print("Player is dead")
-
-func dash():
-	pass

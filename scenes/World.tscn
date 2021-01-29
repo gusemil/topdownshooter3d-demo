@@ -1,12 +1,16 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
+[ext_resource path="res://graphics/textures/concrete_cracked_2070_2531_Small.jpg" type="Texture" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/GameManager.gd" type="Script" id=3]
 [ext_resource path="res://scripts/WaveManager.gd" type="Script" id=4]
+[ext_resource path="res://graphics/materials/walls.material" type="Material" id=5]
+[ext_resource path="res://scenes/Pickup.tscn" type="PackedScene" id=6]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_unshaded = true
 albedo_color = Color( 0.419608, 0.419608, 0.419608, 1 )
+albedo_texture = ExtResource( 1 )
 
 [sub_resource type="PlaneMesh" id=2]
 material = SubResource( 1 )
@@ -49,6 +53,7 @@ shape = SubResource( 3 )
 [node name="CSGMesh" type="CSGMesh" parent="Environment"]
 transform = Transform( 49.6531, 0, 0, 0, 3.75747, 0, 0, 0, 1, 0, 4.1333, -48.7592 )
 mesh = SubResource( 4 )
+material = ExtResource( 5 )
 
 [node name="StaticBody" type="StaticBody" parent="Environment/CSGMesh"]
 
@@ -58,6 +63,7 @@ shape = SubResource( 5 )
 [node name="CSGMesh3" type="CSGMesh" parent="Environment"]
 transform = Transform( 49.6531, 0, 0, 0, 3.75747, 0, 0, 0, 1, 0, 4.1333, 49.2408 )
 mesh = SubResource( 4 )
+material = ExtResource( 5 )
 
 [node name="StaticBody" type="StaticBody" parent="Environment/CSGMesh3"]
 
@@ -67,6 +73,7 @@ shape = SubResource( 5 )
 [node name="CSGMesh4" type="CSGMesh" parent="Environment"]
 transform = Transform( -8.08952e-06, 0, 1, 0, 3.75747, 0, -49.6531, 0, -1.62921e-07, -49, 4.1333, 2.2408 )
 mesh = SubResource( 4 )
+material = ExtResource( 5 )
 
 [node name="StaticBody" type="StaticBody" parent="Environment/CSGMesh4"]
 
@@ -76,6 +83,7 @@ shape = SubResource( 5 )
 [node name="CSGMesh5" type="CSGMesh" parent="Environment"]
 transform = Transform( -8.08952e-06, 0, 1, 0, 3.75747, 0, -49.6531, 0, -1.62921e-07, -49, 4.1333, 2.2408 )
 mesh = SubResource( 4 )
+material = ExtResource( 5 )
 
 [node name="StaticBody" type="StaticBody" parent="Environment/CSGMesh5"]
 
@@ -85,6 +93,7 @@ shape = SubResource( 5 )
 [node name="CSGMesh6" type="CSGMesh" parent="Environment"]
 transform = Transform( -8.08952e-06, 0, 1, 0, 3.75747, 0, -49.6531, 0, -1.62921e-07, 50, 4.1333, 0.240803 )
 mesh = SubResource( 4 )
+material = ExtResource( 5 )
 
 [node name="StaticBody" type="StaticBody" parent="Environment/CSGMesh6"]
 
@@ -94,11 +103,16 @@ shape = SubResource( 5 )
 [node name="CSGMesh2" type="CSGMesh" parent="Environment"]
 transform = Transform( 0.591039, 0, -0.997231, 0, 3.75747, 0, 7.92531, 0, 0.0743696, 16.2865, 4.1333, -14.5777 )
 mesh = SubResource( 4 )
+material = ExtResource( 5 )
 
 [node name="StaticBody" type="StaticBody" parent="Environment/CSGMesh2"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Environment/CSGMesh2/StaticBody"]
 shape = SubResource( 5 )
+
+[node name="Pickup" parent="Environment" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.7167, 1.23521, 0 )
+amount = 5
 
 [node name="Player" parent="." groups=[
 "player",
