@@ -1,8 +1,10 @@
 extends Spatial
 
-onready var animation_player = $AnimationPlayer
-onready var bullet_spawners_base : Spatial = $BulletSpawners
-onready var bullet_spawners = $BulletSpawners.get_children()
+#onready var animation_player = $AnimationPlayer
+var bullet_spawners_base : Spatial
+var bullet_spawners : Array
+var projectile_spawners_base : Spatial
+var projectile_spawners : Array
 
 export var automatic_fire = false
 
@@ -29,9 +31,19 @@ func _ready():
 func init(_fire_point: Spatial, _collision_bodies_to_ignore: Array):
 	fire_point = _fire_point
 	collision_bodies_to_ignore = _collision_bodies_to_ignore
-	for bullet_spawner in bullet_spawners:
-		bullet_spawner.set_damage(damage)
-		bullet_spawner.set_bodies_to_exclude(collision_bodies_to_ignore)
+
+	if is_hitscan:
+		bullet_spawners_base = $BulletSpawners
+		bullet_spawners = bullet_spawners_base.get_children()
+		for bullet_spawner in bullet_spawners:
+			bullet_spawner.set_damage(damage)
+			bullet_spawner.set_bodies_to_exclude(collision_bodies_to_ignore)
+	else:
+		projectile_spawners_base = $ProjectileSpawners
+		projectile_spawners = projectile_spawners_base.get_children()
+		for projectile_spawner in projectile_spawners:
+			projectile_spawner.damage = damage
+			projectile_spawner.set_bodies_to_exclude(collision_bodies_to_ignore)
 
 func shoot(shoot_input_just_pressed: bool, shoot_input_held: bool):
 	if(!can_shoot):
@@ -49,11 +61,14 @@ func shoot(shoot_input_just_pressed: bool, shoot_input_held: bool):
 	if(ammo > 0):
 		ammo -= 1
 	
-	var start_transform = bullet_spawners_base.global_transform
-	bullet_spawners_base.global_transform = fire_point.global_transform
-	for bullet_spawner in bullet_spawners:
-		bullet_spawner.fire()
-	bullet_spawners_base.global_transform = start_transform
+	if is_hitscan:
+		var start_transform = bullet_spawners_base.global_transform
+		bullet_spawners_base.global_transform = fire_point.global_transform
+		for bullet_spawner in bullet_spawners:
+			bullet_spawner.fire()
+		bullet_spawners_base.global_transform = start_transform
+	else:
+		shoot_projectile()
 	#anim_player.stop()
 	#anim_player.play("attack)
 	emit_signal("fired")
@@ -69,7 +84,13 @@ func set_active():
 func set_inactive():
 	#anim_player.play("idle")
 	hide()
-	
+
+func shoot_projectile():
+	var start_transform = projectile_spawners_base.global_transform
+	projectile_spawners_base.global_transform = fire_point.global_transform
+	for projectile_spawner in projectile_spawners:
+		projectile_spawner.fire_projectile()
+	projectile_spawners_base.global_transform = start_transform
 	
 	
 	

@@ -5,7 +5,7 @@ var current_state = STATE.IDLE
 
 onready var animation_player = $Graphics/AnimationPlayer
 onready var health_manager = $HealthManager
-onready var damage_area = $AttackArea/DamageArea
+var damage_area
 export var is_melee : bool
 
 # Movement
@@ -85,6 +85,7 @@ func _ready():
 	attack_timer.one_shot = true
 	add_child(attack_timer)
 	if is_melee:
+		damage_area = $AttackArea/DamageArea
 		damage_area.set_damage(attack_damage)
 
 	health_manager.connect("dead", self, "death") #Kun healthmanagerin dead emitataan niin pelaajan death funktio aktivoituu
@@ -105,7 +106,7 @@ func take_damage(damage: int): #refactor this. Vector3 is unnecessary
 		health_manager.take_damage(damage)
 
 		var pain = rng.randi_range(1,pain_chance)
-		print(pain, "/", pain_chance)
+		#print(pain, "/", pain_chance)
 		if pain == pain_chance:
 			set_state(STATE.PAIN)
 func disable_all_collisions():

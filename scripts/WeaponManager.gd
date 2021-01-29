@@ -37,7 +37,7 @@ func init(_fire_point: Spatial, _collision_bodies_to_ignore: Array):
 	
 	for weapon in weapons:
 		if weapon.has_method("init"):
-			weapon.init(_fire_point, _collision_bodies_to_ignore)
+			weapon.init(_fire_point, [_collision_bodies_to_ignore])
 	
 #	if current_weapon.has_method("set_active"):
 #		current_weapon.set_active()
