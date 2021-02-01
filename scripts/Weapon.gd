@@ -91,6 +91,10 @@ func shoot_projectile():
 	for projectile_spawner in projectile_spawners:
 		projectile_spawner.fire_projectile()
 	projectile_spawners_base.global_transform = start_transform
+
+func add_ammo(amount : int):
+	ammo += amount
+	print("Weapon: ", name, " ammo amount: ", ammo)
 	
 	
 	

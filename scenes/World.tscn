@@ -112,7 +112,8 @@ shape = SubResource( 5 )
 
 [node name="Pickup" parent="Environment" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.7167, 1.23521, 0 )
-amount = 5
+pickup_type = 4
+amount = 15
 
 [node name="Player" parent="." groups=[
 "player",

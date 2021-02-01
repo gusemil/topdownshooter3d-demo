@@ -129,6 +129,7 @@ material/0 = SubResource( 7 )
 transform = Transform( 0.666666, 0, 0, 0, 0.666666, 0, 0, 0, 3.33333, 0, 2.0289, 0 )
 
 [node name="HealthManager" parent="." instance=ExtResource( 5 )]
+starting_armor = 50
 
 [node name="PickupManager" type="Area" parent="."]
 collision_layer = 0
