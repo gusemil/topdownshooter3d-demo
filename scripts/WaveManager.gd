@@ -1,7 +1,7 @@
 extends Node
 
-var melee_enemy_prefab = preload("res://scenes/MeleeEnemy.tscn")
-var ranged_enemy_prefab = preload("res://scenes/RangedEnemy.tscn")
+var melee_enemy_prefab = preload("res://scenes/Enemy/MeleeEnemy.tscn")
+var ranged_enemy_prefab = preload("res://scenes/Enemy/RangedEnemy.tscn")
 var navmesh
 
 enum ENEMIES {MELEE, RANGED}

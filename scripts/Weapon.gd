@@ -13,6 +13,7 @@ var collision_bodies_to_ignore : Array = []
 
 export var damage = 5
 export var ammo = 100
+export var max_ammo = 100
 export var is_hitscan = true
 
 export var fire_rate = 0.2
@@ -74,6 +75,7 @@ func shoot(shoot_input_just_pressed: bool, shoot_input_held: bool):
 	emit_signal("fired")
 	can_shoot = false
 	shoot_timer.start() #käynnistettään timer jonka jälkeen finish attack tapahtuu
+	print("Weapon: ", name, " ammo amount: ", ammo)
 	
 func finish_attack():
 	can_shoot = true
@@ -92,9 +94,14 @@ func shoot_projectile():
 		projectile_spawner.fire_projectile()
 	projectile_spawners_base.global_transform = start_transform
 
-func add_ammo(amount : int):
-	ammo += amount
-	print("Weapon: ", name, " ammo amount: ", ammo)
+func add_ammo(pickup : Pickup):
+	if ammo < max_ammo:
+		if ammo + pickup.amount <= max_ammo:
+			ammo += pickup.amount
+		else:
+			ammo = max_ammo
+		print("Weapon: ", name, " ammo amount: ", ammo)
+		pickup.queue_free()
 	
 	
 	

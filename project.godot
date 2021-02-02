@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "Pickup",
 "language": "GDScript",
 "path": "res://scripts/Pickup.gd"
+}, {
+"base": "Area",
+"class": "Powerup",
+"language": "GDScript",
+"path": "res://scripts/Powerup.gd"
 } ]
 _global_script_class_icons={
 "HitBox": "",
-"Pickup": ""
+"Pickup": "",
+"Powerup": ""
 }
 
 [application]

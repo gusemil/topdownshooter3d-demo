@@ -1,11 +1,16 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://graphics/textures/concrete_cracked_2070_2531_Small.jpg" type="Texture" id=1]
-[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/GameManager.gd" type="Script" id=3]
 [ext_resource path="res://scripts/WaveManager.gd" type="Script" id=4]
 [ext_resource path="res://graphics/materials/walls.material" type="Material" id=5]
-[ext_resource path="res://scenes/Pickup.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Pickups/Machinegun_Ammo_Pickup.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Pickups/RocketLauncher_Ammo_Pickup.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/Pickups/Shotgun_Ammo_Pickup.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/Pickups/Health_Pickup.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/Pickups/Powerup.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/Pickups/Armor_Pickup.tscn" type="PackedScene" id=11]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_unshaded = true
@@ -110,11 +115,6 @@ material = ExtResource( 5 )
 [node name="CollisionShape" type="CollisionShape" parent="Environment/CSGMesh2/StaticBody"]
 shape = SubResource( 5 )
 
-[node name="Pickup" parent="Environment" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.7167, 1.23521, 0 )
-pickup_type = 4
-amount = 15
-
 [node name="Player" parent="." groups=[
 "player",
 ] instance=ExtResource( 2 )]
@@ -124,3 +124,24 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
 [node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="Navigation"]
 navmesh = SubResource( 6 )
+
+[node name="Shotgun_Ammo_Pickup" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4415, 24.865 )
+
+[node name="RocketLauncher_Ammo_Pickup" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.56616, -20.4709 )
+pickup_type = 2
+amount = 15
+
+[node name="Machinegun_Ammo_Pickup" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3182, 1, 0 )
+amount = 50
+
+[node name="Powerup" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.6148, 1.9231, 20.6428 )
+
+[node name="Health_Pickup" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.2217, 1.37486, 0 )
+
+[node name="Armor_Pickup" parent="." instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1189, 1.74719, 12.1972 )

@@ -19,7 +19,7 @@ func _ready():
 		print("TODO ROCKET")
 
 func set_bodies_to_exclude(_bodies_to_exclude: Array):
-	print("Projectile spawner bodies to exclude: ", _bodies_to_exclude)
+	#print("Projectile spawner bodies to exclude: ", _bodies_to_exclude)
 	bodies_to_exclude = _bodies_to_exclude
 	
 func fire_projectile():
@@ -33,4 +33,4 @@ func fire_projectile():
 	get_tree().get_root().add_child(projectile_instance)
 	projectile_instance.global_transform = global_transform
 
-	print("Excluded bodies: ", bodies_to_exclude)
+	#print("Excluded bodies: ", bodies_to_exclude)

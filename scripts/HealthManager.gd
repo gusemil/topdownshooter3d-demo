@@ -47,10 +47,20 @@ func spawn_blood_spray(dmg : int, blood_modifier = 2.0):
 	blood_spray_instance.global_transform.origin = global_transform.origin + Vector3(0,2,0)
 
 
-func gain_health(amount : int):
-	current_health += amount
-	print("hp: ", current_health)
+func gain_health(pickup : Pickup):
+	if current_health < max_health:
+		if current_health + pickup.amount <= max_health:
+			current_health += pickup.amount
+		else:
+			current_health = max_health
+		print("hp: ", current_health)
+		pickup.queue_free()
 
-func gain_armor(amount : int):
-	current_armor += amount
-	print("armor: ", current_armor)
+func gain_armor(pickup : Pickup):
+	if current_armor < max_armor:
+		if current_armor + pickup.amount <= max_armor:
+			current_armor += pickup.amount
+		else:
+			current_armor = max_armor
+		print("armor: ", current_armor)
+		pickup.queue_free()

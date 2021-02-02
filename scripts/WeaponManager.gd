@@ -56,6 +56,6 @@ func change_weapon(new_weapon_index : int):
 	current_weapon = weapons[current_slot]
 	current_weapon.set_active()
 
-func add_ammo(amount : int, weapon_index : int):
-	weapons[weapon_index].add_ammo(amount)
+func add_ammo(pickup : Pickup):
+	weapons[pickup.pickup_type].add_ammo(pickup)
 

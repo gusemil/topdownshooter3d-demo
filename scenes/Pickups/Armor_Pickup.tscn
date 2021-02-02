@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/Pickups/Pickup.tscn" type="PackedScene" id=1]
+
+[sub_resource type="CubeMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_unshaded = true
+albedo_color = Color( 0, 0.109804, 1, 1 )
+
+[node name="Armor_Pickup" instance=ExtResource( 1 )]
+pickup_type = 4
+amount = 10
+
+[node name="MeshInstance" parent="Graphics" index="0"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )

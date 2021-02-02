@@ -31,7 +31,7 @@ func set_projectile_speed(var _speed: float):
 func set_projectile_damage_on_hit(var _damage :int):
 	damage_on_hit = _damage
 func set_bodies_to_exclude(_bodies_to_exclude: Array):
-	print("Bodies to exclude projectile.gd ",_bodies_to_exclude)
+	#print("Bodies to exclude projectile.gd ",_bodies_to_exclude)
 	for bodies in _bodies_to_exclude:
 		for body in bodies: #Two arrays? WTF?
 			add_collision_exception_with(body)
