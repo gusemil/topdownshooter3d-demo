@@ -5,6 +5,7 @@ var current_state = STATE.IDLE
 
 onready var animation_player = $Graphics/AnimationPlayer
 onready var health_manager = $HealthManager
+onready var enemy_manager = get_tree().get_root().get_node("World/EnemyManager")
 var damage_area
 export var is_melee : bool
 
@@ -122,6 +123,8 @@ func on_death():
 	animation_player.play("die")
 	disable_all_collisions()
 	body_removal_timer.start() #tarvitaan start obviously
+	print("enemy manager exists: ", enemy_manager.name)
+	enemy_manager.drop_pickup(global_transform.origin)
 
 func can_see_player():
 	var direction_to_player = global_transform.origin.direction_to(player.global_transform.origin) #player.(global)transform.position
@@ -253,5 +256,3 @@ func _process(delta):
 		if !in_pain and !is_dead:
 				set_movement_vector(Vector3.ZERO)
 				start_pain()
-			
-

@@ -18,9 +18,7 @@ func on_pickup(pickup):
 	elif pickup is Powerup:
 		if pickup.powerup_type == pickup.POWERUP_TYPES.QUAD_DAMAGE:
 			powerup_manager.quad_damage()
-			#weapon_manager.add_ammo(powerup.amount, powerup.powerup_TYPES.AMMO_MACHINE_GUN)
 		elif pickup.powerup_type == pickup.POWERUP_TYPES.UNDYING:
 			powerup_manager.undying()
-			#weapon_manager.add_ammo(powerup.amount, powerup.powerup_TYPES.AMMO_SHOTGUN)
 		elif pickup.powerup_type == pickup.POWERUP_TYPES.SPEED_BOOST:
 			powerup_manager.speed_boost()

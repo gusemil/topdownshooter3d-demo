@@ -66,6 +66,7 @@ func shoot(shoot_input_just_pressed: bool, shoot_input_held: bool):
 		var start_transform = bullet_spawners_base.global_transform
 		bullet_spawners_base.global_transform = fire_point.global_transform
 		for bullet_spawner in bullet_spawners:
+			#bullet_spawner.set_damage(damage)
 			bullet_spawner.fire()
 		bullet_spawners_base.global_transform = start_transform
 	else:
@@ -91,6 +92,7 @@ func shoot_projectile():
 	var start_transform = projectile_spawners_base.global_transform
 	projectile_spawners_base.global_transform = fire_point.global_transform
 	for projectile_spawner in projectile_spawners:
+		#projectile_spawner.damage = damage
 		projectile_spawner.fire_projectile()
 	projectile_spawners_base.global_transform = start_transform
 

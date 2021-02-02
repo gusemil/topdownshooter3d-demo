@@ -6,6 +6,8 @@ onready var player = get_node("../")
 
 func quad_damage():
 	print("QUAD DAMAGE")
+	#weapon_manager.is_quad_damage_on = true
+	#weapon_manager.powerup_damage_modifier = 4
 
 func speed_boost():
 	print("SPEED BOOST")

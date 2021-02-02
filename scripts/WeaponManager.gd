@@ -2,19 +2,16 @@ extends Spatial
 
 enum WEAPON_SLOTS {MACHINE_GUN, SHOTGUN, ROCKET_LAUNCHER}
 
-#var slots_unlocked = {
-#	WEAPON_SLOTS.MACHINE_GUN: true,
-#	WEAPON_SLOTS.SHOTGUN: false,
-#	WEAPON_SLOTS.ROCKET_LAUNCHER: false,
-#}
-
 onready var weapons = $Weapons.get_children()
 
 var current_slot = 0
 var current_weapon = null
 var fire_point : Spatial
 var collision_bodies_to_ignore : Array = []
-var weapon_damage_modifier = 1
+
+var powerup_damage_modifier : int = 1
+var is_quad_damage_on : bool = false
+var is_quad_damage_applied : bool = false
 
 func _process(delta):
 	if Input.is_action_just_pressed("weapon1") and current_slot != WEAPON_SLOTS.MACHINE_GUN:
@@ -30,7 +27,7 @@ func init(_fire_point: Spatial, _collision_bodies_to_ignore: Array):
 	current_weapon = weapons[0]
 	current_slot = 0
 	current_weapon.set_active()
-	#change_weapon(WEAPON_SLOTS.MACHINE_GUN)
+
 	print($Weapons.get_child_count())
 	print(current_weapon)
 	
@@ -39,14 +36,15 @@ func init(_fire_point: Spatial, _collision_bodies_to_ignore: Array):
 	for weapon in weapons:
 		if weapon.has_method("init"):
 			weapon.init(_fire_point, [_collision_bodies_to_ignore])
-	
-#	if current_weapon.has_method("set_active"):
-#		current_weapon.set_active()
-#	else:
-#		current_weapon.show()
 
 func shoot(attack_input_just_pressed: bool, attack_input_held: bool):
 	if current_weapon.has_method("shoot"):
+#		if is_quad_damage_on and !is_quad_damage_applied:
+#			print("QUAD APPLY")
+#			current_weapon.damage = current_weapon.damage * powerup_damage_modifier
+#			is_quad_damage_applied = true
+#			print("Current weapon dmg: ", current_weapon.damage, " powerup mod: ", powerup_damage_modifier)
+			
 		current_weapon.shoot(attack_input_just_pressed, attack_input_held)
 
 func change_weapon(new_weapon_index : int):
