@@ -14,6 +14,7 @@ var current_slot = 0
 var current_weapon = null
 var fire_point : Spatial
 var collision_bodies_to_ignore : Array = []
+var weapon_damage_modifier = 1
 
 func _process(delta):
 	if Input.is_action_just_pressed("weapon1") and current_slot != WEAPON_SLOTS.MACHINE_GUN:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://graphics/textures/concrete_cracked_2070_2531_Small.jpg" type="Texture" id=1]
 [ext_resource path="res://scenes/Player/Player.tscn" type="PackedScene" id=2]
@@ -9,8 +9,10 @@
 [ext_resource path="res://scenes/Pickups/RocketLauncher_Ammo_Pickup.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/Pickups/Shotgun_Ammo_Pickup.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/Pickups/Health_Pickup.tscn" type="PackedScene" id=9]
-[ext_resource path="res://scenes/Pickups/Powerup.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/Pickups/Armor_Pickup.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/Pickups/Powerup_Undying.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/Pickups/Powerup_Speed_Boost.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/Pickups/Powerup_Quad_Damage.tscn" type="PackedScene" id=14]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_unshaded = true
@@ -137,11 +139,17 @@ amount = 15
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3182, 1, 0 )
 amount = 50
 
-[node name="Powerup" parent="." instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.6148, 1.9231, 20.6428 )
-
 [node name="Health_Pickup" parent="." instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.2217, 1.37486, 0 )
 
 [node name="Armor_Pickup" parent="." instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1189, 1.74719, 12.1972 )
+
+[node name="Powerup_Undying" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.8804, 1.1168, 24.4444 )
+
+[node name="Powerup_Speed_Boost" parent="." instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4771, 2.53215, 29.0344 )
+
+[node name="Powerup_Quad_Damage" parent="." instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7474, 2.05733, 29.096 )

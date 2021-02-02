@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/Pickups/Powerup.tscn" type="PackedScene" id=1]
+
+[sub_resource type="SphereMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_unshaded = true
+albedo_color = Color( 0, 1, 0.976471, 1 )
+
+[node name="Powerup_Undying" instance=ExtResource( 1 )]
+powerup_type = 1
+length = 10.0
+
+[node name="MeshInstance" parent="Graphics" index="0"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )

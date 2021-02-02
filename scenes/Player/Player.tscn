@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/WeaponManager.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/HealthManager.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/ProjectileSpawner.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scripts/PickupManager.gd" type="Script" id=7]
+[ext_resource path="res://scripts/PowerupManager.gd" type="Script" id=8]
 
 [sub_resource type="CapsuleMesh" id=1]
 mid_height = 2.0
@@ -142,3 +143,6 @@ script = ExtResource( 7 )
 [node name="CollisionShape" type="CollisionShape" parent="PickupManager"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 5 )
+
+[node name="PowerupManager" type="Node" parent="."]
+script = ExtResource( 8 )

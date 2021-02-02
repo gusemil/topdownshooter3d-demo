@@ -103,8 +103,7 @@ func add_ammo(pickup : Pickup):
 		print("Weapon: ", name, " ammo amount: ", ammo)
 		pickup.queue_free()
 	
-	
-	
+
 	
 	
 	

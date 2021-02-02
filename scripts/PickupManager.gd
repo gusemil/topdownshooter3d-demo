@@ -2,6 +2,7 @@ extends Area
 
 onready var weapon_manager = get_node("../").get_node("WeaponManager")
 onready var health_manager = get_node("../").get_node("HealthManager")
+onready var powerup_manager = get_node("../").get_node("PowerupManager")
 
 func _ready():
 	connect("area_entered", self, "on_pickup")
@@ -16,10 +17,10 @@ func on_pickup(pickup):
 			health_manager.gain_armor(pickup)
 	elif pickup is Powerup:
 		if pickup.powerup_type == pickup.POWERUP_TYPES.QUAD_DAMAGE:
-			print("QUAD DAMAGE")
+			powerup_manager.quad_damage()
 			#weapon_manager.add_ammo(powerup.amount, powerup.powerup_TYPES.AMMO_MACHINE_GUN)
 		elif pickup.powerup_type == pickup.POWERUP_TYPES.UNDYING:
-			print("UNDYING")
+			powerup_manager.undying()
 			#weapon_manager.add_ammo(powerup.amount, powerup.powerup_TYPES.AMMO_SHOTGUN)
 		elif pickup.powerup_type == pickup.POWERUP_TYPES.SPEED_BOOST:
-			print("SPEED BOOST")
+			powerup_manager.speed_boost()
