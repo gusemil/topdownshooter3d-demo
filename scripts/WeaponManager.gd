@@ -9,9 +9,9 @@ var current_weapon = null
 var fire_point : Spatial
 var collision_bodies_to_ignore : Array = []
 
+#Quad damage
 var powerup_damage_modifier : int = 1
 var is_quad_damage_on : bool = false
-var is_quad_damage_applied : bool = false
 
 func _process(delta):
 	if Input.is_action_just_pressed("weapon1") and current_slot != WEAPON_SLOTS.MACHINE_GUN:
@@ -39,12 +39,6 @@ func init(_fire_point: Spatial, _collision_bodies_to_ignore: Array):
 
 func shoot(attack_input_just_pressed: bool, attack_input_held: bool):
 	if current_weapon.has_method("shoot"):
-#		if is_quad_damage_on and !is_quad_damage_applied:
-#			print("QUAD APPLY")
-#			current_weapon.damage = current_weapon.damage * powerup_damage_modifier
-#			is_quad_damage_applied = true
-#			print("Current weapon dmg: ", current_weapon.damage, " powerup mod: ", powerup_damage_modifier)
-			
 		current_weapon.shoot(attack_input_just_pressed, attack_input_held)
 
 func change_weapon(new_weapon_index : int):

@@ -101,7 +101,7 @@ func set_state(state: int):
 	elif current_state == STATE.DEAD :
 		on_death()
 
-func take_damage(damage: int): #refactor this. Vector3 is unnecessary
+func take_damage(damage: int):
 	if !is_dead:
 		#print("enemy got hit!")
 		health_manager.take_damage(damage)

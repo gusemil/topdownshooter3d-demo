@@ -13,7 +13,6 @@ signal health_changed
 
 var blood_spray_prefab = preload("res://scenes/BloodSpray.tscn")
 
-
 func take_damage(dmg : int):
 	if current_armor > 0:
 		current_armor -= dmg
@@ -64,3 +63,4 @@ func gain_armor(pickup : Pickup):
 			current_armor = max_armor
 		print("armor: ", current_armor)
 		pickup.queue_free()
+		

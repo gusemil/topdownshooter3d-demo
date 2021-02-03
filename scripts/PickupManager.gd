@@ -17,8 +17,8 @@ func on_pickup(pickup):
 			health_manager.gain_armor(pickup)
 	elif pickup is Powerup:
 		if pickup.powerup_type == pickup.POWERUP_TYPES.QUAD_DAMAGE:
-			powerup_manager.quad_damage()
+			powerup_manager.quad_damage(pickup)
 		elif pickup.powerup_type == pickup.POWERUP_TYPES.UNDYING:
-			powerup_manager.undying()
+			powerup_manager.undying(pickup)
 		elif pickup.powerup_type == pickup.POWERUP_TYPES.SPEED_BOOST:
-			powerup_manager.speed_boost()
+			powerup_manager.speed_boost(pickup)

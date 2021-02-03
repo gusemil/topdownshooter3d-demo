@@ -24,6 +24,17 @@ var is_dashing = false
 # State
 var dead = false
 
+#Powerup stuff
+var default_speed = speed
+var default_dash_speed = dash_speed
+var is_speed_boost_on : bool = false
+var speed_boost_timer : Timer
+
+#Undying powerup
+var is_invulnerability_on : bool = false
+var invulnerability_timer : Timer
+
+
 
 func _ready():
 	camera_rig.set_as_toplevel(true)
@@ -90,11 +101,49 @@ func move(delta):
 			velocity += move_direction*speed*delta
 
 func take_damage(dmg : int):
-	health_manager.take_damage(dmg)
+	if !is_invulnerability_on:
+		health_manager.take_damage(dmg)
+	else:
+		print("I AM INVULNERABLE!")
 
 func death():
 	dead = true
-	print("Player is dead")
+	#print("Player is dead")
 
-func activate_speed_boost():
-	pass
+func apply_speed_boost(powerup : Powerup):
+	if !is_speed_boost_on:
+		speed *= 2
+		dash_speed *= 1.5
+		is_speed_boost_on = true
+		start_speed_boost_timer(powerup)
+		powerup.queue_free()
+
+func stop_speed_boost():
+	is_speed_boost_on = false
+	speed = default_speed
+	dash_speed = default_dash_speed
+
+func start_speed_boost_timer(powerup : Powerup):
+	if is_speed_boost_on:
+		speed_boost_timer = Timer.new()
+		speed_boost_timer.wait_time = powerup.length
+		speed_boost_timer.connect("timeout", self, "stop_speed_boost")
+		add_child(speed_boost_timer)
+		speed_boost_timer.start()
+
+func apply_invulnerability(powerup : Powerup):
+	if !is_invulnerability_on:
+		is_invulnerability_on = true
+		start_invulnerability_timer(powerup)
+		powerup.queue_free()
+
+func stop_invulnerability():
+	is_invulnerability_on = false
+
+func start_invulnerability_timer(powerup : Powerup):
+	if is_invulnerability_on:
+		invulnerability_timer = Timer.new()
+		invulnerability_timer.wait_time = powerup.length
+		invulnerability_timer.connect("timeout", self, "stop_invulnerability")
+		add_child(invulnerability_timer)
+		invulnerability_timer.start()
