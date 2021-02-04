@@ -50,13 +50,12 @@ func _ready():
 func _process(_delta):
 	weapon_manager.shoot(Input.is_action_just_pressed("shoot"), Input.is_action_pressed("shoot"))
 
-	animation_player.play("RunForward-loop")
-
 
 func _physics_process(delta):
 	camera_follows_player()
 	look_at_cursor()
 	move(delta)
+	animate_move()
 	
 	velocity *= friction
 	velocity.y -= gravity*delta
@@ -91,19 +90,40 @@ func move(delta):
 		var camera_basis = camera.get_global_transform().basis
 		if Input.is_action_pressed("move_forward"):
 			move_direction -= camera_basis.z
+			#animation_player.play("RunForward-loop")
 		elif Input.is_action_pressed("move_backward"):
 			move_direction += camera_basis.z
+			#animation_player.play("RunBackward-loop")
 		if Input.is_action_pressed("move_left"):
 			move_direction -= camera_basis.x
+			#animation_player.play("RunLeft-loop")
 		elif Input.is_action_pressed("move_right"):
 			move_direction += camera_basis.x
+			#animation_player.play("RunRight-loop")
 		move_direction.y = 0
 		move_direction = move_direction.normalized()
-		
 		if Input.is_action_just_pressed("dash"):
 			velocity += move_direction*speed*delta*dash_speed
 		else:
 			velocity += move_direction*speed*delta
+
+	#else:
+	#	animation_player.play("CombatIdle-loop")
+
+func animate_move():
+	if !Input.is_action_pressed("move_forward") or !Input.is_action_pressed("move_backward") or !Input.is_action_pressed("move_left") or !Input.is_action_pressed("move_right") or !Input.is_action_pressed("dash"):
+		if Input.is_action_pressed("move_forward"):
+			animation_player.play("RunForward-loop")
+		elif Input.is_action_pressed("move_backward"):
+			animation_player.play("RunBackward-loop")
+		elif Input.is_action_pressed("move_left"):
+			animation_player.play("RunLeft-loop")
+		elif Input.is_action_pressed("move_right"):
+			animation_player.play("RunRight-loop")
+		elif Input.is_action_just_pressed("dash"):
+			pass
+		else:
+			animation_player.play("AimFireRifle")
 
 func take_damage(dmg : int):
 	if !is_invulnerability_on:

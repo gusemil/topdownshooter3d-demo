@@ -6,6 +6,7 @@ var navmesh
 
 enum ENEMIES {MELEE, RANGED}
 
+export var pause_spawning : bool = false
 export var ranged_enemy_chance = 4
 export var spawn_rate : float = 2.5
 #var spawns_per_wave : int = 1
@@ -31,26 +32,27 @@ func _ready():
 	spawn_timer.set_one_shot(false)
 
 func spawn_random_normal_enemy():
-	var direction = rng.randi_range(0,3)
-	var spawn_point : Vector3
+	if !pause_spawning:
+		var direction = rng.randi_range(0,3)
+		var spawn_point : Vector3
 
-	#print("DIRECTION: ", direction)
-	if(direction == 0):
-		spawn_point = Vector3(rng.randi_range(-47,47),0,rng.randi_range(-47,-40))
-	elif(direction == 1):
-		spawn_point = Vector3(rng.randi_range(-47,-40),0,rng.randi_range(-47,47))
-	elif(direction == 2):
-		spawn_point = Vector3(rng.randi_range(-47,47),0,rng.randi_range(40,47))
-	elif(direction == 3):
-		spawn_point = Vector3(rng.randi_range(40,47),0,rng.randi_range(-47,47))
+		#print("DIRECTION: ", direction)
+		if(direction == 0):
+			spawn_point = Vector3(rng.randi_range(-47,47),0,rng.randi_range(-47,-40))
+		elif(direction == 1):
+			spawn_point = Vector3(rng.randi_range(-47,-40),0,rng.randi_range(-47,47))
+		elif(direction == 2):
+			spawn_point = Vector3(rng.randi_range(-47,47),0,rng.randi_range(40,47))
+		elif(direction == 3):
+			spawn_point = Vector3(rng.randi_range(40,47),0,rng.randi_range(-47,47))
 
-	var enemy_choice = rng.randi_range(0,ranged_enemy_chance)
-	#print(enemy_choice)
-	var enemy_instance
-	if enemy_choice == ranged_enemy_chance:
-		enemy_instance = enemy_prefabs[1].instance()
-	else:
-		enemy_instance = enemy_prefabs[0].instance()
+		var enemy_choice = rng.randi_range(0,ranged_enemy_chance)
+		#print(enemy_choice)
+		var enemy_instance
+		if enemy_choice == ranged_enemy_chance:
+			enemy_instance = enemy_prefabs[1].instance()
+		else:
+			enemy_instance = enemy_prefabs[0].instance()
 
-	navmesh.add_child(enemy_instance)
-	enemy_instance.global_transform.origin = spawn_point
+		navmesh.add_child(enemy_instance)
+		enemy_instance.global_transform.origin = spawn_point
