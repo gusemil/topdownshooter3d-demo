@@ -34,6 +34,9 @@ var speed_boost_timer : Timer
 var is_invulnerability_on : bool = false
 var invulnerability_timer : Timer
 
+#Animation
+onready var animation_player = $Graphics/Armature/AnimationPlayer
+
 
 
 func _ready():
@@ -46,6 +49,8 @@ func _ready():
 		
 func _process(_delta):
 	weapon_manager.shoot(Input.is_action_just_pressed("shoot"), Input.is_action_pressed("shoot"))
+
+	animation_player.play("RunForward-loop")
 
 
 func _physics_process(delta):
