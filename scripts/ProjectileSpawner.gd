@@ -9,6 +9,9 @@ export var explosion_damage : int = 40
 export var is_exploding_projectile = true
 export var projectile_speed : float = 20
 
+var original_damage : int = damage
+var original_explosion_damage : int = explosion_damage
+
 var bodies_to_exclude = []
 
 func _ready():

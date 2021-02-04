@@ -123,7 +123,6 @@ func on_death():
 	animation_player.play("die")
 	disable_all_collisions()
 	body_removal_timer.start() #tarvitaan start obviously
-	print("enemy manager exists: ", enemy_manager.name)
 	enemy_manager.drop_pickup(global_transform.origin)
 
 func can_see_player():

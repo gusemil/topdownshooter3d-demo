@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://graphics/textures/concrete_cracked_2070_2531_Small.jpg" type="Texture" id=1]
 [ext_resource path="res://scenes/Player/Player.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://graphics/materials/walls.material" type="Material" id=5]
 [ext_resource path="res://scenes/Pickups/Powerup_Speed_Boost.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/Pickups/Powerup_Undying.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/Pickups/Powerup_Quad_Damage.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scripts/EnemyManager.gd" type="Script" id=10]
 
 [sub_resource type="SpatialMaterial" id=1]
@@ -136,3 +137,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -30.325, 1.27386, 0 )
 
 [node name="Powerup_Undying2" parent="." instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -30.325, 1.27386, 6 )
+
+[node name="Powerup_Quad_Damage2" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.4921, 1.18408, -11.6068 )
+
+[node name="Powerup_Quad_Damage3" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -37.4921, 1.18408, -11.6068 )

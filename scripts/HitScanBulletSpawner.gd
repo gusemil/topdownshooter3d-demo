@@ -5,6 +5,7 @@ var hit_effect = preload("res://scenes/BulletHitEffect.tscn")
 export var distance = 10000
 var bodies_to_exclude = []
 var damage = 1 #add weapon damage to this
+var original_damage = damage
 
 func set_damage(_damage: int):
 	damage = _damage
@@ -19,7 +20,7 @@ func fire():
 		bodies_to_exclude, 1 + 4, true, true) # world layer + character layer + hitbox layer
 	if result and result.collider.has_method("take_damage"):
 		result.collider.take_damage(damage)
-		print(result.collider.name)
+		#print(result.collider.name)
 	elif result:
 		var hit_effect_inst = hit_effect.instance()
 		get_tree().get_root().add_child(hit_effect_inst)

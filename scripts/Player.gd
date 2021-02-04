@@ -113,7 +113,7 @@ func death():
 func apply_speed_boost(powerup : Powerup):
 	if !is_speed_boost_on:
 		speed *= 2
-		dash_speed *= 1.5
+		dash_speed *= 1.25
 		is_speed_boost_on = true
 		start_speed_boost_timer(powerup)
 		powerup.queue_free()

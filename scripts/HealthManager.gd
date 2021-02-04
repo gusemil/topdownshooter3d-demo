@@ -33,7 +33,7 @@ func take_damage(dmg : int):
 			emit_signal("take_damage")
 
 		emit_signal("health_changed", current_health)
-		print("damage ", dmg, " taken. Current health: ", current_health)
+		print("Object: ", name , " damage taken: ", dmg , " current_health: ", current_health)
 
 	spawn_blood_spray(dmg)
 
