@@ -1,6 +1,4 @@
-[gd_scene load_steps=38 format=2]
-
-[ext_resource path="res://graphics/models/player/Rifle.tscn" type="PackedScene" id=1]
+[gd_scene load_steps=37 format=2]
 
 [sub_resource type="Animation" id=1]
 resource_name = "AimFireRifle"
@@ -6342,7 +6340,3 @@ mesh = SubResource( 36 )
 material/0 = null
 material/1 = null
 material/2 = null
-
-[node name="WeaponGraphics" parent="Armature" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.215066, 1.44018, 0.540648 )
-visible = false

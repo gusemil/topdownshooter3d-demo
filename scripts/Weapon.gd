@@ -21,6 +21,10 @@ export var fire_rate = 0.2
 var shoot_timer : Timer
 var can_shoot = true
 
+var muzzle_flash_timer : Timer
+var flash_time : float = 0.1
+onready var muzzle_flash_object = get_child(0).get_node("Flash")
+
 signal fired
 signal out_of_ammo
 
@@ -29,6 +33,11 @@ func _ready():
 	shoot_timer.wait_time = fire_rate
 	shoot_timer.connect("timeout", self, "finish_attack") #kun shoot_time on ohi niin finish_attack kutsutaan
 	add_child(shoot_timer)
+
+	muzzle_flash_timer = Timer.new()
+	muzzle_flash_timer.wait_time = flash_time
+	muzzle_flash_timer.connect("timeout", self, "hide_muzzle_flash")
+	add_child(muzzle_flash_timer)
 	
 func init(_fire_point: Spatial, _collision_bodies_to_ignore: Array):
 	fire_point = _fire_point
@@ -79,6 +88,7 @@ func shoot(shoot_input_just_pressed: bool, shoot_input_held: bool):
 	emit_signal("fired")
 	can_shoot = false
 	shoot_timer.start() #käynnistettään timer jonka jälkeen finish attack tapahtuu
+	show_muzzle_flash()
 	#print("Weapon: ", name, " ammo amount: ", ammo)
 	
 func finish_attack():
@@ -90,6 +100,16 @@ func set_active():
 func set_inactive():
 	#anim_player.play("idle")
 	hide()
+
+func show_muzzle_flash():
+	print("SHOW FLASH")
+	muzzle_flash_object.show()
+	muzzle_flash_timer.start()
+
+func hide_muzzle_flash():
+	print("HIDE FLASH")
+	muzzle_flash_object.hide()
+	muzzle_flash_timer.stop()
 
 func shoot_projectile():
 	print("DAMAGEMOD: ", weapon_manager.powerup_damage_modifier)
