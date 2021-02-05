@@ -102,12 +102,12 @@ func set_inactive():
 	hide()
 
 func show_muzzle_flash():
-	print("SHOW FLASH")
+	#print("SHOW FLASH")
 	muzzle_flash_object.show()
 	muzzle_flash_timer.start()
 
 func hide_muzzle_flash():
-	print("HIDE FLASH")
+	#print("HIDE FLASH")
 	muzzle_flash_object.hide()
 	muzzle_flash_timer.stop()
 
