@@ -1,13 +1,10 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://graphics/textures/concrete_cracked_2070_2531_Small.jpg" type="Texture" id=1]
 [ext_resource path="res://scenes/Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/GameManager.gd" type="Script" id=3]
 [ext_resource path="res://scripts/WaveManager.gd" type="Script" id=4]
 [ext_resource path="res://graphics/materials/walls.material" type="Material" id=5]
-[ext_resource path="res://scenes/Pickups/Powerup_Speed_Boost.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/Pickups/Powerup_Undying.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/Pickups/Powerup_Quad_Damage.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scripts/LootManager.gd" type="Script" id=9]
 
 [sub_resource type="SpatialMaterial" id=1]
@@ -35,13 +32,14 @@ polygons = [ PoolIntArray( 1, 0, 2 ), PoolIntArray( 2, 0, 3 ), PoolIntArray( 7, 
 
 [node name="EnemyManager" type="Node" parent="."]
 script = ExtResource( 9 )
+pickup_drop_chance = 2
+powerup_drop_chance = 3
 
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource( 3 )
 
 [node name="WaveManager" type="Node" parent="."]
 script = ExtResource( 4 )
-pause_spawning = true
 
 [node name="Environment" type="Spatial" parent="."]
 __meta__ = {
@@ -126,21 +124,3 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
 [node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="Navigation"]
 navmesh = SubResource( 6 )
-
-[node name="Powerup_Speed_Boost" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -36.5198, 1.81522, 0 )
-
-[node name="Powerup_Speed_Boost2" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -36.5198, 1.81522, 6 )
-
-[node name="Powerup_Undying" parent="." instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -30.325, 1.27386, 0 )
-
-[node name="Powerup_Undying2" parent="." instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -30.325, 1.27386, 6 )
-
-[node name="Powerup_Quad_Damage2" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.4921, 1.18408, -11.6068 )
-
-[node name="Powerup_Quad_Damage3" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -37.4921, 1.18408, -11.6068 )

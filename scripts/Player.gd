@@ -111,19 +111,20 @@ func move(delta):
 	#	animation_player.play("CombatIdle-loop")
 
 func animate_move():
-	if !Input.is_action_pressed("move_forward") or !Input.is_action_pressed("move_backward") or !Input.is_action_pressed("move_left") or !Input.is_action_pressed("move_right") or !Input.is_action_pressed("dash"):
-		if Input.is_action_pressed("move_forward"):
-			animation_player.play("RunForward-loop")
-		elif Input.is_action_pressed("move_backward"):
-			animation_player.play("RunBackward-loop")
-		elif Input.is_action_pressed("move_left"):
-			animation_player.play("RunLeft-loop")
-		elif Input.is_action_pressed("move_right"):
-			animation_player.play("RunRight-loop")
-		elif Input.is_action_just_pressed("dash"):
-			pass
-		else:
-			animation_player.play("AimFireRifle")
+	if !dead:
+		if !Input.is_action_pressed("move_forward") or !Input.is_action_pressed("move_backward") or !Input.is_action_pressed("move_left") or !Input.is_action_pressed("move_right") or !Input.is_action_pressed("dash"):
+			if Input.is_action_pressed("move_forward"):
+				animation_player.play("RunForward-loop")
+			elif Input.is_action_pressed("move_backward"):
+				animation_player.play("RunBackward-loop")
+			elif Input.is_action_pressed("move_left"):
+				animation_player.play("RunLeft-loop")
+			elif Input.is_action_pressed("move_right"):
+				animation_player.play("RunRight-loop")
+			elif Input.is_action_just_pressed("dash"):
+				pass
+			else:
+				animation_player.play("AimFireRifle")
 
 func take_damage(dmg : int):
 	if !is_invulnerability_on:

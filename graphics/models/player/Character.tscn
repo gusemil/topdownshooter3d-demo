@@ -6345,3 +6345,4 @@ material/2 = null
 
 [node name="WeaponGraphics" parent="Armature" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.215066, 1.44018, 0.540648 )
+visible = false
