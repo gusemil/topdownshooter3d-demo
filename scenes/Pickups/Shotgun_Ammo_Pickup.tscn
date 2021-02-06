@@ -6,7 +6,7 @@
 
 [sub_resource type="SpatialMaterial" id=2]
 flags_unshaded = true
-albedo_color = Color( 1, 0.729412, 0.0117647, 1 )
+albedo_color = Color( 1, 1, 0, 1 )
 
 [node name="Shotgun_Ammo_Pickup" instance=ExtResource( 1 )]
 pickup_type = 1

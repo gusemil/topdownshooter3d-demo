@@ -96,9 +96,7 @@ func finish_attack():
 	
 func set_active():
 	show()
-	
 func set_inactive():
-	#anim_player.play("idle")
 	hide()
 
 func show_muzzle_flash():
@@ -112,7 +110,7 @@ func hide_muzzle_flash():
 	muzzle_flash_timer.stop()
 
 func shoot_projectile():
-	print("DAMAGEMOD: ", weapon_manager.powerup_damage_modifier)
+	#print("DAMAGEMOD: ", weapon_manager.powerup_damage_modifier)
 	var start_transform = projectile_spawners_base.global_transform
 	projectile_spawners_base.global_transform = fire_point.global_transform
 	for projectile_spawner in projectile_spawners:

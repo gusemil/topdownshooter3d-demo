@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/FightLikeHell.wav-87ff7b4ba699628ba9db547b276474be.sample"
+
+[deps]
+
+source_file="res://audio/music/FightLikeHell.wav"
+dest_files=[ "res://.import/FightLikeHell.wav-87ff7b4ba699628ba9db547b276474be.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/DoomedToSurvive.wav-6bdce70e2d94f912044585d8cae31d46.sample"
+
+[deps]
+
+source_file="res://audio/music/DoomedToSurvive.wav"
+dest_files=[ "res://.import/DoomedToSurvive.wav-6bdce70e2d94f912044585d8cae31d46.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

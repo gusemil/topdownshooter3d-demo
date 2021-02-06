@@ -13,6 +13,7 @@ var collision_bodies_to_ignore : Array = []
 var powerup_damage_modifier : int = 1
 var is_quad_damage_on : bool = false
 var quad_damage_timer : Timer
+var is_quad_powerup_initialized : bool = false
 
 func _process(delta):
 	if Input.is_action_just_pressed("weapon1") and current_slot != WEAPON_SLOTS.MACHINE_GUN:
@@ -44,7 +45,7 @@ func shoot(attack_input_just_pressed: bool, attack_input_held: bool):
 
 func change_weapon(new_weapon_index : int):
 	#if new_weapon_index != current_slot:
-	print("Current weapon: ", current_slot, " new weapon: ", new_weapon_index)
+	#print("Current weapon: ", current_slot, " new weapon: ", new_weapon_index)
 	current_weapon.set_inactive()
 	current_slot = new_weapon_index
 	current_weapon = weapons[current_slot]
@@ -56,21 +57,24 @@ func add_ammo(pickup : Pickup):
 func get_powerup_damage_mod():
 	return powerup_damage_modifier
 
-func apply_quad_damage(powerup : Powerup):
-	if !is_quad_damage_on:
-		is_quad_damage_on = true
-		powerup_damage_modifier = 4
-		start_quad_damage_timer(powerup)
-		powerup.queue_free()
-func stop_quad_damage():
-	print("STOP QUAD DAMAGE")
-	is_quad_damage_on = false
-	powerup_damage_modifier = 1
-
-func start_quad_damage_timer(powerup : Powerup):
-	if is_quad_damage_on:
+func init_quad_powerup(powerup : Powerup):
+	if !is_quad_powerup_initialized:
 		quad_damage_timer = Timer.new()
 		quad_damage_timer.wait_time = powerup.length
 		quad_damage_timer.connect("timeout", self, "stop_quad_damage")
 		add_child(quad_damage_timer)
+		is_quad_powerup_initialized = true
+
+func apply_quad_damage(powerup : Powerup):
+	if !is_quad_damage_on:
+		print("QUAD DAMAGE START")
+		is_quad_damage_on = true
+		powerup_damage_modifier = 4
 		quad_damage_timer.start()
+		powerup.queue_free()
+
+func stop_quad_damage():
+	print("STOP QUAD DAMAGE")
+	quad_damage_timer.stop()
+	is_quad_damage_on = false
+	powerup_damage_modifier = 1

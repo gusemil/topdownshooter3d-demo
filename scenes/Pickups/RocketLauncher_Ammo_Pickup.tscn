@@ -9,6 +9,7 @@ flags_unshaded = true
 albedo_color = Color( 1, 0.0470588, 0, 1 )
 
 [node name="RocketLauncher_Ammo_Pickup" instance=ExtResource( 1 )]
+pickup_type = 2
 amount = 10
 
 [node name="MeshInstance" parent="Graphics" index="0"]

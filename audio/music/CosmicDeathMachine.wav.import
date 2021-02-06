@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/CosmicDeathMachine.wav-f09822dce0a44ea6a66ff8102f875967.sample"
+
+[deps]
+
+source_file="res://audio/music/CosmicDeathMachine.wav"
+dest_files=[ "res://.import/CosmicDeathMachine.wav-f09822dce0a44ea6a66ff8102f875967.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

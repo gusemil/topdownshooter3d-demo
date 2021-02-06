@@ -6,9 +6,10 @@
 
 [sub_resource type="SpatialMaterial" id=2]
 flags_unshaded = true
-albedo_color = Color( 0.968627, 1, 0, 1 )
+albedo_color = Color( 1, 0.631373, 0, 1 )
 
 [node name="Machinegun_Ammo_Pickup" instance=ExtResource( 1 )]
+amount = 50
 
 [node name="MeshInstance" parent="Graphics" index="0"]
 mesh = SubResource( 1 )

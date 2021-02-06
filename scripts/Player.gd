@@ -24,15 +24,17 @@ var is_dashing = false
 # State
 var dead = false
 
-#Powerup stuff
+#Speed Boost Powerup
 var default_speed = speed
 var default_dash_speed = dash_speed
 var is_speed_boost_on : bool = false
 var speed_boost_timer : Timer
+var is_speed_powerup_initialized : bool = false
 
 #Undying powerup
 var is_invulnerability_on : bool = false
 var invulnerability_timer : Timer
+var is_undying_powerup_initialized : bool = false
 
 #Animation
 onready var animation_player = $Graphics/Armature/AnimationPlayer
@@ -136,12 +138,19 @@ func death():
 	dead = true
 	#print("Player is dead")
 
+func init_speed_powerup(powerup : Powerup):
+	if !is_speed_powerup_initialized:
+		speed_boost_timer = Timer.new()
+		speed_boost_timer.wait_time = powerup.length
+		speed_boost_timer.connect("timeout", self, "stop_speed_boost")
+		add_child(speed_boost_timer)
+		is_speed_powerup_initialized = true
 func apply_speed_boost(powerup : Powerup):
 	if !is_speed_boost_on:
 		speed *= 2
 		dash_speed *= 1.25
 		is_speed_boost_on = true
-		start_speed_boost_timer(powerup)
+		speed_boost_timer.start()
 		powerup.queue_free()
 
 func stop_speed_boost():
@@ -149,27 +158,19 @@ func stop_speed_boost():
 	speed = default_speed
 	dash_speed = default_dash_speed
 
-func start_speed_boost_timer(powerup : Powerup):
-	if is_speed_boost_on:
-		speed_boost_timer = Timer.new()
-		speed_boost_timer.wait_time = powerup.length
-		speed_boost_timer.connect("timeout", self, "stop_speed_boost")
-		add_child(speed_boost_timer)
-		speed_boost_timer.start()
-
 func apply_invulnerability(powerup : Powerup):
 	if !is_invulnerability_on:
 		is_invulnerability_on = true
-		start_invulnerability_timer(powerup)
+		invulnerability_timer.start()
 		powerup.queue_free()
 
 func stop_invulnerability():
 	is_invulnerability_on = false
 
-func start_invulnerability_timer(powerup : Powerup):
-	if is_invulnerability_on:
+func init_undying_powerup(powerup : Powerup):
+	if !is_undying_powerup_initialized:
 		invulnerability_timer = Timer.new()
 		invulnerability_timer.wait_time = powerup.length
 		invulnerability_timer.connect("timeout", self, "stop_invulnerability")
 		add_child(invulnerability_timer)
-		invulnerability_timer.start()
+		is_undying_powerup_initialized = true

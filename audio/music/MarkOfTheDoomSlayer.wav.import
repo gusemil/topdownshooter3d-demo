@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/MarkOfTheDoomSlayer.wav-31b5dc05105e25c10a5d9944e3c1d525.sample"
+
+[deps]
+
+source_file="res://audio/music/MarkOfTheDoomSlayer.wav"
+dest_files=[ "res://.import/MarkOfTheDoomSlayer.wav-31b5dc05105e25c10a5d9944e3c1d525.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
