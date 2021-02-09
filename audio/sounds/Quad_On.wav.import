@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Quad_On.wav-b2a6671f33b4eb2d4a6aaee7024f0530.sample"
+
+[deps]
+
+source_file="res://audio/sounds/Quad_On.wav"
+dest_files=[ "res://.import/Quad_On.wav-b2a6671f33b4eb2d4a6aaee7024f0530.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

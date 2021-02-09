@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/DashOn.wav-f3972e83c434eeab37af4b20f9efe281.sample"
+
+[deps]
+
+source_file="res://audio/sounds/DashOn.wav"
+dest_files=[ "res://.import/DashOn.wav-f3972e83c434eeab37af4b20f9efe281.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

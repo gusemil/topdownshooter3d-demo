@@ -74,6 +74,7 @@ func apply_quad_damage(powerup : Powerup):
 		is_quad_damage_on = true
 		powerup_damage_modifier = 4
 		quad_damage_timer.start()
+		sound_manager.play_sound(1,5)
 		powerup.queue_free()
 
 func stop_quad_damage():
@@ -81,3 +82,4 @@ func stop_quad_damage():
 	quad_damage_timer.stop()
 	is_quad_damage_on = false
 	powerup_damage_modifier = 1
+	sound_manager.play_sound(1,8)

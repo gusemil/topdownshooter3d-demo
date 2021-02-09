@@ -9,20 +9,33 @@ onready var current_armor : int = starting_armor
 signal dead
 signal take_damage
 signal health_changed
+signal health_damage
+signal armor_damage
 #signal gibbed
 
 var blood_spray_prefab = preload("res://scenes/BloodSpray.tscn")
 
+#Sounds
+onready var soundmanager = get_tree().get_root().get_node("World/NonPositionalSoundManager")
+
 func take_damage(dmg : int):
 	if current_armor > 0:
+		var armor_before_dmg = current_armor
+		print("DMG BEFORE ARMOR: ", dmg)
 		current_armor -= dmg
+		dmg -= armor_before_dmg
 		if current_armor < 0:
 			current_armor = 0
 		print("my armor", current_armor)
-		#spawn_blood_spray(dmg) #TODO: spawn armor sparks
+		emit_signal("armor_damage")
+		#spawn_armor_sparks(dmg) #TODO: spawn armor sparks
 
-	if current_armor <= 0:
+		print("FINAL DAMAGE: ", dmg)
+
+
+	if current_armor <= 0 and dmg > 0:
 		current_health -= dmg
+		emit_signal("health_damage")
 
 		if current_health <= 0:
 			#emit_signal("gibbed")
@@ -34,8 +47,7 @@ func take_damage(dmg : int):
 
 		emit_signal("health_changed", current_health)
 		print("Object: ", name , " damage taken: ", dmg , " current_health: ", current_health)
-
-	spawn_blood_spray(dmg)
+		spawn_blood_spray(dmg)
 
 func spawn_blood_spray(dmg : int, blood_modifier = 2.0):
 	var blood_spray_instance = blood_spray_prefab.instance()
@@ -53,6 +65,7 @@ func gain_health(pickup : Pickup):
 		else:
 			current_health = max_health
 		print("hp: ", current_health)
+		soundmanager.play_sound(1,3)
 		pickup.queue_free()
 
 func gain_armor(pickup : Pickup):
@@ -62,5 +75,6 @@ func gain_armor(pickup : Pickup):
 		else:
 			current_armor = max_armor
 		print("armor: ", current_armor)
+		soundmanager.play_sound(1,4)
 		pickup.queue_free()
 		

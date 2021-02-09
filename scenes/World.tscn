@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://graphics/textures/concrete_cracked_2070_2531_Small.jpg" type="Texture" id=1]
 [ext_resource path="res://scenes/Player/Player.tscn" type="PackedScene" id=2]
@@ -11,6 +11,11 @@
 [ext_resource path="res://scripts/LootManager.gd" type="Script" id=9]
 [ext_resource path="res://scenes/Pickups/Machinegun_Ammo_Pickup.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/Pickups/RocketLauncher_Ammo_Pickup.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/Pickups/Health_Pickup.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/Pickups/Armor_Pickup.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/Pickups/Powerup_Quad_Damage.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/Pickups/Powerup_Undying.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scenes/Pickups/Powerup_Speed_Boost.tscn" type="PackedScene" id=16]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_unshaded = true
@@ -46,6 +51,8 @@ script = ExtResource( 6 )
 [node name="GunPlayer" type="AudioStreamPlayer" parent="NonPositionalSoundManager"]
 
 [node name="PickupPlayer" type="AudioStreamPlayer" parent="NonPositionalSoundManager"]
+
+[node name="PlayerDamagePlayer" type="AudioStreamPlayer" parent="NonPositionalSoundManager"]
 
 [node name="EnemyManager" type="Node" parent="."]
 script = ExtResource( 9 )
@@ -150,3 +157,19 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 1, 0 )
 
 [node name="Shotgun_Ammo_Pickup" parent="." instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 19 )
+
+[node name="Health_Pickup" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.792, 1.43883, 6.26827 )
+
+[node name="Armor_Pickup" parent="." instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.792, 1.43883, -10.6918 )
+amount = 15
+
+[node name="Powerup_Undying" parent="." instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.672, 1.27957, -21.6274 )
+
+[node name="Powerup_Quad_Damage" parent="." instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.2815, 1.27957, -22 )
+
+[node name="Powerup_Speed_Boost" parent="." instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.0916, 0.995337, -21.0925 )

@@ -50,6 +50,8 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	weapon_manager.init($WeaponManager/FirePoint, [self]) #exclude player from bullet collisions
 	health_manager.connect("dead", self, "death") #Kun healthmanagerin dead emitataan niin pelaajan death funktio aktivoituu
+	health_manager.connect("armor_damage", self, "play_armor_damage_sound")
+	health_manager.connect("health_damage", self, "play_health_damage_sound")
 
 		
 func _process(_delta):
@@ -109,7 +111,6 @@ func move(delta):
 		move_direction = move_direction.normalized()
 		if Input.is_action_just_pressed("dash"):
 			velocity += move_direction*speed*delta*dash_speed
-			print("TEST: ", soundmanager.name)
 		else:
 			velocity += move_direction*speed*delta
 
@@ -155,21 +156,29 @@ func apply_speed_boost(powerup : Powerup):
 		dash_speed *= 1.25
 		is_speed_boost_on = true
 		speed_boost_timer.start()
+		soundmanager.play_sound(1,7)
 		powerup.queue_free()
 
 func stop_speed_boost():
 	is_speed_boost_on = false
 	speed = default_speed
 	dash_speed = default_dash_speed
+	speed_boost_timer.stop()
+	soundmanager.play_sound(1,10)
+	print("STOP SPEED")
 
 func apply_invulnerability(powerup : Powerup):
 	if !is_invulnerability_on:
 		is_invulnerability_on = true
 		invulnerability_timer.start()
+		soundmanager.play_sound(1,6)
 		powerup.queue_free()
 
 func stop_invulnerability():
 	is_invulnerability_on = false
+	invulnerability_timer.stop()
+	soundmanager.play_sound(1,9)
+	print("STOP INVUL")
 
 func init_undying_powerup(powerup : Powerup):
 	if !is_undying_powerup_initialized:
@@ -178,3 +187,9 @@ func init_undying_powerup(powerup : Powerup):
 		invulnerability_timer.connect("timeout", self, "stop_invulnerability")
 		add_child(invulnerability_timer)
 		is_undying_powerup_initialized = true
+
+func play_armor_damage_sound():
+	soundmanager.play_sound(2,1)
+
+func play_health_damage_sound():
+	soundmanager.play_sound(2,0)
