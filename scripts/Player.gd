@@ -39,6 +39,9 @@ var is_undying_powerup_initialized : bool = false
 #Animation
 onready var animation_player = $Graphics/Armature/AnimationPlayer
 
+#Sounds
+onready var soundmanager = get_tree().get_root().get_node("World/NonPositionalSoundManager")
+
 
 
 func _ready():
@@ -106,6 +109,8 @@ func move(delta):
 		move_direction = move_direction.normalized()
 		if Input.is_action_just_pressed("dash"):
 			velocity += move_direction*speed*delta*dash_speed
+			print("TEST: ", soundmanager.name)
+			soundmanager.play_sound(0)
 		else:
 			velocity += move_direction*speed*delta
 
