@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://graphics/textures/concrete_cracked_2070_2531_Small.jpg" type="Texture" id=1]
 [ext_resource path="res://scenes/Player/Player.tscn" type="PackedScene" id=2]
@@ -7,7 +7,10 @@
 [ext_resource path="res://graphics/materials/walls.material" type="Material" id=5]
 [ext_resource path="res://scripts/NonPositionalSoundManager.gd" type="Script" id=6]
 [ext_resource path="res://scripts/MusicManager.gd" type="Script" id=7]
+[ext_resource path="res://scenes/Pickups/Shotgun_Ammo_Pickup.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scripts/LootManager.gd" type="Script" id=9]
+[ext_resource path="res://scenes/Pickups/Machinegun_Ammo_Pickup.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/Pickups/RocketLauncher_Ammo_Pickup.tscn" type="PackedScene" id=11]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_unshaded = true
@@ -40,7 +43,9 @@ script = ExtResource( 7 )
 [node name="NonPositionalSoundManager" type="Node" parent="."]
 script = ExtResource( 6 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="NonPositionalSoundManager"]
+[node name="GunPlayer" type="AudioStreamPlayer" parent="NonPositionalSoundManager"]
+
+[node name="PickupPlayer" type="AudioStreamPlayer" parent="NonPositionalSoundManager"]
 
 [node name="EnemyManager" type="Node" parent="."]
 script = ExtResource( 9 )
@@ -136,3 +141,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
 [node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="Navigation"]
 navmesh = SubResource( 6 )
+
+[node name="Machinegun_Ammo_Pickup" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -23 )
+
+[node name="RocketLauncher_Ammo_Pickup" parent="." instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 1, 0 )
+
+[node name="Shotgun_Ammo_Pickup" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 19 )

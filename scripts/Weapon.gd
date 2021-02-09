@@ -28,6 +28,9 @@ onready var muzzle_flash_object = get_child(0).get_node("Flash")
 signal fired
 signal out_of_ammo
 
+#Sounds
+onready var soundmanager = get_tree().get_root().get_node("World/NonPositionalSoundManager")
+
 func _ready():
 	shoot_timer = Timer.new() #aka ienumerator waitseconds
 	shoot_timer.wait_time = fire_rate
@@ -89,7 +92,13 @@ func shoot(shoot_input_just_pressed: bool, shoot_input_held: bool):
 	can_shoot = false
 	shoot_timer.start() #käynnistettään timer jonka jälkeen finish attack tapahtuu
 	show_muzzle_flash()
-	#print("Weapon: ", name, " ammo amount: ", ammo)
+
+	if self.name == "MachineGun":
+		soundmanager.play_sound(0,0)
+	elif self.name == "Shotgun":
+		soundmanager.play_sound(0,1,1.25)
+	elif self.name == "RocketLauncher":
+		soundmanager.play_sound(0,2)
 	
 func finish_attack():
 	can_shoot = true
@@ -127,8 +136,13 @@ func add_ammo(pickup : Pickup):
 			ammo = max_ammo
 		print("Weapon: ", name, " ammo amount: ", ammo)
 		pickup.queue_free()
-	
 
+		if pickup.pickup_type == pickup.PICKUP_TYPES.AMMO_MACHINE_GUN:
+			soundmanager.play_sound(1,0)
+		if pickup.pickup_type == pickup.PICKUP_TYPES.AMMO_SHOTGUN:
+			soundmanager.play_sound(1,1)
+		if pickup.pickup_type == pickup.PICKUP_TYPES.AMMO_ROCKET_LAUNCHER:
+			soundmanager.play_sound(1,2)
 	
 	
 	

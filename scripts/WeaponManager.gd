@@ -15,6 +15,9 @@ var is_quad_damage_on : bool = false
 var quad_damage_timer : Timer
 var is_quad_powerup_initialized : bool = false
 
+#Sounds
+onready var sound_manager = get_tree().get_root().get_node("World/NonPositionalSoundManager")
+
 func _process(delta):
 	if Input.is_action_just_pressed("weapon1") and current_slot != WEAPON_SLOTS.MACHINE_GUN:
 		change_weapon(WEAPON_SLOTS.MACHINE_GUN)
