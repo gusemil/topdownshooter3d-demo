@@ -10,6 +10,7 @@ var fire_point : Spatial
 var collision_bodies_to_ignore : Array = []
 
 #Quad damage
+onready var quad_powerup_effect : Particles = $QuadPowerUpEffect
 var powerup_damage_modifier : int = 1
 var is_quad_damage_on : bool = false
 var quad_damage_timer : Timer
@@ -75,6 +76,7 @@ func apply_quad_damage(powerup : Powerup):
 		powerup_damage_modifier = 4
 		quad_damage_timer.start()
 		sound_manager.play_sound(1,5)
+		quad_powerup_effect.emitting = true
 		powerup.queue_free()
 
 func stop_quad_damage():
@@ -83,3 +85,4 @@ func stop_quad_damage():
 	is_quad_damage_on = false
 	powerup_damage_modifier = 1
 	sound_manager.play_sound(1,8)
+	quad_powerup_effect.emitting = false
