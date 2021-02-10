@@ -4,7 +4,7 @@ extends KinematicBody
 export var speed = 300
 export var friction = 0.875
 export var gravity = 80
-export var camera_rotation_speed = 250
+#export var camera_rotation_speed = 250
 var move_direction = Vector3()
 var velocity = Vector3()
 
@@ -45,6 +45,9 @@ onready var animation_player = $Graphics/Armature/AnimationPlayer
 #Sounds
 onready var soundmanager = get_tree().get_root().get_node("World/NonPositionalSoundManager")
 
+#Controls
+var is_controller : bool = false
+
 
 
 func _ready():
@@ -72,25 +75,22 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector3.UP, true, 3)
 
 func camera_follows_player():
-	var player_pos = global_transform.origin
-	camera_rig.global_transform.origin = player_pos
+	var player_position = global_transform.origin
+	camera_rig.global_transform.origin = player_position
 
 func look_at_cursor():
 	if !dead:
-		# Create a horizontal plane, and find a point where the ray intersects with it
-		var player_pos = global_transform.origin
-		var dropPlane  = Plane(Vector3(0, 1, 0), player_pos.y)
-		# Project a ray from camera, from where the mouse cursor is in 2D viewport
+		var player_position = global_transform.origin
+		var dropPlane  = Plane(Vector3(0, 1, 0), player_position.y)
+
 		var ray_length = 1000
 		var mouse_pos = get_viewport().get_mouse_position()
 		var from = camera.project_ray_origin(mouse_pos)
 		var to = from + camera.project_ray_normal(mouse_pos) * ray_length
 		var cursor_pos = dropPlane.intersects_ray(from,to)
 		
-		# Set the position of cursor visualizer
 		cursor.global_transform.origin = cursor_pos + Vector3(0,1,0)
 		
-		# Make player look at the cursor
 		look_at(cursor_pos, Vector3.UP)
 
 
