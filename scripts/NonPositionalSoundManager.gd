@@ -34,6 +34,7 @@ onready var pickup_sound10 : String = "res://audio/sounds/DashOff.wav"
 #Player Damage sounds
 onready var player_damage_sound0 : String = "res://audio/sounds/player_damage.wav"
 onready var player_damage_sound1 : String = "res://audio/sounds/player_armor_damage.wav"
+onready var player_damage_sound2 : String = "res://audio/sounds/player_deflect.wav"
 
 var rng = RandomNumberGenerator.new()
 
@@ -62,6 +63,7 @@ func _ready():
 	
 	player_damage_sounds.push_back(player_damage_sound0)
 	player_damage_sounds.push_back(player_damage_sound1)
+	player_damage_sounds.push_back(player_damage_sound2)
 
 	sound_arrays.push_back(gun_sounds)
 	sound_arrays.push_back(pickup_sounds)

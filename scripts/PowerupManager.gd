@@ -1,4 +1,4 @@
-extends Node
+extends Spatial
 
 onready var weapon_manager = get_node("../").get_node("WeaponManager")
 onready var health_manager = get_node("../").get_node("HealthManager")

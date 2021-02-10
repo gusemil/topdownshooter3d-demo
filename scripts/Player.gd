@@ -35,6 +35,7 @@ var is_speed_powerup_initialized : bool = false
 var is_invulnerability_on : bool = false
 var invulnerability_timer : Timer
 var is_undying_powerup_initialized : bool = false
+onready var undying_powerup_effect = $Graphics/UndyingPowerUpEffect
 
 #Animation
 onready var animation_player = $Graphics/Armature/AnimationPlayer
@@ -137,6 +138,7 @@ func take_damage(dmg : int):
 	if !is_invulnerability_on:
 		health_manager.take_damage(dmg)
 	else:
+		play_invulnerability_sound()
 		print("I AM INVULNERABLE!")
 
 func death():
@@ -173,11 +175,13 @@ func apply_invulnerability(powerup : Powerup):
 		invulnerability_timer.start()
 		soundmanager.play_sound(1,6)
 		powerup.queue_free()
+		undying_powerup_effect.show()
 
 func stop_invulnerability():
 	is_invulnerability_on = false
 	invulnerability_timer.stop()
 	soundmanager.play_sound(1,9)
+	undying_powerup_effect.hide()
 	print("STOP INVUL")
 
 func init_undying_powerup(powerup : Powerup):
@@ -193,3 +197,6 @@ func play_armor_damage_sound():
 
 func play_health_damage_sound():
 	soundmanager.play_sound(2,0)
+
+func play_invulnerability_sound():
+	soundmanager.play_sound(2,2)
