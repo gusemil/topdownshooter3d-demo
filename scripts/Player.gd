@@ -31,6 +31,8 @@ var is_speed_boost_on : bool = false
 var speed_boost_timer : Timer
 var is_speed_powerup_initialized : bool = false
 
+onready var speed_powerup_effect : Particles = $SpeedPowerUpEffect
+
 #Undying powerup
 var is_invulnerability_on : bool = false
 var invulnerability_timer : Timer
@@ -159,6 +161,7 @@ func apply_speed_boost(powerup : Powerup):
 		is_speed_boost_on = true
 		speed_boost_timer.start()
 		soundmanager.play_sound(1,7)
+		speed_powerup_effect.emitting = true
 		powerup.queue_free()
 
 func stop_speed_boost():
@@ -167,6 +170,7 @@ func stop_speed_boost():
 	dash_speed = default_dash_speed
 	speed_boost_timer.stop()
 	soundmanager.play_sound(1,10)
+	speed_powerup_effect.emitting = false
 	print("STOP SPEED")
 
 func apply_invulnerability(powerup : Powerup):
