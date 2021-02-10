@@ -5,7 +5,7 @@ var current_state = STATE.IDLE
 
 onready var animation_player = $Graphics/AnimationPlayer
 onready var health_manager = $HealthManager
-onready var enemy_manager = get_tree().get_root().get_node("World/EnemyManager")
+onready var loot_manager = get_tree().get_root().get_node("World/LootManager")
 var damage_area
 export var is_melee : bool
 
@@ -50,10 +50,32 @@ onready var nav : Navigation = get_parent() # enemy must be a child of navigatio
 
 signal attack
 
+#Sounds
+onready var soundplayer : AudioStreamPlayer3D = $AudioStreamPlayer3D
+var enemy_sounds = []
+
+onready var death_sound0 : String = "res://audio/sounds/enemy_death2.wav"
+onready var death_sound1 : String = "res://audio/sounds/enemy_death4.wav"
+onready var death_sound2 : String = "res://audio/sounds/enemy_death1.wav"
+onready var death_sound3 : String = "res://audio/sounds/enemy_death3.wav"
+
+onready var dmg_sound4: String = "res://audio/sounds/player_damage.wav"
+onready var ranged_sound5 : String = "res://audio/sounds/enemy_shoot1.wav"
+
 # Body removal
 export var body_removes_after_seconds = 5
 var body_removal_timer : Timer
+
 func _ready():
+	#sounds
+	enemy_sounds.push_back(death_sound0)
+	enemy_sounds.push_back(death_sound1)
+	enemy_sounds.push_back(death_sound2)
+	enemy_sounds.push_back(death_sound3)
+
+	enemy_sounds.push_back(dmg_sound4)
+	enemy_sounds.push_back(ranged_sound5)
+	
 	rng.randomize() #setting up the seed
 	player = get_tree().get_nodes_in_group("player")[0] # When multiplayer is implemented take the nearest player object with the tag/group "player"
 	var bone_attachments = $Graphics/Armature/Skeleton.get_children()
@@ -105,6 +127,9 @@ func take_damage(damage: int):
 	if !is_dead:
 		#print("enemy got hit!")
 		health_manager.take_damage(damage)
+		if !is_dead:
+			if is_melee:
+				play_sound(4,1)
 
 		var pain = rng.randi_range(1,pain_chance)
 		#print(pain, "/", pain_chance)
@@ -123,7 +148,9 @@ func on_death():
 	animation_player.play("die")
 	disable_all_collisions()
 	body_removal_timer.start() #tarvitaan start obviously
-	enemy_manager.drop_pickup(global_transform.origin)
+	loot_manager.drop_pickup(global_transform.origin)
+	var random_death_sound = rng.randi_range(0,3)
+	play_sound(random_death_sound,1.5, 25.0)
 
 func can_see_player():
 	var direction_to_player = global_transform.origin.direction_to(player.global_transform.origin) #player.(global)transform.position
@@ -171,6 +198,9 @@ func start_attack():
 
 func finish_attack():
 	can_attack = true
+	if !is_melee:
+		play_sound(5)
+
 
 func emit_attack_signal():
 	emit_signal("attack")
@@ -255,3 +285,10 @@ func _process(delta):
 		if !in_pain and !is_dead:
 				set_movement_vector(Vector3.ZERO)
 				start_pain()
+
+
+func play_sound(sound_index : int, pitch_scale = 1.0, volume = 30.0):
+	soundplayer.stream = load(enemy_sounds[sound_index])
+	soundplayer.pitch_scale = pitch_scale
+	soundplayer.unit_db = volume
+	soundplayer.play()

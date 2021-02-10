@@ -774,6 +774,9 @@ shape = SubResource( 19 )
 [node name="PowerupManager" type="Node" parent="."]
 script = ExtResource( 8 )
 
+[node name="Listener" type="Listener" parent="."]
+current = true
+
 [editable path="Graphics"]
 
 [editable path="WeaponManager/Weapons/MachineGun/MachinegunGraphics"]

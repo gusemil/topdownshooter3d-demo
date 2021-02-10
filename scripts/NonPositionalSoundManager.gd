@@ -16,7 +16,7 @@ var player_damage_sounds = []
 #Guns
 onready var gun_sound0 : String = "res://audio/sounds/gun_machinegun_auto_heavy_shot_01.wav"
 onready var gun_sound1 : String = "res://audio/sounds/gun_shotgun_shot_02.wav"
-onready var gun_sound2 : String = "res://audio/sounds/gun_tank_cannon_turret_shot_01.wav"
+onready var gun_sound2 : String = "res://audio/sounds/gun_grenade_launcher_shot_01.wav"
 
 #Pickups
 onready var pickup_sound0 : String = "res://audio/sounds/pickup_machinegun.wav"

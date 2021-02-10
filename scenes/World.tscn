@@ -44,6 +44,7 @@ polygons = [ PoolIntArray( 1, 0, 2 ), PoolIntArray( 2, 0, 3 ), PoolIntArray( 7, 
 script = ExtResource( 7 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
+volume_db = -5.0
 
 [node name="NonPositionalSoundManager" type="Node" parent="."]
 script = ExtResource( 6 )
@@ -54,7 +55,7 @@ script = ExtResource( 6 )
 
 [node name="PlayerDamagePlayer" type="AudioStreamPlayer" parent="NonPositionalSoundManager"]
 
-[node name="EnemyManager" type="Node" parent="."]
+[node name="LootManager" type="Node" parent="."]
 script = ExtResource( 9 )
 pickup_drop_chance = 2
 powerup_drop_chance = 3
