@@ -36,6 +36,13 @@ config/name="Xenoshock3DGit"
 run/main_scene="res://scenes/World.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=1080
+window/size/height=680
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+
 [input]
 
 ui_accept={

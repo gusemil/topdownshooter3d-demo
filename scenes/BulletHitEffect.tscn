@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://graphics/textures/dot.png" type="Texture" id=1]
 [ext_resource path="res://scripts/BulletHole.gd" type="Script" id=2]
@@ -9,28 +9,18 @@ flags_unshaded = true
 albedo_color = Color( 0.972549, 0.913725, 0.0470588, 1 )
 albedo_texture = ExtResource( 1 )
 
-[sub_resource type="Curve" id=2]
-_data = [ Vector2( 0, 0 ), 0.0, 3.12177, 0, 0, Vector2( 0.417722, 1 ), 0.04593, 0.04593, 0, 0, Vector2( 1, 0 ), -3.5161, 0.0, 0, 0 ]
+[sub_resource type="ParticlesMaterial" id=6]
 
-[sub_resource type="CurveTexture" id=3]
-curve = SubResource( 2 )
+[sub_resource type="QuadMesh" id=3]
 
-[sub_resource type="ParticlesMaterial" id=4]
-initial_velocity = 5.0
-scale = 0.1
-scale_random = 0.1
-scale_curve = SubResource( 3 )
-
-[sub_resource type="QuadMesh" id=5]
-
-[sub_resource type="SpatialMaterial" id=6]
+[sub_resource type="SpatialMaterial" id=4]
 flags_transparent = true
 flags_unshaded = true
 albedo_color = Color( 0.054902, 0.027451, 0.027451, 1 )
 albedo_texture = ExtResource( 1 )
 
-[sub_resource type="QuadMesh" id=7]
-material = SubResource( 6 )
+[sub_resource type="QuadMesh" id=5]
+material = SubResource( 4 )
 
 [node name="BulletHitEffect" type="Spatial"]
 script = ExtResource( 2 )
@@ -43,12 +33,12 @@ emitting = false
 one_shot = true
 explosiveness = 0.9
 local_coords = false
-process_material = SubResource( 4 )
-draw_pass_1 = SubResource( 5 )
+process_material = SubResource( 6 )
+draw_pass_1 = SubResource( 3 )
 
 [node name="BulletDecal" type="MeshInstance" parent="."]
 transform = Transform( 0.2, 0, 0, 0, -8.74228e-09, 0.2, 0, -0.2, -8.74228e-09, 0, 0.005, 0 )
-mesh = SubResource( 7 )
+mesh = SubResource( 5 )
 material/0 = null
 
 [node name="Timer" type="Timer" parent="."]
