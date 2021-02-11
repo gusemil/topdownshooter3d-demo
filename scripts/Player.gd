@@ -46,13 +46,22 @@ onready var animation_player = $Graphics/Armature/AnimationPlayer
 onready var soundmanager = get_tree().get_root().get_node("World/NonPositionalSoundManager")
 
 #Controls
-var is_controller : bool = false
+export var is_controller : bool = false
+#onready var controller_cursor = $Controller_Cursor
+export var rotation_speed = 600
+#export var cursor_gravity = 80
+#export var camera_rotation_speed = 250
+var cursor_move_direction = Vector3()
+var cursor_velocity = Vector3()
 
 
 
 func _ready():
 	camera_rig.set_as_toplevel(true)
-	cursor.set_as_toplevel(true)
+	if is_controller:
+		cursor.hide()
+	else:
+		cursor.set_as_toplevel(true)
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	weapon_manager.init($WeaponManager/FirePoint, [self]) #exclude player from bullet collisions
 	health_manager.connect("dead", self, "death") #Kun healthmanagerin dead emitataan niin pelaajan death funktio aktivoituu
@@ -60,13 +69,20 @@ func _ready():
 	health_manager.connect("health_damage", self, "play_health_damage_sound")
 
 		
-func _process(_delta):
+func _process(delta):
 	weapon_manager.shoot(Input.is_action_just_pressed("shoot"), Input.is_action_pressed("shoot"))
+	if is_controller:
+		if Input.is_action_pressed("controller_look_up") or Input.is_action_pressed("controller_look_down") or Input.is_action_pressed("controller_look_left") or Input.is_action_pressed("controller_look_right"):
+			controller_move_cursor(delta)
 
 
 func _physics_process(delta):
 	camera_follows_player()
-	look_at_cursor()
+	if !is_controller:
+		look_at_cursor()
+	#else:
+	#	if Input.is_action_pressed("controller_look_up") or Input.is_action_pressed("controller_look_down") or Input.is_action_pressed("controller_look_left") or Input.is_action_pressed("controller_look_right"):
+	#		controller_move_cursor(delta)
 	move(delta)
 	animate_move()
 	
@@ -92,6 +108,37 @@ func look_at_cursor():
 		cursor.global_transform.origin = cursor_pos + Vector3(0,1,0)
 		
 		look_at(cursor_pos, Vector3.UP)
+
+func controller_move_cursor(delta):
+	if !dead:
+		cursor_move_direction = Vector3()
+		var controller_cursor_basis = camera.get_global_transform().basis
+		if Input.is_action_pressed("controller_look_up"):
+			cursor_move_direction += controller_cursor_basis.z
+			print("ASDFF")
+			#cursor_move_direction -= Vector3(0,0,1)
+			#animation_player.play("RunForward-loop")
+		elif Input.is_action_pressed("controller_look_down"):
+			cursor_move_direction -= controller_cursor_basis.z
+			#animation_player.play("RunBackward-loop")
+		if Input.is_action_pressed("controller_look_left"):
+			cursor_move_direction += controller_cursor_basis.x
+			#cursor_move_direction -= Vector3(1,0,0)
+			#animation_player.play("RunLeft-loop")
+		elif Input.is_action_pressed("controller_look_right"):
+			cursor_move_direction -= controller_cursor_basis.x
+			#cursor_move_direction += Vector3(1,0,0)
+			#animation_player.play("RunRight-loop")
+		cursor_move_direction.y = 0
+		cursor_move_direction = cursor_move_direction.normalized()
+
+		self.rotation.y = lerp_angle(self.rotation.y, atan2(cursor_move_direction.x, cursor_move_direction.z), delta * 4)
+		#self.rotation.y = atan2(cursor_move_direction.x, cursor_move_direction.z)
+		#cursor_velocity += cursor_move_direction*cursor_speed*delta
+
+		#cursor_velocity *= cursor_friction
+		#cursor_velocity.y -= cursor_gravity*delta
+		#cursor_velocity = controller_cursor.move_and_slide(cursor_velocity, Vector3.UP, true, 3)
 
 
 func move(delta):
