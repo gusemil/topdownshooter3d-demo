@@ -1,6 +1,6 @@
 extends KinematicBody
 
-# Movement essentials
+#Movement essentials
 export var speed = 300
 export var friction = 0.875
 export var gravity = 80
@@ -8,12 +8,12 @@ export var gravity = 80
 var move_direction = Vector3()
 var velocity = Vector3()
 
-# Camera
+#Camera
 onready var camera = $CameraRig/Camera
 onready var camera_rig = $CameraRig
 onready var cursor= $Cursor
 
-# Addons
+#Child nodes
 onready var weapon_manager = $WeaponManager
 onready var health_manager = $HealthManager
 
@@ -21,8 +21,9 @@ onready var health_manager = $HealthManager
 export var dash_speed : float = 30
 var is_dashing = false
 
-# State
+#State
 var dead = false
+signal player_death
 
 #Speed Boost Powerup
 var default_speed = speed
@@ -45,7 +46,7 @@ onready var animation_player = $Graphics/Armature/AnimationPlayer
 #Sounds
 onready var soundmanager = get_tree().get_root().get_node("World/NonPositionalSoundManager")
 
-#Controls
+#Controller
 export var is_controller : bool = false
 #onready var controller_cursor = $Controller_Cursor
 export var rotation_speed = 600
@@ -70,10 +71,11 @@ func _ready():
 
 		
 func _process(delta):
-	weapon_manager.shoot(Input.is_action_just_pressed("shoot"), Input.is_action_pressed("shoot"))
-	if is_controller:
-		if Input.is_action_pressed("controller_look_up") or Input.is_action_pressed("controller_look_down") or Input.is_action_pressed("controller_look_left") or Input.is_action_pressed("controller_look_right"):
-			controller_move_cursor(delta)
+	if !dead:
+		weapon_manager.shoot(Input.is_action_just_pressed("shoot"), Input.is_action_pressed("shoot"))
+		if is_controller:
+			if Input.is_action_pressed("controller_look_up") or Input.is_action_pressed("controller_look_down") or Input.is_action_pressed("controller_look_left") or Input.is_action_pressed("controller_look_right"):
+				controller_move_cursor(delta)
 
 
 func _physics_process(delta):
@@ -184,14 +186,17 @@ func animate_move():
 				animation_player.play("AimFireRifle")
 
 func take_damage(dmg : int):
-	if !is_invulnerability_on:
-		health_manager.take_damage(dmg)
-	else:
-		play_invulnerability_sound()
-		print("I AM INVULNERABLE!")
+	if !dead:
+		if !is_invulnerability_on:
+			health_manager.take_damage(dmg)
+		else:
+			play_invulnerability_sound()
+			print("I AM INVULNERABLE!")
 
 func death():
 	dead = true
+	death_animation()
+	emit_signal("player_death")
 	#print("Player is dead")
 
 func init_speed_powerup(powerup : Powerup):
@@ -251,3 +256,7 @@ func play_health_damage_sound():
 
 func play_invulnerability_sound():
 	soundmanager.play_sound(2,2)
+
+func death_animation():
+	animation_player.play("Slide")
+	weapon_manager.hide()

@@ -27,6 +27,7 @@ onready var muzzle_flash_object = get_child(0).get_node("Flash")
 
 signal fired
 signal out_of_ammo
+signal ammo_changed
 
 #Sounds
 onready var soundmanager = get_tree().get_root().get_node("World/NonPositionalSoundManager")
@@ -76,6 +77,7 @@ func shoot(shoot_input_just_pressed: bool, shoot_input_held: bool):
 	
 	if(ammo > 0):
 		ammo -= 1
+		emit_signal("ammo_changed", ammo)
 	
 	if is_hitscan:
 		var start_transform = bullet_spawners_base.global_transform

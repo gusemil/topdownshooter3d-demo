@@ -10,7 +10,7 @@ albedo_color = Color( 1, 1, 0, 1 )
 
 [node name="Shotgun_Ammo_Pickup" instance=ExtResource( 1 )]
 pickup_type = 1
-amount = 20
+amount = 40
 
 [node name="MeshInstance" parent="Graphics" index="0"]
 mesh = SubResource( 1 )

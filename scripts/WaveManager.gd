@@ -6,9 +6,9 @@ var navmesh
 
 enum ENEMIES {MELEE, RANGED}
 
-export var pause_spawning : bool = false
 export var ranged_enemy_chance = 4
 export var spawn_rate : float = 2.5
+export var spawning : bool = true
 #var spawns_per_wave : int = 1
 #var enemies_per_spawn : int = 1
 
@@ -32,7 +32,7 @@ func _ready():
 	spawn_timer.set_one_shot(false)
 
 func spawn_random_normal_enemy():
-	if !pause_spawning:
+	if spawning:
 		var direction = rng.randi_range(0,3)
 		var spawn_point : Vector3
 
@@ -56,3 +56,6 @@ func spawn_random_normal_enemy():
 
 		navmesh.add_child(enemy_instance)
 		enemy_instance.global_transform.origin = spawn_point
+
+func stop_spawning():
+	spawning = false

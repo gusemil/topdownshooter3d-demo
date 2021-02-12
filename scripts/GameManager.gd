@@ -8,6 +8,9 @@ func _input(event):
 		restart_game()
 
 func restart_game():
+	var children = get_tree().get_root().get_children()
+	for child in children:
+		child.queue_free()
 	get_tree().reload_current_scene()
 
 func quit_game():

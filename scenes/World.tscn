@@ -173,3 +173,4 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.2815, 1.27957, -22 )
 
 [node name="Powerup_Speed_Boost" parent="." instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.0916, 0.995337, -21.0925 )
+[connection signal="player_death" from="Player" to="WaveManager" method="stop_spawning"]
