@@ -14,6 +14,7 @@ signal armor_damage
 #signal gibbed
 
 var blood_spray_prefab = preload("res://scenes/BloodSpray.tscn")
+onready var armor_sparks_prefab = preload("res://scenes/BulletHitEffect.tscn")
 
 #Sounds
 onready var soundmanager = get_tree().get_root().get_node("World/NonPositionalSoundManager")
@@ -28,7 +29,7 @@ func take_damage(dmg : int):
 			current_armor = 0
 		print("my armor", current_armor)
 		emit_signal("armor_damage")
-		#spawn_armor_sparks(dmg) #TODO: spawn armor sparks
+		spawn_particles(armor_sparks_prefab,dmg, Vector3(0,2,0))
 
 		print("FINAL DAMAGE: ", dmg)
 
@@ -47,16 +48,15 @@ func take_damage(dmg : int):
 
 		emit_signal("health_changed", current_health)
 		print("Object: ", name , " damage taken: ", dmg , " current_health: ", current_health)
-		spawn_blood_spray(dmg)
+		spawn_particles(blood_spray_prefab,dmg, Vector3(0,2,0))
 
-func spawn_blood_spray(dmg : int, blood_modifier = 2.0):
-	var blood_spray_instance = blood_spray_prefab.instance()
-	var particles = blood_spray_instance.get_child(0)
+func spawn_particles(prefab, dmg : int, offset : Vector3, amount_modifier = 2.0):
+	var prefab_instance = prefab.instance()
+	var particles = prefab_instance.get_child(0)
 	#print(particles.name)
-	particles.set_amount(dmg * blood_modifier)
-	get_tree().get_root().add_child(blood_spray_instance)
-	blood_spray_instance.global_transform.origin = global_transform.origin + Vector3(0,2,0)
-
+	particles.set_amount(dmg * amount_modifier)
+	get_tree().get_root().add_child(prefab_instance)
+	prefab_instance.global_transform.origin = global_transform.origin + offset
 
 func gain_health(pickup : Pickup):
 	if current_health < max_health:
