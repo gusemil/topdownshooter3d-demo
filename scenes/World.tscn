@@ -39,6 +39,11 @@ polygons = [ PoolIntArray( 1, 0, 2 ), PoolIntArray( 2, 0, 3 ), PoolIntArray( 7, 
 
 [node name="World" type="Spatial"]
 
+[node name="Player" parent="." groups=[
+"player",
+] instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+
 [node name="MusicManager" type="Node" parent="."]
 script = ExtResource( 7 )
 
@@ -138,11 +143,6 @@ material = ExtResource( 17 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Environment/CSGMesh2/StaticBody"]
 shape = SubResource( 5 )
-
-[node name="Player" parent="." groups=[
-"player",
-] instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
 [node name="Navigation" type="Navigation" parent="."]
 
