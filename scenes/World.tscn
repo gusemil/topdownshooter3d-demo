@@ -17,12 +17,12 @@
 [ext_resource path="res://scenes/Pickups/Powerup_Speed_Boost.tscn" type="PackedScene" id=16]
 [ext_resource path="res://graphics/materials/wall_psx_material.material" type="Material" id=17]
 
-[sub_resource type="SpatialMaterial" id=7]
+[sub_resource type="SpatialMaterial" id=1]
 flags_unshaded = true
 albedo_texture = ExtResource( 1 )
 
 [sub_resource type="PlaneMesh" id=2]
-material = SubResource( 7 )
+material = SubResource( 1 )
 size = Vector2( 100, 100 )
 
 [sub_resource type="ConcavePolygonShape" id=3]
