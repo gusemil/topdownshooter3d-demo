@@ -38,11 +38,10 @@ config/icon="res://icon.png"
 
 [display]
 
-window/size/width=640
-window/size/height=480
+window/size/width=2000
+window/size/height=1000
 window/size/fullscreen=true
 window/stretch/mode="viewport"
-window/stretch/aspect="keep"
 
 [input]
 

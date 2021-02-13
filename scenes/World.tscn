@@ -39,6 +39,63 @@ polygons = [ PoolIntArray( 1, 0, 2 ), PoolIntArray( 2, 0, 3 ), PoolIntArray( 7, 
 
 [node name="World" type="Spatial"]
 
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_scale = Vector2( 50.3093, 24.8975 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ViewportContainer" type="ViewportContainer" parent="Control/HBoxContainer"]
+margin_right = 18.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 11
+stretch = true
+
+[node name="Viewport" type="Viewport" parent="Control/HBoxContainer/ViewportContainer"]
+size = Vector2( 640, 480 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Player" parent="Control/HBoxContainer/ViewportContainer/Viewport" groups=[
+"player",
+] instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+
+[node name="ViewportContainer2" type="ViewportContainer" parent="Control/HBoxContainer"]
+margin_left = 22.0
+margin_right = 40.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="Viewport" type="Viewport" parent="Control/HBoxContainer/ViewportContainer2"]
+size = Vector2( 640, 480 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Player2" parent="Control/HBoxContainer/ViewportContainer2/Viewport" groups=[
+"player",
+] instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 2, 0 )
+is_controller = true
+player_number = "2"
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource( 3 )
+
 [node name="MusicManager" type="Node" parent="."]
 script = ExtResource( 7 )
 
@@ -59,23 +116,8 @@ script = ExtResource( 9 )
 pickup_drop_chance = 2
 powerup_drop_chance = 3
 
-[node name="GameManager" type="Node" parent="."]
-script = ExtResource( 3 )
-
 [node name="WaveManager" type="Node" parent="."]
 script = ExtResource( 4 )
-
-[node name="Player" parent="." groups=[
-"player",
-] instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
-
-[node name="Player2" parent="." groups=[
-"player",
-] instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 2, 0 )
-is_controller = true
-player_number = "2"
 
 [node name="Environment" type="Spatial" parent="."]
 __meta__ = {
@@ -180,5 +222,5 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.2815, 1.27957, -22 )
 
 [node name="Powerup_Speed_Boost" parent="." instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.0916, 0.995337, -21.0925 )
-[connection signal="player_death" from="Player" to="WaveManager" method="stop_spawning"]
-[connection signal="player_death" from="Player2" to="WaveManager" method="stop_spawning"]
+[connection signal="player_death" from="Control/HBoxContainer/ViewportContainer/Viewport/Player" to="WaveManager" method="stop_spawning"]
+[connection signal="player_death" from="Control/HBoxContainer/ViewportContainer2/Viewport/Player2" to="WaveManager" method="stop_spawning"]
