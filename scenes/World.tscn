@@ -39,11 +39,6 @@ polygons = [ PoolIntArray( 1, 0, 2 ), PoolIntArray( 2, 0, 3 ), PoolIntArray( 7, 
 
 [node name="World" type="Spatial"]
 
-[node name="Player" parent="." groups=[
-"player",
-] instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
-
 [node name="MusicManager" type="Node" parent="."]
 script = ExtResource( 7 )
 
@@ -69,6 +64,18 @@ script = ExtResource( 3 )
 
 [node name="WaveManager" type="Node" parent="."]
 script = ExtResource( 4 )
+
+[node name="Player" parent="." groups=[
+"player",
+] instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+
+[node name="Player2" parent="." groups=[
+"player",
+] instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 2, 0 )
+is_controller = true
+player_number = "2"
 
 [node name="Environment" type="Spatial" parent="."]
 __meta__ = {
@@ -174,3 +181,4 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.2815, 1.27957, -22 )
 [node name="Powerup_Speed_Boost" parent="." instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.0916, 0.995337, -21.0925 )
 [connection signal="player_death" from="Player" to="WaveManager" method="stop_spawning"]
+[connection signal="player_death" from="Player2" to="WaveManager" method="stop_spawning"]

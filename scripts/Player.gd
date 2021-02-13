@@ -55,6 +55,9 @@ export var rotation_speed = 600
 var cursor_move_direction = Vector3()
 var cursor_velocity = Vector3()
 
+#2player support
+export var player_number : String = "1"
+
 
 
 func _ready():
@@ -72,7 +75,7 @@ func _ready():
 		
 func _process(delta):
 	if !dead:
-		weapon_manager.shoot(Input.is_action_just_pressed("shoot"), Input.is_action_pressed("shoot"))
+		weapon_manager.shoot(Input.is_action_just_pressed("shoot" + player_number), Input.is_action_pressed("shoot" + player_number))
 		if is_controller:
 			if Input.is_action_pressed("controller_look_up") or Input.is_action_pressed("controller_look_down") or Input.is_action_pressed("controller_look_left") or Input.is_action_pressed("controller_look_right"):
 				controller_move_cursor(delta)
@@ -117,7 +120,6 @@ func controller_move_cursor(delta):
 		var controller_cursor_basis = camera.get_global_transform().basis
 		if Input.is_action_pressed("controller_look_up"):
 			cursor_move_direction += controller_cursor_basis.z
-			print("ASDFF")
 			#cursor_move_direction -= Vector3(0,0,1)
 			#animation_player.play("RunForward-loop")
 		elif Input.is_action_pressed("controller_look_down"):
@@ -147,21 +149,21 @@ func move(delta):
 	if !dead:
 		move_direction = Vector3()
 		var camera_basis = camera.get_global_transform().basis
-		if Input.is_action_pressed("move_forward"):
+		if Input.is_action_pressed("move_forward" + player_number):
 			move_direction -= camera_basis.z
 			#animation_player.play("RunForward-loop")
-		elif Input.is_action_pressed("move_backward"):
+		elif Input.is_action_pressed("move_backward" + player_number):
 			move_direction += camera_basis.z
 			#animation_player.play("RunBackward-loop")
-		if Input.is_action_pressed("move_left"):
+		if Input.is_action_pressed("move_left" + player_number):
 			move_direction -= camera_basis.x
 			#animation_player.play("RunLeft-loop")
-		elif Input.is_action_pressed("move_right"):
+		elif Input.is_action_pressed("move_right" + player_number):
 			move_direction += camera_basis.x
 			#animation_player.play("RunRight-loop")
 		move_direction.y = 0
 		move_direction = move_direction.normalized()
-		if Input.is_action_just_pressed("dash"):
+		if Input.is_action_just_pressed("dash" + player_number):
 			velocity += move_direction*speed*delta*dash_speed
 		else:
 			velocity += move_direction*speed*delta
@@ -171,16 +173,16 @@ func move(delta):
 
 func animate_move():
 	if !dead:
-		if !Input.is_action_pressed("move_forward") or !Input.is_action_pressed("move_backward") or !Input.is_action_pressed("move_left") or !Input.is_action_pressed("move_right") or !Input.is_action_pressed("dash"):
-			if Input.is_action_pressed("move_forward"):
+		if !Input.is_action_pressed("move_forward" + player_number) or !Input.is_action_pressed("move_backward" + player_number) or !Input.is_action_pressed("move_left" + player_number) or !Input.is_action_pressed("move_right" + player_number) or !Input.is_action_pressed("dash" + player_number):
+			if Input.is_action_pressed("move_forward" + player_number):
 				animation_player.play("RunForward-loop")
-			elif Input.is_action_pressed("move_backward"):
+			elif Input.is_action_pressed("move_backward" + player_number):
 				animation_player.play("RunBackward-loop")
-			elif Input.is_action_pressed("move_left"):
+			elif Input.is_action_pressed("move_left" + player_number):
 				animation_player.play("RunLeft-loop")
-			elif Input.is_action_pressed("move_right"):
+			elif Input.is_action_pressed("move_right" + player_number):
 				animation_player.play("RunRight-loop")
-			elif Input.is_action_just_pressed("dash"):
+			elif Input.is_action_just_pressed("dash" + player_number):
 				pass
 			else:
 				animation_player.play("AimFireRifle")

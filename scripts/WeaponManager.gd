@@ -24,12 +24,16 @@ var is_player_dead : bool = false
 #Sounds
 onready var sound_manager = get_tree().get_root().get_node("World/NonPositionalSoundManager")
 
+#2player support
+onready var player = get_node("..")
+var player_number : String = ""
+
 func _process(delta):
-	if Input.is_action_just_pressed("weapon1") and current_slot != WEAPON_SLOTS.MACHINE_GUN:
+	if Input.is_action_just_pressed("weapon1" + player_number) and current_slot != WEAPON_SLOTS.MACHINE_GUN:
 		change_weapon(WEAPON_SLOTS.MACHINE_GUN)
-	elif Input.is_action_just_pressed("weapon2") and current_slot != WEAPON_SLOTS.SHOTGUN:
+	elif Input.is_action_just_pressed("weapon2" + player_number) and current_slot != WEAPON_SLOTS.SHOTGUN:
 		change_weapon(WEAPON_SLOTS.SHOTGUN)
-	elif Input.is_action_just_pressed("weapon3") and current_slot != WEAPON_SLOTS.ROCKET_LAUNCHER:
+	elif Input.is_action_just_pressed("weapon3" + player_number) and current_slot != WEAPON_SLOTS.ROCKET_LAUNCHER:
 		change_weapon(WEAPON_SLOTS.ROCKET_LAUNCHER)
 
 func init(_fire_point: Spatial, _collision_bodies_to_ignore: Array):
@@ -43,6 +47,8 @@ func init(_fire_point: Spatial, _collision_bodies_to_ignore: Array):
 	print(current_weapon)
 	
 	current_weapon = weapons[current_slot]
+	
+	player_number = player.player_number
 	
 	for weapon in weapons:
 		if weapon.has_method("init"):
@@ -81,7 +87,6 @@ func init_quad_powerup(powerup : Powerup):
 
 func apply_quad_damage(powerup : Powerup):
 	if !is_quad_damage_on:
-		print("QUAD DAMAGE START")
 		is_quad_damage_on = true
 		powerup_damage_modifier = 4
 		quad_damage_timer.start()
@@ -90,7 +95,6 @@ func apply_quad_damage(powerup : Powerup):
 		powerup.queue_free()
 
 func stop_quad_damage():
-	print("STOP QUAD DAMAGE")
 	quad_damage_timer.stop()
 	is_quad_damage_on = false
 	powerup_damage_modifier = 1

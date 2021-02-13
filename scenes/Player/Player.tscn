@@ -7340,11 +7340,12 @@ script = ExtResource( 18 )
 
 [node name="PlayerHUD" type="Label" parent="CanvasLayer"]
 margin_left = 11.5159
-margin_top = 334.67
-margin_right = 111.516
-margin_bottom = 469.67
+margin_top = 300.0
+margin_right = 110.0
+margin_bottom = 470.0
 custom_fonts/font = SubResource( 70 )
-text = "Health: 0
+text = "Player 0
+Health: 0
 Armor: 0
 Ammo: 0"
 uppercase = true
@@ -7368,8 +7369,8 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="player_death" from="." to="WeaponManager" method="player_is_dead"]
 [connection signal="player_death" from="." to="CanvasLayer" method="show_death_hud"]
+[connection signal="player_death" from="." to="WeaponManager" method="player_is_dead"]
 [connection signal="player_death" from="." to="HealthManager" method="player_death_blood"]
 [connection signal="ammo_changed" from="WeaponManager" to="CanvasLayer/PlayerHUD" method="update_ammo"]
 [connection signal="ammo_changed" from="WeaponManager/Weapons/MachineGun" to="CanvasLayer/PlayerHUD" method="update_ammo"]
