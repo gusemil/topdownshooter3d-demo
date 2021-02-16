@@ -36,15 +36,15 @@ extents = Vector3( 1.02186, 1, 1 )
 
 [node name="World" type="Spatial"]
 
-[node name="GameManager" type="Node" parent="."]
-script = ExtResource( 3 )
-
 [node name="Control" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource( 3 )
 
 [node name="MusicManager" type="Node" parent="."]
 script = ExtResource( 7 )

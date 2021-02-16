@@ -22,8 +22,9 @@ export var dash_speed : float = 30
 var is_dashing = false
 
 #State
-var dead = false
+var dead : bool = false
 signal player_death
+var game_over : bool = false
 
 #Speed Boost Powerup
 var default_speed = speed
@@ -55,8 +56,17 @@ export var rotation_speed = 600
 var cursor_move_direction = Vector3()
 var cursor_velocity = Vector3()
 
+#UI
+onready var death_hud = $CanvasLayer/DeathHUD
+onready var game_over_hud = $CanvasLayer/GameOverHUD
+
 #2player support
 export var player_number : String = "1"
+onready var game_manager = get_tree().get_root().get_node("World/GameManager")
+var is_coop : bool = false
+signal player_resurrect
+var resurrection_timer : Timer
+var resurrection_wait_time = 5.0
 
 
 
@@ -72,14 +82,19 @@ func _ready():
 	health_manager.connect("armor_damage", self, "play_armor_damage_sound")
 	health_manager.connect("health_damage", self, "play_health_damage_sound")
 
+	if game_manager.is_coop:
+		is_coop = true
+		game_manager.connect("signal_game_over", self, "stop_resurrection_timer")
+
+	if is_coop:
+		add_resurrection_timer()
 		
 func _process(delta):
-	if !dead:
+	if !dead or !game_over:
 		weapon_manager.shoot(Input.is_action_just_pressed("shoot" + player_number), Input.is_action_pressed("shoot" + player_number))
 		if is_controller:
 			if Input.is_action_pressed("controller_look_up") or Input.is_action_pressed("controller_look_down") or Input.is_action_pressed("controller_look_left") or Input.is_action_pressed("controller_look_right"):
 				controller_move_cursor(delta)
-
 
 func _physics_process(delta):
 	camera_follows_player()
@@ -193,12 +208,17 @@ func take_damage(dmg : int):
 			health_manager.take_damage(dmg)
 		else:
 			play_invulnerability_sound()
-			print("I AM INVULNERABLE!")
 
 func death():
 	dead = true
 	death_animation()
 	emit_signal("player_death")
+	if is_coop and !game_manager.is_game_over: #Hacky fix but I couldn't figure what the problem was
+		add_resurrection_timer()
+		start_resurrection_timer()
+	
+	if is_coop and game_manager.is_game_over: #Hacky fix but I couldn't figure what the problem was
+		death_hud.hide()
 	#print("Player is dead")
 
 func init_speed_powerup(powerup : Powerup):
@@ -225,7 +245,6 @@ func stop_speed_boost():
 	speed_boost_timer.stop()
 	soundmanager.play_sound(1,10)
 	speed_powerup_effect.emitting = false
-	print("STOP SPEED")
 
 func apply_invulnerability(powerup : Powerup):
 	if !is_invulnerability_on:
@@ -240,7 +259,6 @@ func stop_invulnerability():
 	invulnerability_timer.stop()
 	soundmanager.play_sound(1,9)
 	undying_powerup_effect.hide()
-	print("STOP INVUL")
 
 func init_undying_powerup(powerup : Powerup):
 	if !is_undying_powerup_initialized:
@@ -262,3 +280,25 @@ func play_invulnerability_sound():
 func death_animation():
 	animation_player.play("Slide")
 	weapon_manager.hide()
+
+func resurrect():
+	dead = false
+	health_manager.set_health_forced(100)
+	emit_signal("player_resurrect")
+
+func add_resurrection_timer():
+	resurrection_timer = Timer.new()
+	resurrection_timer.wait_time = resurrection_wait_time
+	resurrection_timer.connect("timeout", self, "resurrect")
+	resurrection_timer.one_shot = true
+	add_child(resurrection_timer)
+
+func start_resurrection_timer():
+	resurrection_timer.start()
+
+func stop_resurrection_timer():
+	print("RESURRECTION TIMER STOPPED: ", self.name)
+	resurrection_timer.set_paused(true)
+
+func get_resurrection_time():
+	return resurrection_timer.get_time_left()

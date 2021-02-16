@@ -90,6 +90,10 @@ func gain_armor(pickup : Pickup):
 		soundmanager.play_sound(1,4)
 		emit_signal("armor_changed", current_armor)
 		pickup.queue_free()
+
+func set_health_forced(amount):
+	current_health = amount
+	emit_signal("health_changed", current_health)
 		
 func player_death_blood():
 	spawn_particles(blood_spray_prefab,50, Vector3(0,0,0), 2, true)

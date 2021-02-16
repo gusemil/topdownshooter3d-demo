@@ -7363,6 +7363,21 @@ margin_top = 88.3771
 margin_right = 431.615
 margin_bottom = 217.377
 custom_fonts/font = SubResource( 71 )
+text = "WAIT FOR RESURRECTION:
+X"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameOverHUD" type="Label" parent="CanvasLayer"]
+visible = false
+margin_left = 232.615
+margin_top = 88.3771
+margin_right = 431.615
+margin_bottom = 217.377
+custom_fonts/font = SubResource( 71 )
 text = "YOU ARE DEAD
 PRESS 'R' TO RESTART
 OR 'ESC' TO QUIT"
@@ -7371,9 +7386,7 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="player_death" from="." to="CanvasLayer" method="show_death_hud"]
 [connection signal="player_death" from="." to="WeaponManager" method="player_is_dead"]
-[connection signal="player_death" from="." to="HealthManager" method="player_death_blood"]
 [connection signal="ammo_changed" from="WeaponManager" to="CanvasLayer/PlayerHUD" method="update_ammo"]
 [connection signal="ammo_changed" from="WeaponManager/Weapons/MachineGun" to="CanvasLayer/PlayerHUD" method="update_ammo"]
 [connection signal="ammo_changed" from="WeaponManager/Weapons/Shotgun" to="CanvasLayer/PlayerHUD" method="update_ammo"]
