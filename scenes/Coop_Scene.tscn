@@ -1,0 +1,53 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/Player/Player.tscn" type="PackedScene" id=2]
+
+[node name="HBoxContainer" type="HBoxContainer"]
+margin_right = 26.0
+margin_bottom = 40.0
+rect_scale = Vector2( 49.1, 24 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ViewportContainer" type="ViewportContainer" parent="."]
+margin_right = 13.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+stretch = true
+
+[node name="Viewport" type="Viewport" parent="ViewportContainer"]
+size = Vector2( 640, 480 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Player" parent="ViewportContainer/Viewport" groups=[
+"player",
+] instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+
+[node name="ViewportContainer2" type="ViewportContainer" parent="."]
+margin_left = 13.0
+margin_right = 26.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="ViewportContainer2"]
+size = Vector2( 640, 480 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Player2" parent="ViewportContainer2/Viewport" groups=[
+"player",
+] instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 2, 0 )
+is_controller = true
+player_number = "2"

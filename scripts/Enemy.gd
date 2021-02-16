@@ -43,7 +43,8 @@ var is_dead : bool = false
 var rng = RandomNumberGenerator.new()
 
 # Navigation and player sensing
-var player = null #reference to the player
+var players = []
+#var player = null #reference to the player
 var path = []
 export var sight_cone_degrees = 45.0
 onready var nav : Navigation = get_parent() # enemy must be a child of navigation node
@@ -66,6 +67,10 @@ onready var ranged_sound5 : String = "res://audio/sounds/enemy_shoot1.wav"
 export var body_removes_after_seconds = 5
 var body_removal_timer : Timer
 
+#Coop
+var is_coop : bool
+onready var game_manager = get_tree().get_root().get_node("World/GameManager")
+
 func _ready():
 	#sounds
 	enemy_sounds.push_back(death_sound0)
@@ -77,7 +82,8 @@ func _ready():
 	enemy_sounds.push_back(ranged_sound5)
 	
 	rng.randomize() #setting up the seed
-	player = get_tree().get_nodes_in_group("player")[0] # When multiplayer is implemented take the nearest player object with the tag/group "player"
+	players = get_tree().get_nodes_in_group("player")
+	#player = get_tree().get_nodes_in_group("player")[0] # When multiplayer is implemented take the nearest player object with the tag/group "player"
 	var bone_attachments = $Graphics/Armature/Skeleton.get_children()
 	for bone_attachment in bone_attachments:
 		for child in bone_attachment.get_children():
@@ -112,6 +118,12 @@ func _ready():
 		damage_area.set_damage(attack_damage)
 
 	health_manager.connect("dead", self, "death") #Kun healthmanagerin dead emitataan niin pelaajan death funktio aktivoituu
+
+	#Coop setup
+	if game_manager.is_coop:
+		is_coop = true
+	else:
+		is_coop = false
 
 func set_state(state: int):
 	current_state = state
@@ -153,18 +165,30 @@ func on_death():
 	play_sound(random_death_sound,1.5, 25.0)
 
 func can_see_player():
-	var direction_to_player = global_transform.origin.direction_to(player.global_transform.origin) #player.(global)transform.position
+	var direction_to_player 
+	if !is_coop:
+		direction_to_player = global_transform.origin.direction_to(players[0].global_transform.origin) #player.(global)transform.position
+	else:
+		direction_to_player = global_transform.origin.direction_to(get_closest_player().global_transform.origin) #player.(global)transform.position
 	var forward = global_transform.basis.z
 	return rad2deg(forward.angle_to(direction_to_player)) < sight_cone_degrees and has_player_in_line_of_sight()
 
 func player_within_angle(angle: float):
-	var direction_to_player = global_transform.origin.direction_to(player.global_transform.origin) #player.(global)transform.position
+	var direction_to_player
+	if !is_coop:
+		direction_to_player = global_transform.origin.direction_to(players[0].global_transform.origin) #player.(global)transform.position
+	else:
+		direction_to_player = global_transform.origin.direction_to(get_closest_player().global_transform.origin) #player.(global)transform.position
 	var forward = global_transform.basis.z
 	return rad2deg(forward.angle_to(direction_to_player)) < sight_cone_degrees
 
 func has_player_in_line_of_sight():
 	var my_position = global_transform.origin + Vector3.UP #is Vector3.UP necessary?
-	var player_position = player.global_transform.origin + Vector3.UP #is Vector3.UP necessary?
+	var player_position
+	if !is_coop:
+		player_position = players[0].global_transform.origin + Vector3.UP #is Vector3.UP necessary?
+	else:
+		player_position = get_closest_player().global_transform.origin + Vector3.UP #is Vector3.UP necessary?
 	
 	var space_state = get_world().get_direct_space_state()
 	var result = space_state.intersect_ray(my_position, player_position, [], 1) #[] exclude everything, 1 = environment
@@ -226,7 +250,10 @@ func death():
 	set_state(STATE.DEAD)
 
 func within_distance_of_player(distance: float):
-	return global_transform.origin.distance_to(player.global_transform.origin) < attack_range
+	if !is_coop:
+		return global_transform.origin.distance_to(players[0].global_transform.origin) < attack_range
+	else:
+		return global_transform.origin.distance_to(get_closest_player().global_transform.origin) < attack_range
 
 func _process(delta):
 	#print(can_see_player())
@@ -241,7 +268,11 @@ func _process(delta):
 		#print(within_distance_of_player(attack_range), " ", has_player_in_line_of_sight())
 		if within_distance_of_player(attack_range) and has_player_in_line_of_sight():
 			set_state(STATE.ATTACK)
-		var player_position = player.global_transform.origin
+		var player_position
+		if !is_coop:
+			player_position = players[0].global_transform.origin
+		else:
+			player_position = get_closest_player().global_transform.origin
 		var my_position = global_transform.origin
 		path = nav.get_simple_path(my_position, player_position)
 		var goal_position = player_position
@@ -260,14 +291,20 @@ func _process(delta):
 		set_movement_vector(Vector3.ZERO)
 
 		if always_face_towards_player_when_attacking:
-			face_direction(global_transform.origin.direction_to(player.global_transform.origin),delta) #always face towards player during attack
+			if !is_coop:
+				face_direction(global_transform.origin.direction_to(players[0].global_transform.origin),delta) #always face towards player during attack
+			else:
+				face_direction(global_transform.origin.direction_to(get_closest_player().global_transform.origin),delta) #always face towards player during attack
 
 		#if stop_moving_when_attacking:
 		if can_attack:
 			if !within_distance_of_player(attack_range) or !can_see_player():
 				set_state(STATE.CHASE)
 			elif !player_within_angle(attack_angle) and !always_face_towards_player_when_attacking:
-				face_direction(global_transform.origin.direction_to(player.global_transform.origin),delta)
+				if !is_coop:
+					face_direction(global_transform.origin.direction_to(players[0].global_transform.origin),delta)
+				else:
+					face_direction(global_transform.origin.direction_to(get_closest_player().global_transform.origin),delta)
 			else:
 				start_attack()
 		#else:
@@ -292,3 +329,19 @@ func play_sound(sound_index : int, pitch_scale = 1.0, volume = 30.0):
 	soundplayer.pitch_scale = pitch_scale
 	soundplayer.unit_db = volume
 	soundplayer.play()
+
+func get_closest_player():
+	if players[0].dead and !players[1].dead:
+		return players[1]
+	elif players[1].dead and !players[0].dead:
+		return players[0]
+	elif players[0].dead and players[1].dead:
+		if global_transform.origin.distance_to(players[0].global_transform.origin) < global_transform.origin.distance_to(players[1].global_transform.origin):
+			return players[0]
+		else:
+			return players[1]
+	else:
+		if global_transform.origin.distance_to(players[0].global_transform.origin) < global_transform.origin.distance_to(players[1].global_transform.origin):
+			return players[0]
+		else:
+			return players[1]
