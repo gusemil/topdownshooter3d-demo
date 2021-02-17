@@ -365,7 +365,7 @@ margin_top = 76.1093
 margin_right = 280.919
 margin_bottom = 138.109
 custom_fonts/font = SubResource( 3 )
-text = "SOLO PLAY"
+text = "Singleplayer"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -388,7 +388,7 @@ margin_top = 76.1093
 margin_right = 280.919
 margin_bottom = 138.109
 custom_fonts/font = SubResource( 3 )
-text = "2 Player PLAY"
+text = "2p Coop"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false

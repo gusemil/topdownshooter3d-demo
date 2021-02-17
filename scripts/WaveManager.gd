@@ -15,7 +15,7 @@ var wave_delay_time : float = 5
 var spawn_rate_reduction_per_wave : float = 0.25
 var double_spawn_chance : int = 1
 
-const min_spawn_rate : float = 0.5
+const min_spawn_rate : float = 0.25
 const max_double_spawn_chance : int = 10
 const double_spawn_cap : int = 20
 
@@ -112,7 +112,7 @@ func increase_difficulty():
 	enemies_per_wave += 10
 	wave_delay_time += 0.5
 	wave_count += 1
-	enemy_move_speed_bonus += 1
+	enemy_move_speed_bonus += 2
 	enemy_projectile_speed_bonus += 1
 	
 	if spawn_timer.wait_time > min_spawn_rate:

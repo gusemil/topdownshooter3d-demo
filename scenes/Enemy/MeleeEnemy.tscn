@@ -21,6 +21,7 @@ collision_mask = 2147483649
 script = ExtResource( 5 )
 is_melee = true
 turn_speed_per_second = 180.0
+attack_damage = 30
 sight_cone_degrees = 360.0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]

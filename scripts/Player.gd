@@ -20,6 +20,9 @@ onready var health_manager = $HealthManager
 # Dash
 export var dash_speed : float = 30
 var is_dashing = false
+var dash_timer : Timer
+const starting_dash_rate : float = 0.5
+var can_dash : bool = true
 
 #State
 var dead : bool = false
@@ -81,6 +84,12 @@ func _ready():
 	health_manager.connect("dead", self, "death") #Kun healthmanagerin dead emitataan niin pelaajan death funktio aktivoituu
 	health_manager.connect("armor_damage", self, "play_armor_damage_sound")
 	health_manager.connect("health_damage", self, "play_health_damage_sound")
+
+	dash_timer = Timer.new()
+	dash_timer.wait_time = starting_dash_rate
+	dash_timer.connect("timeout", self, "stop_dash_delay")
+	add_child(dash_timer)
+	dash_timer.set_one_shot(false)
 
 	if game_manager.is_coop:
 		is_coop = true
@@ -178,8 +187,9 @@ func move(delta):
 			#animation_player.play("RunRight-loop")
 		move_direction.y = 0
 		move_direction = move_direction.normalized()
-		if Input.is_action_just_pressed("dash" + player_number):
+		if Input.is_action_just_pressed("dash" + player_number) and (can_dash or is_speed_boost_on):
 			velocity += move_direction*speed*delta*dash_speed
+			start_dash_delay()
 		else:
 			velocity += move_direction*speed*delta
 
@@ -302,3 +312,10 @@ func stop_resurrection_timer():
 
 func get_resurrection_time():
 	return resurrection_timer.get_time_left()
+
+func start_dash_delay():
+	can_dash = false
+	dash_timer.start()
+
+func stop_dash_delay():
+	can_dash = true

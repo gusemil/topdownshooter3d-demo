@@ -63,6 +63,7 @@ func game_over():
 	pause_canvas_node.show()
 	pause_canvas_node.get_node("PauseLabel").hide()
 	pause_canvas_node.get_node("GameOverLabel").show()
+	pause_canvas_node.get_node("Buttons/ContinueButton").hide()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func check_if_game_over():
