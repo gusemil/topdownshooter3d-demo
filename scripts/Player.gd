@@ -187,7 +187,7 @@ func move(delta):
 	#	animation_player.play("CombatIdle-loop")
 
 func animate_move():
-	if !dead:
+	if !dead and !game_manager.is_pause:
 		if !Input.is_action_pressed("move_forward" + player_number) or !Input.is_action_pressed("move_backward" + player_number) or !Input.is_action_pressed("move_left" + player_number) or !Input.is_action_pressed("move_right" + player_number) or !Input.is_action_pressed("dash" + player_number):
 			if Input.is_action_pressed("move_forward" + player_number):
 				animation_player.play("RunForward-loop")
