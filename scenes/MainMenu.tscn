@@ -7,22 +7,22 @@
 [ext_resource path="res://audio/music/GetOut.wav" type="AudioStream" id=5]
 [ext_resource path="res://graphics/textures/dot.png" type="Texture" id=6]
 
-[sub_resource type="Curve" id=5]
+[sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 size = 200
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 50
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 size = 40
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=5]
 size = 50
 font_data = ExtResource( 1 )
 
@@ -53,7 +53,7 @@ speed_scale = 2.0
 lifetime_randomness = 0.5
 texture = ExtResource( 6 )
 scale_amount = 0.3
-scale_amount_curve = SubResource( 5 )
+scale_amount_curve = SubResource( 1 )
 color = Color( 0.741176, 0, 0, 1 )
 
 [node name="BloodDrip2" type="CPUParticles2D" parent="BloodDrips"]
@@ -65,7 +65,7 @@ randomness = 0.3
 lifetime_randomness = 0.5
 texture = ExtResource( 6 )
 scale_amount = 0.3
-scale_amount_curve = SubResource( 5 )
+scale_amount_curve = SubResource( 1 )
 color = Color( 0.741176, 0, 0, 1 )
 
 [node name="BloodDrip3" type="CPUParticles2D" parent="BloodDrips"]
@@ -78,7 +78,7 @@ randomness = 0.6
 lifetime_randomness = 0.5
 texture = ExtResource( 6 )
 scale_amount = 0.3
-scale_amount_curve = SubResource( 5 )
+scale_amount_curve = SubResource( 1 )
 color = Color( 0.741176, 0, 0, 1 )
 
 [node name="BloodDrip4" type="CPUParticles2D" parent="BloodDrips"]
@@ -91,7 +91,7 @@ randomness = 0.2
 lifetime_randomness = 0.5
 texture = ExtResource( 6 )
 scale_amount = 0.3
-scale_amount_curve = SubResource( 5 )
+scale_amount_curve = SubResource( 1 )
 color = Color( 0.741176, 0, 0, 1 )
 
 [node name="BloodDrip5" type="CPUParticles2D" parent="BloodDrips"]
@@ -104,7 +104,7 @@ randomness = 0.5
 lifetime_randomness = 0.5
 texture = ExtResource( 6 )
 scale_amount = 0.3
-scale_amount_curve = SubResource( 5 )
+scale_amount_curve = SubResource( 1 )
 color = Color( 0.741176, 0, 0, 1 )
 
 [node name="BloodDrip6" type="CPUParticles2D" parent="BloodDrips"]
@@ -115,7 +115,7 @@ speed_scale = 2.0
 lifetime_randomness = 0.5
 texture = ExtResource( 6 )
 scale_amount = 0.3
-scale_amount_curve = SubResource( 5 )
+scale_amount_curve = SubResource( 1 )
 color = Color( 0.741176, 0, 0, 1 )
 
 [node name="BloodDrip7" type="CPUParticles2D" parent="BloodDrips"]
@@ -128,7 +128,7 @@ randomness = 0.1
 lifetime_randomness = 0.5
 texture = ExtResource( 6 )
 scale_amount = 0.3
-scale_amount_curve = SubResource( 5 )
+scale_amount_curve = SubResource( 1 )
 color = Color( 0.741176, 0, 0, 1 )
 
 [node name="BloodDrip8" type="CPUParticles2D" parent="BloodDrips"]
@@ -141,7 +141,7 @@ randomness = 1.0
 lifetime_randomness = 0.5
 texture = ExtResource( 6 )
 scale_amount = 0.3
-scale_amount_curve = SubResource( 5 )
+scale_amount_curve = SubResource( 1 )
 color = Color( 0.741176, 0, 0, 1 )
 
 [node name="BloodDrip9" type="CPUParticles2D" parent="BloodDrips"]
@@ -154,7 +154,7 @@ randomness = 0.1
 lifetime_randomness = 0.5
 texture = ExtResource( 6 )
 scale_amount = 0.3
-scale_amount_curve = SubResource( 5 )
+scale_amount_curve = SubResource( 1 )
 color = Color( 0.741176, 0, 0, 1 )
 
 [node name="BloodDrip10" type="CPUParticles2D" parent="BloodDrips"]
@@ -167,7 +167,7 @@ randomness = 0.6
 lifetime_randomness = 0.5
 texture = ExtResource( 6 )
 scale_amount = 0.3
-scale_amount_curve = SubResource( 5 )
+scale_amount_curve = SubResource( 1 )
 color = Color( 0.741176, 0, 0, 1 )
 
 [node name="BloodDrip11" type="CPUParticles2D" parent="BloodDrips"]
@@ -180,7 +180,7 @@ randomness = 0.3
 lifetime_randomness = 0.5
 texture = ExtResource( 6 )
 scale_amount = 0.3
-scale_amount_curve = SubResource( 5 )
+scale_amount_curve = SubResource( 1 )
 color = Color( 0.741176, 0, 0, 1 )
 
 [node name="BloodDrip12" type="CPUParticles2D" parent="BloodDrips"]
@@ -193,7 +193,7 @@ randomness = 0.8
 lifetime_randomness = 0.5
 texture = ExtResource( 6 )
 scale_amount = 0.3
-scale_amount_curve = SubResource( 5 )
+scale_amount_curve = SubResource( 1 )
 color = Color( 0.741176, 0, 0, 1 )
 
 [node name="BloodDrip13" type="CPUParticles2D" parent="BloodDrips"]
@@ -205,7 +205,7 @@ randomness = 1.0
 lifetime_randomness = 0.5
 texture = ExtResource( 6 )
 scale_amount = 0.3
-scale_amount_curve = SubResource( 5 )
+scale_amount_curve = SubResource( 1 )
 color = Color( 0.741176, 0, 0, 1 )
 
 [node name="BloodDrip14" type="CPUParticles2D" parent="BloodDrips"]
@@ -217,7 +217,7 @@ explosiveness = 1.0
 lifetime_randomness = 0.5
 texture = ExtResource( 6 )
 scale_amount = 0.3
-scale_amount_curve = SubResource( 5 )
+scale_amount_curve = SubResource( 1 )
 color = Color( 0.741176, 0, 0, 1 )
 
 [node name="BloodDrip15" type="CPUParticles2D" parent="BloodDrips"]
@@ -229,7 +229,7 @@ randomness = 0.5
 lifetime_randomness = 0.5
 texture = ExtResource( 6 )
 scale_amount = 0.3
-scale_amount_curve = SubResource( 5 )
+scale_amount_curve = SubResource( 1 )
 color = Color( 0.741176, 0, 0, 1 )
 
 [node name="BloodDrip16" type="CPUParticles2D" parent="BloodDrips"]
@@ -242,7 +242,7 @@ randomness = 0.6
 lifetime_randomness = 0.5
 texture = ExtResource( 6 )
 scale_amount = 0.3
-scale_amount_curve = SubResource( 5 )
+scale_amount_curve = SubResource( 1 )
 color = Color( 0.741176, 0, 0, 1 )
 
 [node name="BloodDrip17" type="CPUParticles2D" parent="BloodDrips"]
@@ -255,7 +255,7 @@ randomness = 0.6
 lifetime_randomness = 0.5
 texture = ExtResource( 6 )
 scale_amount = 0.3
-scale_amount_curve = SubResource( 5 )
+scale_amount_curve = SubResource( 1 )
 color = Color( 0.741176, 0, 0, 1 )
 
 [node name="BloodDrip18" type="CPUParticles2D" parent="BloodDrips"]
@@ -268,7 +268,7 @@ randomness = 0.9
 lifetime_randomness = 0.5
 texture = ExtResource( 6 )
 scale_amount = 0.3
-scale_amount_curve = SubResource( 5 )
+scale_amount_curve = SubResource( 1 )
 color = Color( 0.741176, 0, 0, 1 )
 
 [node name="BloodDrip19" type="CPUParticles2D" parent="BloodDrips"]
@@ -280,7 +280,7 @@ randomness = 0.1
 lifetime_randomness = 0.5
 texture = ExtResource( 6 )
 scale_amount = 0.3
-scale_amount_curve = SubResource( 5 )
+scale_amount_curve = SubResource( 1 )
 color = Color( 0.741176, 0, 0, 1 )
 
 [node name="BloodDrip20" type="CPUParticles2D" parent="BloodDrips"]
@@ -293,7 +293,7 @@ randomness = 1.0
 lifetime_randomness = 0.5
 texture = ExtResource( 6 )
 scale_amount = 0.3
-scale_amount_curve = SubResource( 5 )
+scale_amount_curve = SubResource( 1 )
 color = Color( 0.741176, 0, 0, 1 )
 
 [node name="BloodDrip21" type="CPUParticles2D" parent="BloodDrips"]
@@ -305,7 +305,7 @@ randomness = 0.2
 lifetime_randomness = 0.5
 texture = ExtResource( 6 )
 scale_amount = 0.3
-scale_amount_curve = SubResource( 5 )
+scale_amount_curve = SubResource( 1 )
 color = Color( 0.741176, 0, 0, 1 )
 
 [node name="BloodDrip22" type="CPUParticles2D" parent="BloodDrips"]
@@ -316,7 +316,7 @@ speed_scale = 2.0
 lifetime_randomness = 0.5
 texture = ExtResource( 6 )
 scale_amount = 0.3
-scale_amount_curve = SubResource( 5 )
+scale_amount_curve = SubResource( 1 )
 color = Color( 0.741176, 0, 0, 1 )
 
 [node name="TitleLabel" type="Label" parent="."]
@@ -324,7 +324,7 @@ margin_left = 275.659
 margin_top = 39.2899
 margin_right = 1062.66
 margin_bottom = 285.29
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.658824, 0.027451, 0.027451, 1 )
 text = "XENOSHOCK 3D"
 align = 1
@@ -338,7 +338,7 @@ margin_left = 460.778
 margin_top = 94.1029
 margin_right = 822.778
 margin_bottom = 217.103
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "GAME OVER"
 align = 1
 __meta__ = {
@@ -364,7 +364,7 @@ margin_left = 30.9194
 margin_top = 76.1093
 margin_right = 280.919
 margin_bottom = 138.109
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "SOLO PLAY"
 align = 1
 __meta__ = {
@@ -387,7 +387,7 @@ margin_left = 30.9194
 margin_top = 76.1093
 margin_right = 280.919
 margin_bottom = 138.109
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "2 Player PLAY"
 align = 1
 __meta__ = {
@@ -423,7 +423,7 @@ margin_left = 31.0
 margin_top = 76.0
 margin_right = 281.0
 margin_bottom = 126.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "HOW TO PLAY"
 align = 1
 __meta__ = {
@@ -446,7 +446,7 @@ margin_left = 33.2979
 margin_top = 73.7309
 margin_right = 283.298
 margin_bottom = 135.731
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 text = "EXIT GAME"
 align = 1
 __meta__ = {
