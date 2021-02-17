@@ -29,6 +29,5 @@ func hide_death_hud():
 	death_hud.hide()
 
 func show_game_over_hud():
-	game_over_hud.show()
 	if death_hud.is_visible():
 		hide_death_hud()

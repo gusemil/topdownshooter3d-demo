@@ -7378,7 +7378,7 @@ margin_top = 88.3771
 margin_right = 431.615
 margin_bottom = 217.377
 custom_fonts/font = SubResource( 71 )
-text = "YOU ARE DEAD
+text = "GAME OVER
 PRESS 'R' TO RESTART
 OR 'ESC' TO QUIT"
 align = 1

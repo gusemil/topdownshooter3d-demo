@@ -90,7 +90,7 @@ func _ready():
 		add_resurrection_timer()
 		
 func _process(delta):
-	if !dead or !game_over:
+	if !dead and !game_over and !game_manager.is_pause:
 		weapon_manager.shoot(Input.is_action_just_pressed("shoot" + player_number), Input.is_action_pressed("shoot" + player_number))
 		if is_controller:
 			if Input.is_action_pressed("controller_look_up") or Input.is_action_pressed("controller_look_down") or Input.is_action_pressed("controller_look_left") or Input.is_action_pressed("controller_look_right"):
@@ -115,7 +115,7 @@ func camera_follows_player():
 	camera_rig.global_transform.origin = player_position
 
 func look_at_cursor():
-	if !dead:
+	if !dead and !game_manager.is_pause:
 		var player_position = global_transform.origin
 		var dropPlane  = Plane(Vector3(0, 1, 0), player_position.y)
 
