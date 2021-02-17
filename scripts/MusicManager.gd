@@ -3,7 +3,6 @@ extends Node
 #Music
 onready var music_manager_player : AudioStreamPlayer = $AudioStreamPlayer
 var music_tracks = []
-onready var track0 : String = "res://audio/music/GetOut.wav"
 onready var track1 : String = "res://audio/music/KneeDeepintheDead.wav"
 onready var track2 : String = "res://audio/music/BFG.wav"
 onready var track3 : String = "res://audio/music/CosmicDeathMachine.wav"
@@ -17,7 +16,6 @@ var rng = RandomNumberGenerator.new()
 
 func _ready():
 	rng.randomize() #aka seeding
-	music_tracks.push_back(track0)
 	music_tracks.push_back(track1)
 	music_tracks.push_back(track2)
 	music_tracks.push_back(track3)

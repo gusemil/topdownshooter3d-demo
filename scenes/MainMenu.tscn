@@ -1,9 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://graphics/fonts/AmazDooMLeft.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://graphics/ui_graphics/buttonStock1.png" type="Texture" id=2]
 [ext_resource path="res://graphics/ui_graphics/background.png" type="Texture" id=3]
 [ext_resource path="res://scripts/MainMenuManager.gd" type="Script" id=4]
+[ext_resource path="res://audio/music/GetOut.wav" type="AudioStream" id=5]
+[ext_resource path="res://graphics/textures/dot.png" type="Texture" id=6]
+
+[sub_resource type="Curve" id=5]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="DynamicFont" id=1]
 size = 200
@@ -38,6 +43,282 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="BloodDrips" type="Node2D" parent="."]
+
+[node name="BloodDrip" type="CPUParticles2D" parent="BloodDrips"]
+position = Vector2( 280.892, 202.453 )
+amount = 16
+lifetime = 7.0
+speed_scale = 2.0
+lifetime_randomness = 0.5
+texture = ExtResource( 6 )
+scale_amount = 0.3
+scale_amount_curve = SubResource( 5 )
+color = Color( 0.741176, 0, 0, 1 )
+
+[node name="BloodDrip2" type="CPUParticles2D" parent="BloodDrips"]
+position = Vector2( 330.58, 163.887 )
+amount = 16
+lifetime = 7.0
+speed_scale = 2.0
+randomness = 0.3
+lifetime_randomness = 0.5
+texture = ExtResource( 6 )
+scale_amount = 0.3
+scale_amount_curve = SubResource( 5 )
+color = Color( 0.741176, 0, 0, 1 )
+
+[node name="BloodDrip3" type="CPUParticles2D" parent="BloodDrips"]
+position = Vector2( 346.644, 194.755 )
+amount = 16
+lifetime = 7.0
+speed_scale = 2.0
+explosiveness = 0.1
+randomness = 0.6
+lifetime_randomness = 0.5
+texture = ExtResource( 6 )
+scale_amount = 0.3
+scale_amount_curve = SubResource( 5 )
+color = Color( 0.741176, 0, 0, 1 )
+
+[node name="BloodDrip4" type="CPUParticles2D" parent="BloodDrips"]
+position = Vector2( 396.411, 153.178 )
+amount = 16
+lifetime = 7.0
+speed_scale = 2.0
+explosiveness = 0.4
+randomness = 0.2
+lifetime_randomness = 0.5
+texture = ExtResource( 6 )
+scale_amount = 0.3
+scale_amount_curve = SubResource( 5 )
+color = Color( 0.741176, 0, 0, 1 )
+
+[node name="BloodDrip5" type="CPUParticles2D" parent="BloodDrips"]
+position = Vector2( 414.68, 196.015 )
+amount = 16
+lifetime = 7.0
+speed_scale = 2.0
+explosiveness = 0.5
+randomness = 0.5
+lifetime_randomness = 0.5
+texture = ExtResource( 6 )
+scale_amount = 0.3
+scale_amount_curve = SubResource( 5 )
+color = Color( 0.741176, 0, 0, 1 )
+
+[node name="BloodDrip6" type="CPUParticles2D" parent="BloodDrips"]
+position = Vector2( 464.447, 151.603 )
+amount = 16
+lifetime = 7.0
+speed_scale = 2.0
+lifetime_randomness = 0.5
+texture = ExtResource( 6 )
+scale_amount = 0.3
+scale_amount_curve = SubResource( 5 )
+color = Color( 0.741176, 0, 0, 1 )
+
+[node name="BloodDrip7" type="CPUParticles2D" parent="BloodDrips"]
+position = Vector2( 481.141, 175.226 )
+amount = 16
+lifetime = 7.0
+speed_scale = 2.0
+explosiveness = 0.6
+randomness = 0.1
+lifetime_randomness = 0.5
+texture = ExtResource( 6 )
+scale_amount = 0.3
+scale_amount_curve = SubResource( 5 )
+color = Color( 0.741176, 0, 0, 1 )
+
+[node name="BloodDrip8" type="CPUParticles2D" parent="BloodDrips"]
+position = Vector2( 531.538, 173.966 )
+amount = 16
+lifetime = 7.0
+speed_scale = 2.0
+explosiveness = 0.3
+randomness = 1.0
+lifetime_randomness = 0.5
+texture = ExtResource( 6 )
+scale_amount = 0.3
+scale_amount_curve = SubResource( 5 )
+color = Color( 0.741176, 0, 0, 1 )
+
+[node name="BloodDrip9" type="CPUParticles2D" parent="BloodDrips"]
+position = Vector2( 548.861, 192.865 )
+amount = 16
+lifetime = 7.0
+speed_scale = 2.0
+explosiveness = 1.0
+randomness = 0.1
+lifetime_randomness = 0.5
+texture = ExtResource( 6 )
+scale_amount = 0.3
+scale_amount_curve = SubResource( 5 )
+color = Color( 0.741176, 0, 0, 1 )
+
+[node name="BloodDrip10" type="CPUParticles2D" parent="BloodDrips"]
+position = Vector2( 598.628, 150.343 )
+amount = 16
+lifetime = 7.0
+speed_scale = 2.0
+explosiveness = 0.1
+randomness = 0.6
+lifetime_randomness = 0.5
+texture = ExtResource( 6 )
+scale_amount = 0.3
+scale_amount_curve = SubResource( 5 )
+color = Color( 0.741176, 0, 0, 1 )
+
+[node name="BloodDrip11" type="CPUParticles2D" parent="BloodDrips"]
+position = Vector2( 615.007, 198.85 )
+amount = 16
+lifetime = 7.0
+speed_scale = 2.0
+explosiveness = 0.2
+randomness = 0.3
+lifetime_randomness = 0.5
+texture = ExtResource( 6 )
+scale_amount = 0.3
+scale_amount_curve = SubResource( 5 )
+color = Color( 0.741176, 0, 0, 1 )
+
+[node name="BloodDrip12" type="CPUParticles2D" parent="BloodDrips"]
+position = Vector2( 665.404, 154.123 )
+amount = 16
+lifetime = 7.0
+speed_scale = 2.0
+explosiveness = 0.6
+randomness = 0.8
+lifetime_randomness = 0.5
+texture = ExtResource( 6 )
+scale_amount = 0.3
+scale_amount_curve = SubResource( 5 )
+color = Color( 0.741176, 0, 0, 1 )
+
+[node name="BloodDrip13" type="CPUParticles2D" parent="BloodDrips"]
+position = Vector2( 682.728, 175.541 )
+amount = 16
+lifetime = 7.0
+speed_scale = 2.0
+randomness = 1.0
+lifetime_randomness = 0.5
+texture = ExtResource( 6 )
+scale_amount = 0.3
+scale_amount_curve = SubResource( 5 )
+color = Color( 0.741176, 0, 0, 1 )
+
+[node name="BloodDrip14" type="CPUParticles2D" parent="BloodDrips"]
+position = Vector2( 731.865, 170.502 )
+amount = 16
+lifetime = 7.0
+speed_scale = 2.0
+explosiveness = 1.0
+lifetime_randomness = 0.5
+texture = ExtResource( 6 )
+scale_amount = 0.3
+scale_amount_curve = SubResource( 5 )
+color = Color( 0.741176, 0, 0, 1 )
+
+[node name="BloodDrip15" type="CPUParticles2D" parent="BloodDrips"]
+position = Vector2( 749.504, 194.44 )
+amount = 16
+lifetime = 7.0
+speed_scale = 2.0
+randomness = 0.5
+lifetime_randomness = 0.5
+texture = ExtResource( 6 )
+scale_amount = 0.3
+scale_amount_curve = SubResource( 5 )
+color = Color( 0.741176, 0, 0, 1 )
+
+[node name="BloodDrip16" type="CPUParticles2D" parent="BloodDrips"]
+position = Vector2( 798.641, 152.548 )
+amount = 16
+lifetime = 7.0
+speed_scale = 2.0
+explosiveness = 0.1
+randomness = 0.6
+lifetime_randomness = 0.5
+texture = ExtResource( 6 )
+scale_amount = 0.3
+scale_amount_curve = SubResource( 5 )
+color = Color( 0.741176, 0, 0, 1 )
+
+[node name="BloodDrip17" type="CPUParticles2D" parent="BloodDrips"]
+position = Vector2( 815.459, 192.911 )
+amount = 16
+lifetime = 7.0
+speed_scale = 2.0
+explosiveness = 0.3
+randomness = 0.6
+lifetime_randomness = 0.5
+texture = ExtResource( 6 )
+scale_amount = 0.3
+scale_amount_curve = SubResource( 5 )
+color = Color( 0.741176, 0, 0, 1 )
+
+[node name="BloodDrip18" type="CPUParticles2D" parent="BloodDrips"]
+position = Vector2( 867.299, 151.907 )
+amount = 16
+lifetime = 7.0
+speed_scale = 2.0
+explosiveness = 0.1
+randomness = 0.9
+lifetime_randomness = 0.5
+texture = ExtResource( 6 )
+scale_amount = 0.3
+scale_amount_curve = SubResource( 5 )
+color = Color( 0.741176, 0, 0, 1 )
+
+[node name="BloodDrip19" type="CPUParticles2D" parent="BloodDrips"]
+position = Vector2( 932.334, 191.997 )
+amount = 16
+lifetime = 7.0
+speed_scale = 2.0
+randomness = 0.1
+lifetime_randomness = 0.5
+texture = ExtResource( 6 )
+scale_amount = 0.3
+scale_amount_curve = SubResource( 5 )
+color = Color( 0.741176, 0, 0, 1 )
+
+[node name="BloodDrip20" type="CPUParticles2D" parent="BloodDrips"]
+position = Vector2( 982.67, 149.234 )
+amount = 16
+lifetime = 7.0
+speed_scale = 2.0
+explosiveness = 0.5
+randomness = 1.0
+lifetime_randomness = 0.5
+texture = ExtResource( 6 )
+scale_amount = 0.3
+scale_amount_curve = SubResource( 5 )
+color = Color( 0.741176, 0, 0, 1 )
+
+[node name="BloodDrip21" type="CPUParticles2D" parent="BloodDrips"]
+position = Vector2( 1000.49, 188.879 )
+amount = 16
+lifetime = 7.0
+speed_scale = 2.0
+randomness = 0.2
+lifetime_randomness = 0.5
+texture = ExtResource( 6 )
+scale_amount = 0.3
+scale_amount_curve = SubResource( 5 )
+color = Color( 0.741176, 0, 0, 1 )
+
+[node name="BloodDrip22" type="CPUParticles2D" parent="BloodDrips"]
+position = Vector2( 1049.04, 151.016 )
+amount = 16
+lifetime = 7.0
+speed_scale = 2.0
+lifetime_randomness = 0.5
+texture = ExtResource( 6 )
+scale_amount = 0.3
+scale_amount_curve = SubResource( 5 )
+color = Color( 0.741176, 0, 0, 1 )
+
 [node name="TitleLabel" type="Label" parent="."]
 margin_left = 275.659
 margin_top = 39.2899
@@ -68,10 +349,10 @@ __meta__ = {
 position = Vector2( 4.15448, 489.096 )
 
 [node name="SoloButton" type="Button" parent="Buttons"]
-margin_left = 474.913
-margin_top = -250.0
-margin_right = 786.913
-margin_bottom = -44.0
+margin_left = 271.504
+margin_top = -203.806
+margin_right = 583.505
+margin_bottom = 2.194
 icon = ExtResource( 2 )
 flat = true
 __meta__ = {
@@ -91,10 +372,10 @@ __meta__ = {
 }
 
 [node name="CoopButton" type="Button" parent="Buttons"]
-margin_left = 474.913
-margin_top = -75.0
-margin_right = 786.913
-margin_bottom = 131.0
+margin_left = 758.211
+margin_top = -203.806
+margin_right = 1070.21
+margin_bottom = 2.194
 icon = ExtResource( 2 )
 flat = true
 __meta__ = {
@@ -113,24 +394,37 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OptionsButton" type="Button" parent="Buttons"]
-margin_left = 474.913
-margin_top = 100.0
-margin_right = 786.913
-margin_bottom = 306.0
+[node name="HowToPlayButton" type="Button" parent="Buttons"]
+margin_left = 476.986
+margin_top = 22.4746
+margin_right = 788.986
+margin_bottom = 228.475
 icon = ExtResource( 2 )
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Buttons/OptionsButton"]
-margin_left = 30.9194
-margin_top = 76.1093
-margin_right = 280.919
-margin_bottom = 138.109
+[node name="HowToPlayImage" type="TextureRect" parent="Buttons/HowToPlayButton"]
+visible = false
+margin_left = -218.7
+margin_top = -164.626
+margin_right = 701.3
+margin_bottom = 515.374
+rect_scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 6 )
+stretch_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Buttons/HowToPlayButton"]
+margin_left = 31.0
+margin_top = 76.0
+margin_right = 281.0
+margin_bottom = 126.0
 custom_fonts/font = SubResource( 3 )
-text = "OPTIONS"
+text = "HOW TO PLAY"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -155,7 +449,15 @@ margin_bottom = 135.731
 custom_fonts/font = SubResource( 4 )
 text = "EXIT GAME"
 align = 1
-[connection signal="button_down" from="Buttons/SoloButton" to="MainMenuManager" method="solo_play"]
-[connection signal="button_down" from="Buttons/CoopButton" to="MainMenuManager" method="coop_play"]
-[connection signal="button_down" from="Buttons/OptionsButton" to="MainMenuManager" method="options"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -2.0
+autoplay = true
+[connection signal="button_up" from="Buttons/SoloButton" to="MainMenuManager" method="solo_play"]
+[connection signal="button_up" from="Buttons/CoopButton" to="MainMenuManager" method="coop_play"]
+[connection signal="button_down" from="Buttons/HowToPlayButton" to="MainMenuManager" method="how_to_play"]
 [connection signal="button_down" from="Buttons/QuitButton" to="MainMenuManager" method="exit_game"]

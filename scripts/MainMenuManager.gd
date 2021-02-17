@@ -1,17 +1,22 @@
 extends Node
 
-
+onready var how_to_play_button = get_tree().get_root().get_node("MainMenuCanvas/Buttons/HowToPlayButton/HowToPlayImage")
 func _ready():
 	pass 
 
 func solo_play():
-	pass
+	GlobalSceneManager.is_coop = false
+	get_tree().change_scene("res://scenes/World.tscn")
 
 func coop_play():
-	pass
+	GlobalSceneManager.is_coop = true
+	get_tree().change_scene("res://scenes/World.tscn")
 
-func options():
-	pass
+func how_to_play():
+	if !how_to_play_button.is_visible():
+		how_to_play_button.show()
+	else:
+		how_to_play_button.hide()
 
 func exit_game():
 	get_tree().quit()

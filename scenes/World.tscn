@@ -34,23 +34,23 @@ font_data = ExtResource( 2 )
 size = 50
 font_data = ExtResource( 2 )
 
-[sub_resource type="SpatialMaterial" id=7]
+[sub_resource type="SpatialMaterial" id=5]
 flags_unshaded = true
 albedo_texture = ExtResource( 1 )
 
-[sub_resource type="PlaneMesh" id=8]
-material = SubResource( 7 )
+[sub_resource type="PlaneMesh" id=6]
+material = SubResource( 5 )
 size = Vector2( 100, 100 )
 
-[sub_resource type="ConcavePolygonShape" id=9]
+[sub_resource type="ConcavePolygonShape" id=7]
 data = PoolVector3Array( 50, 0, 50, -50, 0, 50, 50, 0, -50, -50, 0, 50, -50, 0, -50, 50, 0, -50 )
 
-[sub_resource type="CubeMesh" id=10]
+[sub_resource type="CubeMesh" id=8]
 
-[sub_resource type="BoxShape" id=5]
+[sub_resource type="BoxShape" id=9]
 extents = Vector3( 1.02186, 1, 1 )
 
-[sub_resource type="NavigationMesh" id=6]
+[sub_resource type="NavigationMesh" id=10]
 
 [node name="World" type="Spatial"]
 
@@ -70,22 +70,23 @@ script = ExtResource( 3 )
 visible = false
 
 [node name="PauseLabel" type="Label" parent="GameManager/PauseCanvas/PauseNode"]
-margin_left = 273.891
+margin_left = 300.0
 margin_top = 92.8792
 margin_right = 1003.89
 margin_bottom = 338.879
 custom_fonts/font = SubResource( 1 )
 text = "GAME PAUSED"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="GameOverLabel" type="Label" parent="GameManager/PauseCanvas/PauseNode"]
 visible = false
-margin_left = 460.778
-margin_top = 94.1029
-margin_right = 822.778
-margin_bottom = 217.103
+margin_left = 346.731
+margin_top = 98.8597
+margin_right = 942.731
+margin_bottom = 344.86
 custom_fonts/font = SubResource( 1 )
 text = "GAME OVER"
 align = 1
@@ -214,68 +215,68 @@ __meta__ = {
 }
 
 [node name="Ground" type="MeshInstance" parent="Environment"]
-mesh = SubResource( 8 )
+mesh = SubResource( 6 )
 material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="Environment/Ground"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Environment/Ground/StaticBody"]
-shape = SubResource( 9 )
+shape = SubResource( 7 )
 
 [node name="CSGMesh" type="CSGMesh" parent="Environment"]
 transform = Transform( 49.6531, 0, 0, 0, 3.75747, 0, 0, 0, 1, 0, 4.1333, -48.7592 )
-mesh = SubResource( 10 )
+mesh = SubResource( 8 )
 material = ExtResource( 17 )
 
 [node name="StaticBody" type="StaticBody" parent="Environment/CSGMesh"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Environment/CSGMesh/StaticBody"]
-shape = SubResource( 5 )
+shape = SubResource( 9 )
 
 [node name="CSGMesh3" type="CSGMesh" parent="Environment"]
 transform = Transform( 49.6531, 0, 0, 0, 3.75747, 0, 0, 0, 1, 0, 4.1333, 49.2408 )
-mesh = SubResource( 10 )
+mesh = SubResource( 8 )
 material = ExtResource( 17 )
 
 [node name="StaticBody" type="StaticBody" parent="Environment/CSGMesh3"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Environment/CSGMesh3/StaticBody"]
-shape = SubResource( 5 )
+shape = SubResource( 9 )
 
 [node name="CSGMesh4" type="CSGMesh" parent="Environment"]
 transform = Transform( -8.08952e-06, 0, 1, 0, 3.75747, 0, -49.6531, 0, -1.62921e-07, -49, 4.1333, 2.2408 )
-mesh = SubResource( 10 )
+mesh = SubResource( 8 )
 material = ExtResource( 17 )
 
 [node name="StaticBody" type="StaticBody" parent="Environment/CSGMesh4"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Environment/CSGMesh4/StaticBody"]
-shape = SubResource( 5 )
+shape = SubResource( 9 )
 
 [node name="CSGMesh5" type="CSGMesh" parent="Environment"]
 transform = Transform( -8.08952e-06, 0, 1, 0, 3.75747, 0, -49.6531, 0, -1.62921e-07, -49, 4.1333, 2.2408 )
-mesh = SubResource( 10 )
+mesh = SubResource( 8 )
 material = ExtResource( 17 )
 
 [node name="StaticBody" type="StaticBody" parent="Environment/CSGMesh5"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Environment/CSGMesh5/StaticBody"]
-shape = SubResource( 5 )
+shape = SubResource( 9 )
 
 [node name="CSGMesh6" type="CSGMesh" parent="Environment"]
 transform = Transform( -8.08952e-06, 0, 1, 0, 3.75747, 0, -49.6531, 0, -1.62921e-07, 50, 4.1333, 0.240803 )
-mesh = SubResource( 10 )
+mesh = SubResource( 8 )
 material = ExtResource( 17 )
 
 [node name="StaticBody" type="StaticBody" parent="Environment/CSGMesh6"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Environment/CSGMesh6/StaticBody"]
-shape = SubResource( 5 )
+shape = SubResource( 9 )
 
 [node name="Navigation" type="Navigation" parent="."]
 
 [node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="Navigation"]
-navmesh = SubResource( 6 )
+navmesh = SubResource( 10 )
 
 [node name="Machinegun_Ammo_Pickup" parent="." instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -23 )

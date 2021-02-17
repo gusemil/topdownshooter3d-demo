@@ -36,6 +36,10 @@ config/name="Xenoshock3DGit"
 run/main_scene="res://scenes/World.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GlobalSceneManager="*res://scripts/Global_Scene_Manager.gd"
+
 [display]
 
 window/size/width=1280

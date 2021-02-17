@@ -13,6 +13,7 @@ var is_pause : bool = false
 signal signal_game_over
 
 func _ready():
+	is_coop = GlobalSceneManager.is_coop
 	control_node = get_node("../Control")
 	if !is_coop:
 		setup_solo_play()
@@ -43,8 +44,9 @@ func exit_game():
 	get_tree().quit()
 
 func quit_game():
-	get_tree().quit()
-	#RETURN TO MAIN MENU
+	Engine.time_scale = 1
+	is_pause = false
+	get_tree().change_scene("res://scenes/MainMenu.tscn")
 
 func setup_solo_play():
 	var scene_instance = solo_scene_prefab.instance()
