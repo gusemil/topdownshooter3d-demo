@@ -6945,7 +6945,7 @@ surfaces/2 = {
 [sub_resource type="ShaderMaterial" id=64]
 shader = ExtResource( 15 )
 shader_param/precision_multiplier = 7.0
-shader_param/modulate_color = Color( 0.0588235, 0.0745098, 0.470588, 1 )
+shader_param/modulate_color = Color( 0, 1, 0.976471, 1 )
 shader_param/uv_scale = Vector2( 2, 2 )
 shader_param/uv_offset = Vector2( 0, 0 )
 shader_param/color_depth = 15
@@ -7107,6 +7107,7 @@ material/0 = SubResource( 24 )
 transform = Transform( -1, 0, 3.25841e-07, 0, 1, 0, -3.25841e-07, 0, -1, 0.309421, 1.10622, -1.9593 )
 
 [node name="ProjectileSpawner" parent="WeaponManager/Weapons/RocketLauncher/ProjectileSpawners" instance=ExtResource( 6 )]
+projectile_type = 1
 
 [node name="FirePoint" type="Spatial" parent="WeaponManager"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.348694, 1.55154, -3.08891 )

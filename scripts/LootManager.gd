@@ -45,7 +45,7 @@ func drop_pickup(enemy_position : Vector3):
 			var powerup_instance = powerup_prefabs[powerup_choice].instance()
 			
 			get_tree().get_root().add_child(powerup_instance)
-			powerup_instance.global_transform.origin = enemy_position + Vector3(0,1.5,0)
+			powerup_instance.global_transform.origin = enemy_position + Vector3(0,2.25,0)
 		
 		else: #else drop a pickup
 			var pickup_choice = rng.randi_range(0,pickup_prefabs.size() -1)
@@ -53,5 +53,5 @@ func drop_pickup(enemy_position : Vector3):
 			var pickup_instance = pickup_prefabs[pickup_choice].instance()
 			
 			get_tree().get_root().add_child(pickup_instance)
-			pickup_instance.global_transform.origin = enemy_position + Vector3(0,1.5,0)
+			pickup_instance.global_transform.origin = enemy_position + Vector3(0,2.25,0)
 

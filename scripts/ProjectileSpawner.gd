@@ -18,8 +18,8 @@ func _ready():
 	if projectile_type == PROJECTILE_TYPE.FIREBALL:
 		projectile_prefab = load("res://scenes/Projectile.tscn") #Ei voi käyttää preload mitenkään. Preload suoritetaan scriptin compilen aikana (ennen exportteja)
 	elif projectile_type == PROJECTILE_TYPE.ROCKET:
-		#TODO: ROCKET
-		print("TODO ROCKET")
+		projectile_prefab = load("res://scenes/Rocket_Projectile.tscn")
+		#print("TODO ROCKET")
 
 func set_bodies_to_exclude(_bodies_to_exclude: Array):
 	#print("Projectile spawner bodies to exclude: ", _bodies_to_exclude)

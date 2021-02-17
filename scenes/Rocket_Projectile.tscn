@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://graphics/psx_shaders/psx_unlit.shader" type="Shader" id=1]
+[ext_resource path="res://graphics/models/pickups/rocket.glb" type="PackedScene" id=2]
 [ext_resource path="res://scripts/Projectile.gd" type="Script" id=3]
 
 [sub_resource type="SphereShape" id=1]
@@ -97,10 +98,15 @@ shape = SubResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Graphics"]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+visible = false
 mesh = SubResource( 2 )
 material/0 = SubResource( 3 )
 
+[node name="rocket" parent="Graphics" instance=ExtResource( 2 )]
+transform = Transform( 2, 0, 0, 0, -8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0, 0.827001 )
+
 [node name="Particles" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.863526 )
 
 [node name="SmokeOnHit" type="Particles" parent="Particles"]
 transform = Transform( -1.77636e-15, 2.98023e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, 2.98023e-08, 0.0297108, -0.0286782, -0.10966 )

@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/Pickups/Pickup.tscn" type="PackedScene" id=1]
+[ext_resource path="res://graphics/models/pickups/rocket.glb" type="PackedScene" id=2]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -9,9 +10,14 @@ flags_unshaded = true
 albedo_color = Color( 1, 0.0470588, 0, 1 )
 
 [node name="RocketLauncher_Ammo_Pickup" instance=ExtResource( 1 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0 )
 pickup_type = 2
 amount = 20
 
-[node name="MeshInstance" parent="Graphics" index="0"]
+[node name="rocket" parent="Graphics" index="0" instance=ExtResource( 2 )]
+transform = Transform( 3, 0, 0, 0, 2, 0, 0, 0, 3, 0, -0.946344, 0 )
+
+[node name="MeshInstance" parent="Graphics" index="1"]
+visible = false
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
