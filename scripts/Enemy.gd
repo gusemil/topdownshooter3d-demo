@@ -51,6 +51,9 @@ onready var nav : Navigation = get_parent() # enemy must be a child of navigatio
 
 signal attack
 
+#Boss
+export var is_boss : bool = false
+
 #Sounds
 onready var soundplayer : AudioStreamPlayer3D = $AudioStreamPlayer3D
 var enemy_sounds = []

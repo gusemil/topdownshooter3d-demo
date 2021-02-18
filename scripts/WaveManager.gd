@@ -79,6 +79,7 @@ func spawn_random_normal_enemy():
 		enemy_instance.move_acceleration += enemy_move_speed_bonus
 		enemy_instance.max_speed += enemy_move_speed_bonus
 		enemy_instance.attack_rate -= enemy_attack_rate_bonus
+		enemy_instance.attack_animation_speed -= enemy_attack_rate_bonus / 2
 
 		navmesh.add_child(enemy_instance)
 		enemy_instance.global_transform.origin = spawn_point
