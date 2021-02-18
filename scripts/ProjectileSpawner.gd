@@ -14,6 +14,9 @@ var original_explosion_damage : int = explosion_damage
 
 var bodies_to_exclude = []
 
+var projectile_spawners = []
+onready var spawner_parent = get_node("..")
+
 func _ready():
 	if projectile_type == PROJECTILE_TYPE.FIREBALL:
 		projectile_prefab = load("res://scenes/Projectile.tscn") #Ei voi käyttää preload mitenkään. Preload suoritetaan scriptin compilen aikana (ennen exportteja)
@@ -21,12 +24,14 @@ func _ready():
 		projectile_prefab = load("res://scenes/Rocket_Projectile.tscn")
 		#print("TODO ROCKET")
 
+	for spawner in spawner_parent.get_children():
+		projectile_spawners.push_back(spawner)
+
 func set_bodies_to_exclude(_bodies_to_exclude: Array):
 	#print("Projectile spawner bodies to exclude: ", _bodies_to_exclude)
 	bodies_to_exclude = _bodies_to_exclude
 	
 func fire_projectile():
-	#print("firing projectile!")
 	var projectile_instance = projectile_prefab.instance()
 	projectile_instance.set_bodies_to_exclude(bodies_to_exclude)
 	projectile_instance.set_projectile_damage_on_hit(damage)
