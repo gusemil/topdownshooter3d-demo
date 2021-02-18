@@ -71,8 +71,12 @@ func change_weapon(new_weapon_index : int):
 		emit_signal("ammo_changed", weapons[current_slot].ammo)
 
 func add_ammo(pickup : Pickup):
-	weapons[pickup.pickup_type].add_ammo(pickup)
+	weapons[pickup.pickup_type].add_ammo(pickup.amount, pickup)
 	emit_signal("ammo_changed", weapons[pickup.pickup_type].ammo)
+
+func add_ammo_boss(weapon_index : int, amount : int):
+	weapons[weapon_index].add_ammo(amount)
+	emit_signal("ammo_changed", weapons[weapon_index].ammo)
 
 func get_powerup_damage_mod():
 	return powerup_damage_modifier

@@ -33,7 +33,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Xenoshock3DGit"
-run/main_scene="res://scenes/World.tscn"
+run/main_scene="res://scenes/MainMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -44,6 +44,7 @@ GlobalSceneManager="*res://scripts/Global_Scene_Manager.gd"
 
 window/size/width=1280
 window/size/height=960
+window/size/fullscreen=true
 window/stretch/mode="viewport"
 
 [input]

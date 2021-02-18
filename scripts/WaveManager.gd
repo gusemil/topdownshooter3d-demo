@@ -2,9 +2,11 @@ extends Node
 
 var melee_enemy_prefab = preload("res://scenes/Enemy/MeleeEnemy.tscn")
 var ranged_enemy_prefab = preload("res://scenes/Enemy/RangedEnemy.tscn")
+var melee_boss_prefab = preload("res://scenes/Enemy/MeleeBossEnemy.tscn")
+var ranged_boss_prefab = preload("res://scenes/Enemy/RangedBossEnemy.tscn")
 var navmesh
 
-enum ENEMIES {MELEE, RANGED}
+enum ENEMIES {MELEE, RANGED, MELEE_BOSS, RANGED_BOSS}
 
 export var ranged_enemy_chance = 4
 export var starting_spawn_rate : float = 2.5
@@ -33,15 +35,19 @@ var enemy_projectile_speed_bonus : float = 0
 var enemy_attack_rate_bonus : float = 0
 var max_enemy_attack_rate : float = 0.75
 
+var has_boss_spawned : bool = false
+
 func _ready():
 	rng.randomize()
 	navmesh = get_tree().get_root().get_node("World/Navigation")
 	enemy_prefabs.push_back(melee_enemy_prefab)
 	enemy_prefabs.push_back(ranged_enemy_prefab)
+	enemy_prefabs.push_back(melee_boss_prefab)
+	enemy_prefabs.push_back(ranged_boss_prefab)
 
 	spawn_timer = Timer.new()
 	spawn_timer.wait_time = starting_spawn_rate
-	spawn_timer.connect("timeout", self, "spawn_random_normal_enemy")
+	spawn_timer.connect("timeout", self, "spawn_enemy")
 	add_child(spawn_timer)
 	spawn_timer.start()
 	spawn_timer.set_one_shot(false)
@@ -52,7 +58,7 @@ func _ready():
 	add_child(wave_delay_timer)
 	wave_delay_timer.set_one_shot(false)
 
-func spawn_random_normal_enemy():
+func spawn_enemy(is_boss : bool = false):
 	if spawning:
 		var direction = rng.randi_range(0,3)
 		var spawn_point : Vector3
@@ -67,19 +73,27 @@ func spawn_random_normal_enemy():
 		elif(direction == 3):
 			spawn_point = Vector3(rng.randi_range(40,47),0,rng.randi_range(-47,47))
 
-		var enemy_choice = rng.randi_range(0,ranged_enemy_chance)
+		var ranged_choice = rng.randi_range(0,ranged_enemy_chance)
 		#print(enemy_choice)
 		var enemy_instance
-		if enemy_choice == ranged_enemy_chance:
-			enemy_instance = enemy_prefabs[1].instance()
-			enemy_instance.get_node("AttackArea/ProjectileSpawner").projectile_speed += enemy_projectile_speed_bonus
-		else:
-			enemy_instance = enemy_prefabs[0].instance()
 
-		enemy_instance.move_acceleration += enemy_move_speed_bonus
-		enemy_instance.max_speed += enemy_move_speed_bonus
-		enemy_instance.attack_rate -= enemy_attack_rate_bonus
-		enemy_instance.attack_animation_speed -= enemy_attack_rate_bonus / 2
+		var boss_integer_mod = 0
+
+		if is_boss:
+			boss_integer_mod += 2
+			print("BOSS IS TRUE", boss_integer_mod)
+
+		if ranged_choice == ranged_enemy_chance:
+			enemy_instance = enemy_prefabs[ENEMIES.RANGED + boss_integer_mod].instance()
+			for child in enemy_instance.get_node("AttackArea").get_children():
+				child.projectile_speed += enemy_projectile_speed_bonus
+		else:
+			enemy_instance = enemy_prefabs[ENEMIES.MELEE + boss_integer_mod].instance()
+
+		enemy_instance.move_acceleration += enemy_move_speed_bonus * boss_integer_mod
+		enemy_instance.max_speed += enemy_move_speed_bonus * boss_integer_mod
+		enemy_instance.attack_rate -= enemy_attack_rate_bonus * boss_integer_mod
+		enemy_instance.attack_animation_speed -= (enemy_attack_rate_bonus / 2) * boss_integer_mod
 
 		navmesh.add_child(enemy_instance)
 		enemy_instance.global_transform.origin = spawn_point
@@ -88,16 +102,18 @@ func spawn_random_normal_enemy():
 
 		var double_spawn_check = rng.randi_range(0, double_spawn_cap)
 		if double_spawn_check <= double_spawn_chance:
-			print("DOUBLE SPAWN")
-			spawn_random_normal_enemy()
+			spawn_enemy()
 
 		if enemies_spawned >= enemies_per_wave:
-			enemies_spawned = 0
 			pause_spawning()
 		
 		print("ENEMIES_SPAWNED: ", enemies_spawned)
 
 func pause_spawning():
+	if wave_count > 0 and !has_boss_spawned:
+		has_boss_spawned = true
+		spawn_enemy(true)
+	enemies_spawned = 0
 	spawning = false
 	spawn_timer.set_paused(true)
 	wave_delay_timer.start()
@@ -106,6 +122,7 @@ func pause_spawning():
 func start_spawning():
 	print("START SPAWNING")
 	spawning = true
+	has_boss_spawned = false
 	spawn_timer.set_paused(false)
 	wave_delay_timer.stop()
 

@@ -163,7 +163,7 @@ func on_death():
 	animation_player.play("die")
 	disable_all_collisions()
 	body_removal_timer.start() #tarvitaan start obviously
-	loot_manager.drop_pickup(global_transform.origin)
+	loot_manager.drop_pickup(global_transform.origin, is_boss)
 	var random_death_sound = rng.randi_range(0,3)
 	play_sound(random_death_sound,1.5, 25.0)
 

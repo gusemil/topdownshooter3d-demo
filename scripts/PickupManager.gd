@@ -15,6 +15,13 @@ func on_pickup(pickup):
 			health_manager.gain_health(pickup)
 		elif pickup.pickup_type == pickup.PICKUP_TYPES.ARMOR:
 			health_manager.gain_armor(pickup)
+		elif pickup.pickup_type == pickup.PICKUP_TYPES.BOSS:
+			weapon_manager.add_ammo_boss(0,200)
+			weapon_manager.add_ammo_boss(1,200)
+			weapon_manager.add_ammo_boss(2,200)
+			health_manager.gain_health(pickup)
+			health_manager.gain_armor(pickup)
+			pickup.queue_free()
 	elif pickup is Powerup:
 		if pickup.powerup_type == pickup.POWERUP_TYPES.QUAD_DAMAGE:
 			powerup_manager.quad_damage(pickup)

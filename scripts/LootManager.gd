@@ -14,6 +14,8 @@ var powerup_quad_prefab = preload("res://scenes/Pickups/Powerup_Quad_Damage.tscn
 var powerup_undying_prefab = preload("res://scenes/Pickups/Powerup_Undying.tscn")
 var powerup_speed_prefab = preload("res://scenes/Pickups/Powerup_Speed_Boost.tscn")
 
+var boss_pickup_prefab = preload("res://scenes/Pickups/Boss_Pickup.tscn")
+
 var rng = RandomNumberGenerator.new()
 var pickup_prefabs = []
 var powerup_prefabs = []
@@ -32,26 +34,32 @@ func _ready():
 	powerup_prefabs.push_back(powerup_undying_prefab)
 	powerup_prefabs.push_back(powerup_speed_prefab)
 
-func drop_pickup(enemy_position : Vector3):
-	var pickup_drop = rng.randi_range(0, pickup_drop_chance)
-	
-	if pickup_drop == pickup_drop_chance: #will pickup drop at all
-	
-		var is_drop_powerup = rng.randi_range(0, powerup_drop_chance)
-		
-		if is_drop_powerup == powerup_drop_chance: #if drop happens check if powerup
-			var powerup_choice = rng.randi_range(0,powerup_prefabs.size() -1)
-			
-			var powerup_instance = powerup_prefabs[powerup_choice].instance()
-			
-			get_tree().get_root().add_child(powerup_instance)
-			powerup_instance.global_transform.origin = enemy_position + Vector3(0,2.25,0)
-		
-		else: #else drop a pickup
-			var pickup_choice = rng.randi_range(0,pickup_prefabs.size() -1)
+func drop_pickup(enemy_position : Vector3, is_boss : bool = false):
 
-			var pickup_instance = pickup_prefabs[pickup_choice].instance()
+	if !is_boss:
+		var pickup_drop = rng.randi_range(0, pickup_drop_chance)
+
+		if pickup_drop == pickup_drop_chance: #will pickup drop at all
+		
+			var is_drop_powerup = rng.randi_range(0, powerup_drop_chance)
 			
-			get_tree().get_root().add_child(pickup_instance)
-			pickup_instance.global_transform.origin = enemy_position + Vector3(0,2.25,0)
+			if is_drop_powerup == powerup_drop_chance: #if drop happens check if powerup
+				var powerup_choice = rng.randi_range(0,powerup_prefabs.size() -1)
+				
+				var powerup_instance = powerup_prefabs[powerup_choice].instance()
+				
+				get_tree().get_root().add_child(powerup_instance)
+				powerup_instance.global_transform.origin = enemy_position + Vector3(0,2.25,0)
+			
+			else: #else drop a pickup
+				var pickup_choice = rng.randi_range(0,pickup_prefabs.size() -1)
+
+				var pickup_instance = pickup_prefabs[pickup_choice].instance()
+				
+				get_tree().get_root().add_child(pickup_instance)
+				pickup_instance.global_transform.origin = enemy_position + Vector3(0,2.25,0)
+	else:
+		var boss_pickup_instance = boss_pickup_prefab.instance()
+		get_tree().get_root().add_child(boss_pickup_instance)
+		boss_pickup_instance.global_transform.origin = enemy_position + Vector3(0,2.25,0)
 

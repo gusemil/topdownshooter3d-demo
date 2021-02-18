@@ -7108,6 +7108,7 @@ transform = Transform( -1, 0, 3.25841e-07, 0, 1, 0, -3.25841e-07, 0, -1, 0.30942
 
 [node name="ProjectileSpawner" parent="WeaponManager/Weapons/RocketLauncher/ProjectileSpawners" instance=ExtResource( 6 )]
 projectile_type = 1
+projectile_speed = 40.0
 
 [node name="FirePoint" type="Spatial" parent="WeaponManager"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.348694, 1.55154, -3.08891 )

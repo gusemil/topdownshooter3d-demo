@@ -4,7 +4,7 @@
 [ext_resource path="res://graphics/textures/rocket1.tex" type="Texture" id=2]
 [ext_resource path="res://graphics/textures/rocket2.tex" type="Texture" id=3]
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 1 )
 shader_param/precision_multiplier = 7.0
 shader_param/modulate_color = Color( 1, 1, 1, 1 )
@@ -19,7 +19,7 @@ shader_param/max_fog_distance = 40.0
 shader_param/uv_pan_velocity = Vector2( 0, 0 )
 shader_param/albedoTex = ExtResource( 2 )
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 1 )
 shader_param/precision_multiplier = 7.0
 shader_param/modulate_color = Color( 1, 1, 1, 1 )
@@ -34,7 +34,7 @@ shader_param/max_fog_distance = 40.0
 shader_param/uv_pan_velocity = Vector2( 0, 0 )
 shader_param/albedoTex = ExtResource( 3 )
 
-[sub_resource type="ArrayMesh" id=1]
+[sub_resource type="ArrayMesh" id=5]
 resource_name = "Rocket"
 surfaces/0 = {
 "aabb": AABB( -0.133104, 0.124226, -0.118197, 0.266209, 0.846027, 0.25318 ),
@@ -43,7 +43,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 150,
-"material": SubResource( 2 ),
+"material": SubResource( 3 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 110
@@ -55,7 +55,7 @@ surfaces/1 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 72,
-"material": SubResource( 3 ),
+"material": SubResource( 4 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 48
@@ -66,6 +66,6 @@ surfaces/1 = {
 [node name="Graphics" type="Spatial" parent="."]
 
 [node name="Rocket" type="MeshInstance" parent="Graphics"]
-mesh = SubResource( 1 )
+mesh = SubResource( 5 )
 material/0 = null
 material/1 = null

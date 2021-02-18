@@ -66,6 +66,6 @@ func explode():
 	var explosion_instance = explosion_prefab.instance()
 	explosion_instance.set_damage(explosion_damage)
 	get_tree().get_root().add_child(explosion_instance)
-	explosion_instance.global_transform.origin = global_transform.origin
+	explosion_instance.global_transform.origin = global_transform.origin + Vector3(0,0,3)
 	explosion_instance.explode()
 

@@ -130,21 +130,23 @@ func shoot_projectile():
 		projectile_spawner.fire_projectile()
 	projectile_spawners_base.global_transform = start_transform
 
-func add_ammo(pickup : Pickup):
+func add_ammo(amount : int, pickup : Pickup = null):
 	if ammo < max_ammo:
-		if ammo + pickup.amount <= max_ammo:
-			ammo += pickup.amount
+		if ammo + amount <= max_ammo:
+			ammo += amount
 		else:
 			ammo = max_ammo
 		print("Weapon: ", name, " ammo amount: ", ammo)
-		pickup.queue_free()
 
-		if pickup.pickup_type == pickup.PICKUP_TYPES.AMMO_MACHINE_GUN:
-			soundmanager.play_sound(1,0)
-		if pickup.pickup_type == pickup.PICKUP_TYPES.AMMO_SHOTGUN:
-			soundmanager.play_sound(1,1)
-		if pickup.pickup_type == pickup.PICKUP_TYPES.AMMO_ROCKET_LAUNCHER:
-			soundmanager.play_sound(1,2)
+		if pickup != null:
+			if pickup.pickup_type == pickup.PICKUP_TYPES.AMMO_MACHINE_GUN:
+				soundmanager.play_sound(1,0)
+			if pickup.pickup_type == pickup.PICKUP_TYPES.AMMO_SHOTGUN:
+				soundmanager.play_sound(1,1)
+			if pickup.pickup_type == pickup.PICKUP_TYPES.AMMO_ROCKET_LAUNCHER:
+				soundmanager.play_sound(1,2)
+			
+			pickup.queue_free()
 	
 	
 	
