@@ -13,7 +13,11 @@ var is_pause : bool = false
 signal signal_game_over
 
 func _ready():
-	is_coop = GlobalSceneManager.is_coop
+	if GlobalSceneManager != null:
+		is_coop = GlobalSceneManager.is_coop
+	else:
+		is_coop = self.is_coop
+
 	control_node = get_node("../Control")
 	if !is_coop:
 		setup_solo_play()
@@ -38,7 +42,9 @@ func restart_game():
 	var children = get_tree().get_root().get_children()
 	for child in children:
 		child.queue_free()
+	var temp_is_coop = is_coop
 	get_tree().reload_current_scene()
+	is_coop = temp_is_coop
 
 func exit_game():
 	get_tree().quit()
@@ -47,6 +53,7 @@ func quit_game():
 	Engine.time_scale = 1
 	is_pause = false
 	get_tree().change_scene("res://scenes/MainMenu.tscn")
+
 
 func setup_solo_play():
 	var scene_instance = solo_scene_prefab.instance()

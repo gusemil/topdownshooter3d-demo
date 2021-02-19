@@ -4,6 +4,9 @@ onready var weapon_manager = get_node("../").get_node("WeaponManager")
 onready var health_manager = get_node("../").get_node("HealthManager")
 onready var powerup_manager = get_node("../").get_node("PowerupManager")
 
+#Sounds
+onready var soundmanager = get_tree().get_root().get_node("World/NonPositionalSoundManager")
+
 func _ready():
 	connect("area_entered", self, "on_pickup")
 	
@@ -21,6 +24,7 @@ func on_pickup(pickup):
 			weapon_manager.add_ammo_boss(2,200)
 			health_manager.gain_health(pickup)
 			health_manager.gain_armor(pickup)
+			soundmanager.play_sound(1,11)
 			pickup.queue_free()
 	elif pickup is Powerup:
 		if pickup.powerup_type == pickup.POWERUP_TYPES.QUAD_DAMAGE:

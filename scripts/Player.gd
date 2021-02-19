@@ -289,9 +289,10 @@ func play_invulnerability_sound():
 
 func death_animation():
 	animation_player.play("Slide")
-	weapon_manager.hide()
+	weapon_manager.current_weapon.hide()
 
 func resurrect():
+	weapon_manager.current_weapon.show()
 	dead = false
 	health_manager.set_health_forced(100)
 	emit_signal("player_resurrect")

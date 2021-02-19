@@ -22,7 +22,7 @@ script = ExtResource( 5 )
 turn_speed_per_second = 180.0
 attack_range = 50.0
 always_face_towards_player_when_attacking = true
-pain_chance = 1
+pain_chance = 10
 sight_cone_degrees = 360.0
 is_boss = true
 
@@ -32,7 +32,7 @@ is_boss = true
 material/0 = ExtResource( 6 )
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Graphics/Armature/Skeleton" index="1"]
-transform = Transform( 1, -4.25214e-08, -2.29664e-07, -4.42134e-08, 0.931049, -0.364894, 2.29344e-07, 0.364894, 0.931049, 2.84689e-18, 1.20205, -0.042127 )
+transform = Transform( 1, 1.77636e-15, -2.38419e-07, -2.5024e-08, 0.994477, -0.104958, 2.37102e-07, 0.104958, 0.994477, 2.84689e-18, 1.20205, -0.042127 )
 bone_name = "body"
 
 [node name="Hitbox" parent="Graphics/Armature/Skeleton/BoneAttachment" instance=ExtResource( 1 )]

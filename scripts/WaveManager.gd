@@ -20,6 +20,7 @@ var double_spawn_chance : int = 1
 const min_spawn_rate : float = 0.25
 const max_double_spawn_chance : int = 10
 const double_spawn_cap : int = 20
+const boss_spawn_wave : int = 3
 
 
 var enemy_prefabs = []
@@ -36,6 +37,8 @@ var enemy_attack_rate_bonus : float = 0
 var max_enemy_attack_rate : float = 0.75
 
 var has_boss_spawned : bool = false
+
+onready var game_manager = get_tree().get_root().get_node("World/GameManager")
 
 func _ready():
 	rng.randomize()
@@ -57,6 +60,8 @@ func _ready():
 	wave_delay_timer.connect("timeout", self, "start_spawning")
 	add_child(wave_delay_timer)
 	wave_delay_timer.set_one_shot(false)
+
+	game_manager.connect("signal_game_over", self, "stop_spawning")
 
 func spawn_enemy(is_boss : bool = false):
 	if spawning:
@@ -110,7 +115,7 @@ func spawn_enemy(is_boss : bool = false):
 		print("ENEMIES_SPAWNED: ", enemies_spawned)
 
 func pause_spawning():
-	if wave_count > 0 and !has_boss_spawned:
+	if wave_count > 3 and !has_boss_spawned:
 		has_boss_spawned = true
 		spawn_enemy(true)
 	enemies_spawned = 0
@@ -118,6 +123,9 @@ func pause_spawning():
 	spawn_timer.set_paused(true)
 	wave_delay_timer.start()
 	increase_difficulty()
+
+func stop_spawning():
+	spawn_timer.stop()
 
 func start_spawning():
 	print("START SPAWNING")

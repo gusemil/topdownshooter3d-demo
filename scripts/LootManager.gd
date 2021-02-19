@@ -1,7 +1,8 @@
 extends Node
 
-export var pickup_drop_chance = 3
-export var powerup_drop_chance = 2
+const pickup_drop_chance = 3
+const powerup_drop_chance = 2
+const boss_pickup_drop_chance = 2
 
 var ammo_machinegun_prefab = preload("res://scenes/Pickups/Machinegun_Ammo_Pickup.tscn")
 var ammo_shotgun_prefab = preload("res://scenes/Pickups/Shotgun_Ammo_Pickup.tscn")
@@ -59,7 +60,9 @@ func drop_pickup(enemy_position : Vector3, is_boss : bool = false):
 				get_tree().get_root().add_child(pickup_instance)
 				pickup_instance.global_transform.origin = enemy_position + Vector3(0,2.25,0)
 	else:
-		var boss_pickup_instance = boss_pickup_prefab.instance()
-		get_tree().get_root().add_child(boss_pickup_instance)
-		boss_pickup_instance.global_transform.origin = enemy_position + Vector3(0,2.25,0)
+		var boss_drop = rng.randi_range(0, boss_pickup_drop_chance)
+		if boss_drop == boss_pickup_drop_chance:
+			var boss_pickup_instance = boss_pickup_prefab.instance()
+			get_tree().get_root().add_child(boss_pickup_instance)
+			boss_pickup_instance.global_transform.origin = enemy_position + Vector3(0,2.25,0)
 

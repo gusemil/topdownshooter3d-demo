@@ -30,6 +30,7 @@ onready var pickup_sound7 : String = "res://audio/sounds/DashOn.wav"
 onready var pickup_sound8 : String = "res://audio/sounds/Quad_Off.wav"
 onready var pickup_sound9 : String = "res://audio/sounds/UndyingOff.wav"
 onready var pickup_sound10 : String = "res://audio/sounds/DashOff.wav"
+onready var pickup_sound11 : String = "res://audio/sounds/BossPickup.wav"
 
 #Player Damage sounds
 onready var player_damage_sound0 : String = "res://audio/sounds/player_damage.wav"
@@ -60,6 +61,7 @@ func _ready():
 	pickup_sounds.push_back(pickup_sound8)
 	pickup_sounds.push_back(pickup_sound9)
 	pickup_sounds.push_back(pickup_sound10)
+	pickup_sounds.push_back(pickup_sound11)
 	
 	player_damage_sounds.push_back(player_damage_sound0)
 	player_damage_sounds.push_back(player_damage_sound1)

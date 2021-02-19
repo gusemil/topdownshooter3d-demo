@@ -205,8 +205,6 @@ script = ExtResource( 6 )
 
 [node name="LootManager" type="Node" parent="."]
 script = ExtResource( 9 )
-pickup_drop_chance = 2
-powerup_drop_chance = 3
 
 [node name="WaveManager" type="Node" parent="."]
 script = ExtResource( 4 )
@@ -284,7 +282,7 @@ navmesh = SubResource( 10 )
 environment = SubResource( 12 )
 
 [node name="BossPickup" parent="." instance=ExtResource( 8 )]
-transform = Transform( 2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 3, -10.5522 )
+transform = Transform( 2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 23, 3, 0 )
 [connection signal="button_up" from="GameManager/PauseCanvas/PauseNode/Buttons/ContinueButton" to="GameManager" method="toggle_pause"]
 [connection signal="button_up" from="GameManager/PauseCanvas/PauseNode/Buttons/RestartButton" to="GameManager" method="restart_game"]
 [connection signal="button_up" from="GameManager/PauseCanvas/PauseNode/Buttons/MainMenuButton" to="GameManager" method="quit_game"]

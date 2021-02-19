@@ -6979,6 +6979,7 @@ height = 2.0
 [sub_resource type="SphereMesh" id=68]
 
 [sub_resource type="SpatialMaterial" id=69]
+flags_unshaded = true
 albedo_color = Color( 1, 0, 0, 1 )
 
 [sub_resource type="DynamicFont" id=70]
@@ -7040,6 +7041,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -1 )
 visible = false
 script = ExtResource( 4 )
 automatic_fire = true
+damage = 20
 ammo = 30
 max_ammo = 90
 fire_rate = 0.5
@@ -7065,17 +7067,11 @@ transform = Transform( -1, 0, 3.25841e-07, 0, 1, 0, -3.25841e-07, 0, -1, 0.31189
 [node name="HitScanBulletSpawner" parent="WeaponManager/Weapons/Shotgun/BulletSpawners" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 2.84217e-14, 0, 1, 0, -2.84217e-14, 0, 1, 0.161842, 0.0778811, 2.21359 )
 
-[node name="HitScanBulletSpawner2" parent="WeaponManager/Weapons/Shotgun/BulletSpawners" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 2.84217e-14, 0, 1, 0, -2.84217e-14, 0, 1, 0.0844214, 0.0778811, 2.21359 )
-
 [node name="HitScanBulletSpawner3" parent="WeaponManager/Weapons/Shotgun/BulletSpawners" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 2.84217e-14, 0, 1, 0, -2.84217e-14, 0, 1, 0.338526, 0.0778811, 2.21359 )
+transform = Transform( 0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, 0.984808, 1.16184, 0.0778811, 2.21359 )
 
-[node name="HitScanBulletSpawner4" parent="WeaponManager/Weapons/Shotgun/BulletSpawners" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 2.84217e-14, 0, 1, 0, -2.84217e-14, 0, 1, 0.200912, 0.183327, 2.21359 )
-
-[node name="HitScanBulletSpawner5" parent="WeaponManager/Weapons/Shotgun/BulletSpawners" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 2.84217e-14, 0, 1, 0, -2.84217e-14, 0, 1, 0.200912, -0.0552298, 2.21359 )
+[node name="HitScanBulletSpawner2" parent="WeaponManager/Weapons/Shotgun/BulletSpawners" instance=ExtResource( 3 )]
+transform = Transform( 0.984808, 0, -0.173648, 0, 1, 0, 0.173648, 0, 0.984808, -0.838158, 0.0778811, 2.21359 )
 
 [node name="RocketLauncher" type="Spatial" parent="WeaponManager/Weapons"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -1 )
@@ -7104,7 +7100,7 @@ mesh = SubResource( 11 )
 material/0 = SubResource( 24 )
 
 [node name="ProjectileSpawners" type="Spatial" parent="WeaponManager/Weapons/RocketLauncher"]
-transform = Transform( -1, 0, 3.25841e-07, 0, 1, 0, -3.25841e-07, 0, -1, 0.309421, 1.10622, -1.9593 )
+transform = Transform( -1, 0, 3.25841e-07, 0, 1, 0, -3.25841e-07, 0, -1, 0.309421, 1.10622, 0.619376 )
 
 [node name="ProjectileSpawner" parent="WeaponManager/Weapons/RocketLauncher/ProjectileSpawners" instance=ExtResource( 6 )]
 projectile_type = 1
@@ -7321,6 +7317,7 @@ material/0 = SubResource( 69 )
 transform = Transform( 0.666666, 0, 0, 0, 0.666666, 0, 0, 0, 3.33333, 0, 2.0289, 0 )
 
 [node name="HealthManager" parent="." instance=ExtResource( 5 )]
+is_player = true
 
 [node name="PickupManager" type="Area" parent="."]
 collision_layer = 0

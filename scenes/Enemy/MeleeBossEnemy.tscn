@@ -27,7 +27,7 @@ attack_range = 9.0
 attack_rate = 2.0
 attack_animation_speed = 1.0
 attack_damage = 100
-pain_chance = 1
+pain_chance = 10
 sight_cone_degrees = 360.0
 is_boss = true
 

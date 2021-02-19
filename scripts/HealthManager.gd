@@ -1,5 +1,6 @@
 extends Spatial
 
+export var is_player : bool = false
 export var max_health : int = 100
 onready var current_health : int = max_health
 export var max_armor : int = 100
@@ -20,9 +21,13 @@ onready var armor_sparks_prefab = preload("res://scenes/BulletHitEffect.tscn")
 #Sounds
 onready var soundmanager = get_tree().get_root().get_node("World/NonPositionalSoundManager")
 
+onready var game_manager = get_tree().get_root().get_node("World/GameManager")
+
 func _ready():
 	emit_signal("health_changed", current_health)
 	emit_signal("armor_changed", current_armor)
+	if is_player:
+		game_manager.connect("signal_game_over", self, "player_death_blood")
 
 func take_damage(dmg : int):
 	if current_armor > 0:
@@ -96,4 +101,4 @@ func set_health_forced(amount):
 	emit_signal("health_changed", current_health)
 		
 func player_death_blood():
-	spawn_particles(blood_spray_prefab,50, Vector3(0,0,0), 2, true)
+		spawn_particles(blood_spray_prefab,50, Vector3(0,0,0), 2, true)

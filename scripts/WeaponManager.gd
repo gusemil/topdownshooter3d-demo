@@ -18,15 +18,13 @@ var is_quad_damage_on : bool = false
 var quad_damage_timer : Timer
 var is_quad_powerup_initialized : bool = false
 
-#State
-var is_player_dead : bool = false
-
 #Sounds
 onready var sound_manager = get_tree().get_root().get_node("World/NonPositionalSoundManager")
 
 #2player support
 onready var player = get_node("..")
 var player_number : String = ""
+var is_player_dead : bool = false
 
 func _process(delta):
 	if Input.is_action_just_pressed("weapon1" + player_number) and current_slot != WEAPON_SLOTS.MACHINE_GUN:
@@ -55,6 +53,9 @@ func init(_fire_point: Spatial, _collision_bodies_to_ignore: Array):
 			weapon.init(_fire_point, [_collision_bodies_to_ignore])
 
 	emit_signal("ammo_changed", weapons[WEAPON_SLOTS.MACHINE_GUN].ammo)
+
+	player.connect("player_death", self, "toggle_player_dead")
+	player.connect("player_resurrect", self, "toggle_player_dead")
 
 func shoot(attack_input_just_pressed: bool, attack_input_held: bool):
 	if current_weapon.has_method("shoot"):
@@ -105,5 +106,8 @@ func stop_quad_damage():
 	sound_manager.play_sound(1,8)
 	quad_powerup_effect.emitting = false
 
-func player_is_dead():
-	is_player_dead = true
+func toggle_player_death():
+	if !is_player_dead:
+		is_player_dead = true
+	else:
+		is_player_dead = false
