@@ -6990,7 +6990,9 @@ font_data = ExtResource( 17 )
 size = 32
 font_data = ExtResource( 17 )
 
-[node name="Player" type="KinematicBody"]
+[node name="Player" type="KinematicBody" groups=[
+"player",
+]]
 collision_layer = 6
 collision_mask = 3
 script = ExtResource( 1 )

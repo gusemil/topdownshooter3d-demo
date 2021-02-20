@@ -16,6 +16,7 @@ var bodies_to_exclude = []
 
 var projectile_spawners = []
 onready var spawner_parent = get_node("..")
+var projectile_layer : int
 
 func _ready():
 	if projectile_type == PROJECTILE_TYPE.FIREBALL:

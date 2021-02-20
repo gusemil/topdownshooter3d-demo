@@ -12,6 +12,8 @@ onready var explosion_prefab = preload("res://scenes/Explosion.tscn")
 var remove_projectile_on_hit_timer : Timer
 var remove_projectile_lifetime_timer : Timer
 
+var explosion_layer : int
+
 func _ready():
 	remove_projectile_on_hit_timer = Timer.new()
 	remove_projectile_on_hit_timer.wait_time = 0.001
@@ -38,6 +40,7 @@ func set_bodies_to_exclude(_bodies_to_exclude: Array):
 
 func set_explosion_damage(var _damage: int):
 	explosion_damage = _damage
+
 func _physics_process(delta):
 	var collision : KinematicCollision = move_and_collide(-global_transform.basis.z * speed * delta)
 
@@ -67,5 +70,6 @@ func explode():
 	explosion_instance.set_damage(explosion_damage)
 	get_tree().get_root().add_child(explosion_instance)
 	explosion_instance.global_transform.origin = global_transform.origin + Vector3(0,0,3)
+	explosion_instance.set_collision_mask(self.collision_mask)
 	explosion_instance.explode()
 

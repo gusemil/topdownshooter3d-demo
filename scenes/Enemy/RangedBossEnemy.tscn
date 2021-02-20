@@ -14,10 +14,12 @@ height = 0.8
 [sub_resource type="CapsuleShape" id=2]
 radius = 0.5
 
-[node name="RangedBossEnemy" type="KinematicBody"]
+[node name="RangedBossEnemy" type="KinematicBody" groups=[
+"enemy",
+]]
 transform = Transform( 6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0 )
-collision_layer = 2147483650
-collision_mask = 2147483649
+collision_layer = 2147483696
+collision_mask = 2147483665
 script = ExtResource( 5 )
 turn_speed_per_second = 180.0
 attack_range = 50.0
@@ -36,6 +38,7 @@ transform = Transform( 1, 1.77636e-15, -2.38419e-07, -2.5024e-08, 0.994477, -0.1
 bone_name = "body"
 
 [node name="Hitbox" parent="Graphics/Armature/Skeleton/BoneAttachment" instance=ExtResource( 1 )]
+collision_layer = 32
 
 [node name="CollisionShape" type="CollisionShape" parent="Graphics/Armature/Skeleton/BoneAttachment/Hitbox"]
 transform = Transform( 1, -8.84278e-08, 9.33282e-09, -9.33274e-09, -0.0391446, -0.995872, -8.84278e-08, 0.629109, 0.0391445, 2.1322e-08, -0.122411, 0.0894311 )

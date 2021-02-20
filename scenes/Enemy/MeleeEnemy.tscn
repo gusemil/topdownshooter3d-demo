@@ -14,10 +14,12 @@ radius = 0.5
 radius = 0.5
 height = 0.8
 
-[node name="MeleeEnemy" type="KinematicBody"]
+[node name="MeleeEnemy" type="KinematicBody" groups=[
+"enemy",
+]]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
-collision_layer = 2147483650
-collision_mask = 2147483649
+collision_layer = 2147483696
+collision_mask = 17
 script = ExtResource( 5 )
 is_melee = true
 turn_speed_per_second = 180.0
@@ -38,6 +40,7 @@ transform = Transform( 1, 0, 2.38418e-07, -8.6824e-08, 0.931334, 0.364166, -2.22
 bone_name = "body"
 
 [node name="Hitbox" parent="Graphics/Armature/Skeleton/BoneAttachment" instance=ExtResource( 2 )]
+collision_layer = 32
 
 [node name="CollisionShape" type="CollisionShape" parent="Graphics/Armature/Skeleton/BoneAttachment/Hitbox"]
 transform = Transform( 1, 2.27374e-13, -1.47882e-13, 0, 0.342021, 0.939694, 0, -0.939694, 0.342021, 1.93751e-08, -0.207831, -0.0812652 )

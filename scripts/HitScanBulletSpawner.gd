@@ -17,7 +17,7 @@ func fire():
 	var space_state = get_world().get_direct_space_state() #ottaa fyysisen tilan jossa ammutaan
 	var our_pos = global_transform.origin
 	var result = space_state.intersect_ray(our_pos, our_pos - global_transform.basis.z * distance, 
-		bodies_to_exclude, 1 + 4, true, true) # world layer + character layer + hitbox layer
+		bodies_to_exclude, 1 + 32, true, true) # 32 = enemy hitbox layer
 	if result and result.collider.has_method("take_damage"):
 		result.collider.take_damage(damage)
 		#print(result.collider.name)

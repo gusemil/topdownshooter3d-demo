@@ -54,9 +54,7 @@ handle_input_locally = false
 render_target_update_mode = 3
 audio_listener_enable_3d = true
 
-[node name="Player" parent="ViewportContainer/Viewport" groups=[
-"player",
-] instance=ExtResource( 2 )]
+[node name="Player" parent="ViewportContainer/Viewport" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
 [node name="ViewportContainer2" type="ViewportContainer" parent="."]
@@ -76,9 +74,7 @@ handle_input_locally = false
 render_target_update_mode = 3
 audio_listener_enable_3d = true
 
-[node name="Player2" parent="ViewportContainer2/Viewport" groups=[
-"player",
-] instance=ExtResource( 2 )]
+[node name="Player2" parent="ViewportContainer2/Viewport" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 2, 0 )
 is_controller = true
 player_number = "2"
