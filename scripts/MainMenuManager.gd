@@ -1,8 +1,6 @@
 extends Node
 
 onready var how_to_play_button = get_tree().get_root().get_node("MainMenuCanvas/Buttons/HowToPlayButton/HowToPlayImage")
-func _ready():
-	pass 
 
 func solo_play():
 	GlobalSceneManager.is_coop = false

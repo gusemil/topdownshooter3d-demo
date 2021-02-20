@@ -57,6 +57,9 @@ audio_listener_enable_3d = true
 [node name="Player" parent="ViewportContainer/Viewport" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
+[node name="Cursor" parent="ViewportContainer/Viewport/Player" index="4"]
+layers = 2
+
 [node name="ViewportContainer2" type="ViewportContainer" parent="."]
 margin_left = 13.0
 margin_right = 26.0
@@ -79,8 +82,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 2, 0 )
 is_controller = true
 player_number = "2"
 
+[node name="Camera" parent="ViewportContainer2/Viewport/Player2/CameraRig" index="0"]
+cull_mask = 1048573
+
 [node name="Body" parent="ViewportContainer2/Viewport/Player2/Graphics/Armature" index="1"]
 material/0 = SubResource( 1 )
 material/1 = SubResource( 2 )
+
+[editable path="ViewportContainer/Viewport/Player"]
 
 [editable path="ViewportContainer2/Viewport/Player2"]

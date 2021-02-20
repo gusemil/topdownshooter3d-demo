@@ -41,10 +41,10 @@ func restart_game():
 	Engine.time_scale = 1
 	var children = get_tree().get_root().get_children()
 	for child in children:
-		child.queue_free()
+		if child.name != "GlobalSceneManager":
+			child.queue_free()
 	var temp_is_coop = is_coop
 	get_tree().reload_current_scene()
-	is_coop = temp_is_coop
 
 func exit_game():
 	get_tree().quit()
