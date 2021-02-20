@@ -3,12 +3,15 @@ extends Label
 var health = 0
 var armor = 0
 var ammo = 0
-var max_ammo = 200
+var max_ammo = 0
 var player_number = "0"
 onready var player = get_node("../..")
+onready var weapon_manager = player.get_node("WeaponManager")
 
 func _ready():
 	player_number = player.player_number
+
+	weapon_manager.connect("weapon_changed", self, "update_max_ammo")
 
 	if player_number == "2":
 		set_player_2_position()
@@ -25,6 +28,9 @@ func update_ammo(amount):
 	ammo = amount
 	update_hud()
 
+func update_max_ammo(amount):
+	max_ammo = amount
+	update_hud()
 
 func update_hud():
 	text = "Player " + player_number + "\nHealth: " + str(health) + "\nArmor: " + str(armor) + "\nAmmo: " + str(ammo) + "/" + str(max_ammo)

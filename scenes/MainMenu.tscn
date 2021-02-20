@@ -350,7 +350,7 @@ position = Vector2( 4.15448, 489.096 )
 
 [node name="SoloButton" type="Button" parent="Buttons"]
 margin_left = 271.504
-margin_top = -203.806
+margin_top = -205.0
 margin_right = 583.505
 margin_bottom = 2.194
 icon = ExtResource( 2 )
@@ -372,10 +372,10 @@ __meta__ = {
 }
 
 [node name="CoopButton" type="Button" parent="Buttons"]
-margin_left = 758.211
-margin_top = -203.806
-margin_right = 1070.21
-margin_bottom = 2.194
+margin_left = 743.924
+margin_top = -205.393
+margin_right = 1055.92
+margin_bottom = 0.606598
 icon = ExtResource( 2 )
 flat = true
 __meta__ = {

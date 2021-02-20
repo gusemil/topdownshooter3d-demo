@@ -4,7 +4,6 @@ extends KinematicBody
 export var speed = 300
 export var friction = 0.875
 export var gravity = 80
-#export var camera_rotation_speed = 250
 var move_direction = Vector3()
 var velocity = Vector3()
 
@@ -52,10 +51,7 @@ onready var soundmanager = get_tree().get_root().get_node("World/NonPositionalSo
 
 #Controller
 export var is_controller : bool = false
-#onready var controller_cursor = $Controller_Cursor
 export var rotation_speed = 600
-#export var cursor_gravity = 80
-#export var camera_rotation_speed = 250
 var cursor_move_direction = Vector3()
 var cursor_velocity = Vector3()
 
@@ -109,9 +105,6 @@ func _physics_process(delta):
 	camera_follows_player()
 	if !is_controller:
 		look_at_cursor()
-	#else:
-	#	if Input.is_action_pressed("controller_look_up") or Input.is_action_pressed("controller_look_down") or Input.is_action_pressed("controller_look_left") or Input.is_action_pressed("controller_look_right"):
-	#		controller_move_cursor(delta)
 	move(delta)
 	animate_move()
 	
@@ -144,47 +137,28 @@ func controller_move_cursor(delta):
 		var controller_cursor_basis = camera.get_global_transform().basis
 		if Input.is_action_pressed("controller_look_up"):
 			cursor_move_direction += controller_cursor_basis.z
-			#cursor_move_direction -= Vector3(0,0,1)
-			#animation_player.play("RunForward-loop")
 		elif Input.is_action_pressed("controller_look_down"):
 			cursor_move_direction -= controller_cursor_basis.z
-			#animation_player.play("RunBackward-loop")
 		if Input.is_action_pressed("controller_look_left"):
 			cursor_move_direction += controller_cursor_basis.x
-			#cursor_move_direction -= Vector3(1,0,0)
-			#animation_player.play("RunLeft-loop")
 		elif Input.is_action_pressed("controller_look_right"):
 			cursor_move_direction -= controller_cursor_basis.x
-			#cursor_move_direction += Vector3(1,0,0)
-			#animation_player.play("RunRight-loop")
 		cursor_move_direction.y = 0
 		cursor_move_direction = cursor_move_direction.normalized()
 
 		self.rotation.y = lerp_angle(self.rotation.y, atan2(cursor_move_direction.x, cursor_move_direction.z), delta * 4)
-		#self.rotation.y = atan2(cursor_move_direction.x, cursor_move_direction.z)
-		#cursor_velocity += cursor_move_direction*cursor_speed*delta
-
-		#cursor_velocity *= cursor_friction
-		#cursor_velocity.y -= cursor_gravity*delta
-		#cursor_velocity = controller_cursor.move_and_slide(cursor_velocity, Vector3.UP, true, 3)
-
-
 func move(delta):
 	if !dead:
 		move_direction = Vector3()
 		var camera_basis = camera.get_global_transform().basis
 		if Input.is_action_pressed("move_forward" + player_number):
 			move_direction -= camera_basis.z
-			#animation_player.play("RunForward-loop")
 		elif Input.is_action_pressed("move_backward" + player_number):
 			move_direction += camera_basis.z
-			#animation_player.play("RunBackward-loop")
 		if Input.is_action_pressed("move_left" + player_number):
 			move_direction -= camera_basis.x
-			#animation_player.play("RunLeft-loop")
 		elif Input.is_action_pressed("move_right" + player_number):
 			move_direction += camera_basis.x
-			#animation_player.play("RunRight-loop")
 		move_direction.y = 0
 		move_direction = move_direction.normalized()
 		if Input.is_action_just_pressed("dash" + player_number) and (can_dash or is_speed_boost_on):
@@ -192,9 +166,6 @@ func move(delta):
 			start_dash_delay()
 		else:
 			velocity += move_direction*speed*delta
-
-	#else:
-	#	animation_player.play("CombatIdle-loop")
 
 func animate_move():
 	if !dead and !game_manager.is_pause:
@@ -223,13 +194,12 @@ func death():
 	dead = true
 	death_animation()
 	emit_signal("player_death")
-	if is_coop and !game_manager.is_game_over: #Hacky fix but I couldn't figure what the problem was
+	if is_coop and !game_manager.is_game_over: #Hacky fix
 		add_resurrection_timer()
 		start_resurrection_timer()
 	
-	if is_coop and game_manager.is_game_over: #Hacky fix but I couldn't figure what the problem was
+	if is_coop and game_manager.is_game_over: #Hacky fix
 		death_hud.hide()
-	#print("Player is dead")
 
 func init_speed_powerup(powerup : Powerup):
 	if !is_speed_powerup_initialized:

@@ -10,6 +10,7 @@ var fire_point : Spatial
 var collision_bodies_to_ignore : Array = []
 
 signal ammo_changed
+signal weapon_changed
 
 #Quad damage
 onready var quad_powerup_effect : Particles = $QuadPowerUpEffect
@@ -53,6 +54,7 @@ func init(_fire_point: Spatial, _collision_bodies_to_ignore: Array):
 			weapon.init(_fire_point, [_collision_bodies_to_ignore])
 
 	emit_signal("ammo_changed", weapons[WEAPON_SLOTS.MACHINE_GUN].ammo)
+	emit_signal("weapon_changed", weapons[WEAPON_SLOTS.MACHINE_GUN].max_ammo)
 
 	player.connect("player_death", self, "toggle_player_dead")
 	player.connect("player_resurrect", self, "toggle_player_dead")
@@ -70,6 +72,7 @@ func change_weapon(new_weapon_index : int):
 		current_weapon = weapons[current_slot]
 		current_weapon.set_active()
 		emit_signal("ammo_changed", weapons[current_slot].ammo)
+		emit_signal("weapon_changed", weapons[current_slot].max_ammo)
 
 func add_ammo(pickup : Pickup):
 	weapons[pickup.pickup_type].add_ammo(pickup.amount, pickup)
