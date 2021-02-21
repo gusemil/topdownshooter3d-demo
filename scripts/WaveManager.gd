@@ -68,7 +68,6 @@ func spawn_enemy(is_boss : bool = false):
 		var direction = rng.randi_range(0,3)
 		var spawn_point : Vector3
 
-		#print("DIRECTION: ", direction)
 		if(direction == 0):
 			spawn_point = Vector3(rng.randi_range(-47,47),0,rng.randi_range(-47,-40))
 		elif(direction == 1):
@@ -79,14 +78,12 @@ func spawn_enemy(is_boss : bool = false):
 			spawn_point = Vector3(rng.randi_range(40,47),0,rng.randi_range(-47,47))
 
 		var ranged_choice = rng.randi_range(0,ranged_enemy_chance)
-		#print(enemy_choice)
 		var enemy_instance
 
 		var boss_integer_mod = 0
 
 		if is_boss:
 			boss_integer_mod += 2
-			print("BOSS IS TRUE", boss_integer_mod)
 
 		if ranged_choice == ranged_enemy_chance:
 			enemy_instance = enemy_prefabs[ENEMIES.RANGED + boss_integer_mod].instance()
@@ -111,8 +108,6 @@ func spawn_enemy(is_boss : bool = false):
 
 		if enemies_spawned >= enemies_per_wave:
 			pause_spawning()
-		
-		print("ENEMIES_SPAWNED: ", enemies_spawned)
 
 func pause_spawning():
 	if wave_count > 2 and !has_boss_spawned:
@@ -128,7 +123,6 @@ func stop_spawning():
 	spawn_timer.stop()
 
 func start_spawning():
-	print("START SPAWNING")
 	spawning = true
 	has_boss_spawned = false
 	spawn_timer.set_paused(false)

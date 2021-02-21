@@ -14,19 +14,18 @@ func set_bodies_to_exclude(_bodies_to_exclude: Array):
 	bodies_to_exclude = _bodies_to_exclude
 
 func fire():
-	var space_state = get_world().get_direct_space_state() #ottaa fyysisen tilan jossa ammutaan
+	var space_state = get_world().get_direct_space_state() #take physical space where shot
 	var our_pos = global_transform.origin
 	var result = space_state.intersect_ray(our_pos, our_pos - global_transform.basis.z * distance, 
-		bodies_to_exclude, 1 + 32, true, true) # 32 = enemy hitbox layer
+		bodies_to_exclude, 1 + 32, true, true) # 1 = environment, 32 = enemy hitbox layer
 	if result and result.collider.has_method("take_damage"):
 		result.collider.take_damage(damage)
-		#print(result.collider.name)
 	elif result:
 		var hit_effect_inst = hit_effect.instance()
 		get_tree().get_root().add_child(hit_effect_inst)
 		hit_effect_inst.global_transform.origin = result.position
 		
-		if result.normal.angle_to(Vector3.UP) < 0.00005: #pakko heittää joku arvo floatille, == ei ole hyvä
+		if result.normal.angle_to(Vector3.UP) < 0.00005: #a magic number for a very small value
 			return
 		if result.normal.angle_to(Vector3.DOWN) < 0.00005:
 			hit_effect_inst.rotate(Vector3.RIGHT, PI)

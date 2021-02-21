@@ -51,9 +51,6 @@ func init(_fire_point: Spatial, _collision_bodies_to_ignore: Array):
 	current_slot = 0
 	current_weapon.set_active()
 
-	print($Weapons.get_child_count())
-	print(current_weapon)
-	
 	current_weapon = weapons[current_slot]
 	
 	player_number = player.player_number
@@ -74,8 +71,6 @@ func shoot(attack_input_just_pressed: bool, attack_input_held: bool):
 
 func change_weapon(new_weapon_index : int):
 	if !is_player_dead:
-		#if new_weapon_index != current_slot:
-		#print("Current weapon: ", current_slot, " new weapon: ", new_weapon_index)
 		current_weapon.set_inactive()
 		current_slot = new_weapon_index
 		current_weapon = weapons[current_slot]
@@ -90,7 +85,6 @@ func add_ammo(pickup : Pickup):
 func add_bomb(pickup : Pickup):
 	if bombs + pickup.amount <= max_bombs:
 		bombs += 1
-		print("BOMB AMOUNT: ", bombs)
 		sound_manager.play_sound(1,12)
 		pickup.queue_free()
 		player.get_node("CanvasLayer").show_ammo_hud("Bomb")
@@ -135,7 +129,6 @@ func toggle_player_death():
 		is_player_dead = false
 
 func activate_bomb():
-	print("ACTIVATe BOMB!", bombs)
 	bombs -= 1
 	var enemies = get_tree().get_nodes_in_group("enemy")
 	for enemy in enemies:

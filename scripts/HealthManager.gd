@@ -15,7 +15,6 @@ signal health_changed
 signal armor_changed
 signal health_damage
 signal armor_damage
-#signal gibbed
 
 var blood_spray_prefab = preload("res://scenes/BloodSpray.tscn")
 onready var armor_sparks_prefab = preload("res://scenes/BulletHitEffect.tscn")
@@ -53,10 +52,7 @@ func take_damage(dmg : int):
 		emit_signal("health_damage")
 
 		if current_health <= 0:
-			#emit_signal("gibbed")
-			emit_signal("dead") #connectataan mm. pelaajan death funktioon
-		#elif(current_health <= 0):
-			#emit_signal("dead")
+			emit_signal("dead")
 		else:
 			emit_signal("take_damage")
 
@@ -75,7 +71,6 @@ func spawn_particles(prefab, dmg : int, offset : Vector3, amount_modifier = 2, l
 		particles.emitting = true
 		if prefab_instance.has_method("infinite_loop"):
 			prefab_instance.infinite_loop()
-	#print(particles.name)
 	particles.set_amount(dmg * amount_modifier)
 	get_tree().get_root().add_child(prefab_instance)
 	prefab_instance.global_transform.origin = global_transform.origin + offset

@@ -20,16 +20,14 @@ var projectile_layer : int
 
 func _ready():
 	if projectile_type == PROJECTILE_TYPE.FIREBALL:
-		projectile_prefab = load("res://scenes/Projectile.tscn") #Ei voi käyttää preload mitenkään. Preload suoritetaan scriptin compilen aikana (ennen exportteja)
+		projectile_prefab = load("res://scenes/Projectile.tscn") #Can't use preload. Preload is done during script compile time (before exports)
 	elif projectile_type == PROJECTILE_TYPE.ROCKET:
 		projectile_prefab = load("res://scenes/Rocket_Projectile.tscn")
-		#print("TODO ROCKET")
 
 	for spawner in spawner_parent.get_children():
 		projectile_spawners.push_back(spawner)
 
 func set_bodies_to_exclude(_bodies_to_exclude: Array):
-	#print("Projectile spawner bodies to exclude: ", _bodies_to_exclude)
 	bodies_to_exclude = _bodies_to_exclude
 	
 func fire_projectile():
@@ -41,5 +39,3 @@ func fire_projectile():
 	projectile_instance.set_projectile_speed(projectile_speed)
 	get_tree().get_root().add_child(projectile_instance)
 	projectile_instance.global_transform = global_transform
-
-	#print("Excluded bodies: ", bodies_to_exclude)

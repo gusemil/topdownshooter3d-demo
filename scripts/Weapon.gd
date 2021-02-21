@@ -112,17 +112,14 @@ func set_inactive():
 	hide()
 
 func show_muzzle_flash():
-	#print("SHOW FLASH")
 	muzzle_flash_object.show()
 	muzzle_flash_timer.start()
 
 func hide_muzzle_flash():
-	#print("HIDE FLASH")
 	muzzle_flash_object.hide()
 	muzzle_flash_timer.stop()
 
 func shoot_projectile():
-	#print("DAMAGEMOD: ", weapon_manager.powerup_damage_modifier)
 	var start_transform = projectile_spawners_base.global_transform
 	projectile_spawners_base.global_transform = fire_point.global_transform
 	for projectile_spawner in projectile_spawners:
@@ -138,7 +135,6 @@ func add_ammo(amount : int, pickup : Pickup = null):
 		else:
 			ammo = max_ammo
 		player.get_node("CanvasLayer").show_ammo_hud(name + " Ammo")
-		print("Weapon: ", name, " ammo amount: ", ammo)
 
 		if pickup != null:
 			if pickup.pickup_type == pickup.PICKUP_TYPES.AMMO_MACHINE_GUN:

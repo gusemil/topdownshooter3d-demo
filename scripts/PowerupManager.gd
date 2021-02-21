@@ -8,9 +8,6 @@ func quad_damage(powerup : Powerup):
 	if !weapon_manager.is_quad_powerup_initialized:
 		weapon_manager.init_quad_powerup(powerup)
 	weapon_manager.apply_quad_damage(powerup)
-	#weapon_manager.is_quad_damage_on = true
-	#weapon_manager.powerup_damage_modifier = 4
-
 func speed_boost(powerup : Powerup):
 	if !player.is_speed_powerup_initialized:
 		player.init_speed_powerup(powerup)

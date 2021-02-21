@@ -77,7 +77,7 @@ func _ready():
 		cursor.set_as_toplevel(true)
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	weapon_manager.init($WeaponManager/FirePoint, [self]) #exclude player from bullet collisions
-	health_manager.connect("dead", self, "death") #Kun healthmanagerin dead emitataan niin pelaajan death funktio aktivoituu
+	health_manager.connect("dead", self, "death")
 	health_manager.connect("armor_damage", self, "play_armor_damage_sound")
 	health_manager.connect("health_damage", self, "play_health_damage_sound")
 
@@ -281,7 +281,6 @@ func start_resurrection_timer():
 	resurrection_timer.start()
 
 func stop_resurrection_timer():
-	print("RESURRECTION TIMER STOPPED: ", self.name)
 	resurrection_timer.set_paused(true)
 
 func get_resurrection_time():

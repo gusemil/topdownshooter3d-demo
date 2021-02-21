@@ -65,7 +65,6 @@ func setup_coop_play():
 
 func game_over():
 	is_game_over = true
-	#print("GAME OVER")
 	emit_signal("signal_game_over")
 	pause_canvas_node.show()
 	pause_canvas_node.get_node("PauseLabel").hide()
@@ -74,7 +73,6 @@ func game_over():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func check_if_game_over():
-	#print("CHECK IF GAME OVER")
 	if !is_coop:
 		game_over()
 	elif players[0].dead and players[1].dead:

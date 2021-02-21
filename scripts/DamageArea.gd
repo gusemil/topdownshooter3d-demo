@@ -1,7 +1,7 @@
 extends Area
 
 var bodies_to_exclude = []
-var damage = 1 #default unmodified damage
+var damage = 1
 
 func set_damage(_damage: int):
 	damage = _damage

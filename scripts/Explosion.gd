@@ -19,7 +19,7 @@ func explode():
 	physics_query.collision_mask = mask
 	
 	var space_state = get_world().get_direct_space_state()
-	var results = space_state.intersect_shape(physics_query, 32) #intersect ray mutta shape, 32 on max results oletuksena, voidaan muuttaa
+	var results = space_state.intersect_shape(physics_query, 32)
 
 	for data in results:
 		if data.collider.has_method("take_damage"):
