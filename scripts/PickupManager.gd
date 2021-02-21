@@ -21,9 +21,9 @@ func on_pickup(pickup):
 		elif pickup.pickup_type == pickup.PICKUP_TYPES.ARMOR:
 			health_manager.gain_armor(pickup)
 		elif pickup.pickup_type == pickup.PICKUP_TYPES.BOSS:
-			weapon_manager.add_ammo_boss(0,200)
-			weapon_manager.add_ammo_boss(1,200)
-			weapon_manager.add_ammo_boss(2,200)
+			weapon_manager.add_ammo_boss(0,300)
+			weapon_manager.add_ammo_boss(1,300)
+			weapon_manager.add_ammo_boss(2,300)
 			health_manager.gain_health(pickup)
 			health_manager.gain_armor(pickup)
 			soundmanager.play_sound(1,11)

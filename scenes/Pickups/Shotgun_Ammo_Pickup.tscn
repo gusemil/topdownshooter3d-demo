@@ -5,7 +5,7 @@
 [ext_resource path="res://graphics/textures/shotgun2.tex" type="Texture" id=3]
 [ext_resource path="res://graphics/psx_shaders/psx_unlit.shader" type="Shader" id=4]
 
-[sub_resource type="ShaderMaterial" id=9]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 4 )
 shader_param/precision_multiplier = 7.0
 shader_param/modulate_color = Color( 1, 1, 1, 1 )
@@ -20,7 +20,7 @@ shader_param/max_fog_distance = 40.0
 shader_param/uv_pan_velocity = Vector2( 0, 0 )
 shader_param/albedoTex = ExtResource( 2 )
 
-[sub_resource type="ShaderMaterial" id=10]
+[sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 4 )
 shader_param/precision_multiplier = 7.0
 shader_param/modulate_color = Color( 1, 1, 1, 1 )
@@ -35,7 +35,7 @@ shader_param/max_fog_distance = 40.0
 shader_param/uv_pan_velocity = Vector2( 0, 0 )
 shader_param/albedoTex = ExtResource( 3 )
 
-[sub_resource type="ArrayMesh" id=7]
+[sub_resource type="ArrayMesh" id=3]
 resource_name = "ShotgunAmmo"
 surfaces/0 = {
 "aabb": AABB( -0.121429, -0.000212099, -0.0405083, 0.248573, 0.0306802, 0.0788025 ),
@@ -44,7 +44,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 225,
-"material": SubResource( 9 ),
+"material": SubResource( 1 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 165
@@ -56,32 +56,32 @@ surfaces/1 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 135,
-"material": SubResource( 10 ),
+"material": SubResource( 2 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 105
 }
 
-[sub_resource type="CubeMesh" id=8]
+[sub_resource type="CubeMesh" id=4]
 
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="SpatialMaterial" id=5]
 flags_unshaded = true
 albedo_color = Color( 1, 1, 0, 1 )
 
 [node name="Shotgun_Ammo_Pickup" instance=ExtResource( 1 )]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 0, 0, 0 )
 pickup_type = 1
-amount = 40
+amount = 60
 
 [node name="shotgunammo" type="Spatial" parent="Graphics" index="0"]
 transform = Transform( 7, 0, 0, 0, 7, 0, 0, 0, 7, 0, -0.464231, 0.0531265 )
 
 [node name="ShotgunAmmo" type="MeshInstance" parent="Graphics/shotgunammo" index="0"]
-mesh = SubResource( 7 )
+mesh = SubResource( 3 )
 material/0 = null
 material/1 = null
 
 [node name="MeshInstance" parent="Graphics" index="1"]
 visible = false
-mesh = SubResource( 8 )
-material/0 = SubResource( 3 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )

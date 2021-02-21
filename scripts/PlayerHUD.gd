@@ -39,7 +39,7 @@ func update_bomb(amount):
 	update_hud()
 
 func update_hud():
-	text = "Player " + player_number + "\nHealth: " + str(health) + "\nArmor: " + str(armor) + "\nAmmo: " + str(ammo) + "/" + str(max_ammo) +"\nBombs: " + str(bombs)
+	text = "Player " + player_number + "\nHealth: " + str(health) + "\nArmor: " + str(armor) + "\nAmmo: " + str(ammo) + "/" + str(max_ammo) +"\nBombs: " + str(bombs) + "/3"
 
 #func set_player_2_position():
 #	self.margin_left = 530

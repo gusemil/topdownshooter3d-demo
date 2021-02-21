@@ -2,7 +2,7 @@ extends Node
 
 const pickup_drop_chance = 3
 const powerup_drop_chance = 2
-const boss_pickup_drop_chance = 2
+const boss_pickup_drop_chance = 1
 
 var ammo_machinegun_prefab = preload("res://scenes/Pickups/Machinegun_Ammo_Pickup.tscn")
 var ammo_shotgun_prefab = preload("res://scenes/Pickups/Shotgun_Ammo_Pickup.tscn")

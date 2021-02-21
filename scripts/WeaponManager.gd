@@ -98,7 +98,7 @@ func add_bomb(pickup : Pickup):
 
 func add_ammo_boss(weapon_index : int, amount : int):
 	weapons[weapon_index].add_ammo(amount)
-	emit_signal("ammo_changed", weapons[weapon_index].ammo)
+	emit_signal("ammo_changed", weapons[current_slot].ammo)
 
 func get_powerup_damage_mod():
 	return powerup_damage_modifier
@@ -140,7 +140,7 @@ func activate_bomb():
 	var enemies = get_tree().get_nodes_in_group("enemy")
 	for enemy in enemies:
 		if !enemy.is_dead:
-			enemy.get_node("HealthManager").take_damage(enemy.health_manager.max_health)
+			enemy.queue_free()
 			enemy.get_node("HealthManager").bomb_effect()
 
 	emit_signal("bombs_changed", bombs)

@@ -244,18 +244,8 @@ material = ExtResource( 17 )
 [node name="CollisionShape" type="CollisionShape" parent="Environment/CSGMesh3/StaticBody"]
 shape = SubResource( 9 )
 
-[node name="CSGMesh4" type="CSGMesh" parent="Environment"]
-transform = Transform( -8.08952e-06, 0, 1, 0, 3.75747, 0, -49.6531, 0, -1.62921e-07, -49, 4.1333, 2.2408 )
-mesh = SubResource( 8 )
-material = ExtResource( 17 )
-
-[node name="StaticBody" type="StaticBody" parent="Environment/CSGMesh4"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Environment/CSGMesh4/StaticBody"]
-shape = SubResource( 9 )
-
 [node name="CSGMesh5" type="CSGMesh" parent="Environment"]
-transform = Transform( -8.08952e-06, 0, 1, 0, 3.75747, 0, -49.6531, 0, -1.62921e-07, -49, 4.1333, 2.2408 )
+transform = Transform( -8.08952e-06, 0, 1, 0, 3.75747, 0, -49.6531, 0, -1.62921e-07, -49, 4.1333, 0.2408 )
 mesh = SubResource( 8 )
 material = ExtResource( 17 )
 

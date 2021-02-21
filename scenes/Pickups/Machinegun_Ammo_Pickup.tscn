@@ -7,7 +7,7 @@
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
 shader_param/precision_multiplier = 7.0
-shader_param/modulate_color = Color( 0.968627, 0.72549, 0.203922, 1 )
+shader_param/modulate_color = Color( 0.968627, 0.6, 0.203922, 1 )
 shader_param/uv_scale = Vector2( 1, 1 )
 shader_param/uv_offset = Vector2( 0, 0 )
 shader_param/color_depth = 15
@@ -41,7 +41,7 @@ albedo_color = Color( 1, 0.631373, 0, 1 )
 
 [node name="Machinegun_Ammo_Pickup" instance=ExtResource( 1 )]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0 )
-amount = 100
+amount = 150
 
 [node name="machinegunammo" type="Spatial" parent="Graphics" index="0"]
 transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, -1.05611, 0 )

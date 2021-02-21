@@ -7023,7 +7023,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -1 )
 visible = false
 script = ExtResource( 4 )
 automatic_fire = true
-max_ammo = 200
+max_ammo = 300
 
 [node name="MachinegunGraphics" type="Spatial" parent="WeaponManager/Weapons/MachineGun"]
 transform = Transform( -2.5, 0, -9.73536e-07, 0, 2.5, 0, 9.73536e-07, 0, -2.5, 0.310849, 0.573811, -0.477798 )
@@ -7053,7 +7053,7 @@ script = ExtResource( 4 )
 automatic_fire = true
 damage = 20
 ammo = 30
-max_ammo = 90
+max_ammo = 120
 fire_rate = 0.5
 
 [node name="ShotgunGraphics" type="Spatial" parent="WeaponManager/Weapons/Shotgun"]
