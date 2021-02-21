@@ -17,6 +17,8 @@ var powerup_speed_prefab = preload("res://scenes/Pickups/Powerup_Speed_Boost.tsc
 
 var boss_pickup_prefab = preload("res://scenes/Pickups/Boss_Pickup.tscn")
 
+var bomb_pickup_prefab = preload("res://scenes/Pickups/Bomb_Pickup.tscn")
+
 var rng = RandomNumberGenerator.new()
 var pickup_prefabs = []
 var powerup_prefabs = []
@@ -30,6 +32,7 @@ func _ready():
 
 	pickup_prefabs.push_back(health_pickup_prefab)
 	pickup_prefabs.push_back(armor_pickup_prefab)
+	pickup_prefabs.push_back(bomb_pickup_prefab)
 
 	powerup_prefabs.push_back(powerup_quad_prefab)
 	powerup_prefabs.push_back(powerup_undying_prefab)

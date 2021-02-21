@@ -26,6 +26,8 @@ func on_pickup(pickup):
 			health_manager.gain_armor(pickup)
 			soundmanager.play_sound(1,11)
 			pickup.queue_free()
+		elif pickup.pickup_type == pickup.PICKUP_TYPES.BOMB:
+			weapon_manager.add_bomb(pickup)
 	elif pickup is Powerup:
 		if pickup.powerup_type == pickup.POWERUP_TYPES.QUAD_DAMAGE:
 			powerup_manager.quad_damage(pickup)

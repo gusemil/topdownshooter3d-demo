@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/PickupBomb.wav-c282faf06631053ba33ebc1bcf2402bb.sample"
+
+[deps]
+
+source_file="res://audio/sounds/PickupBomb.wav"
+dest_files=[ "res://.import/PickupBomb.wav-c282faf06631053ba33ebc1bcf2402bb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

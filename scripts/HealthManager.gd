@@ -17,6 +17,7 @@ signal armor_damage
 
 var blood_spray_prefab = preload("res://scenes/BloodSpray.tscn")
 onready var armor_sparks_prefab = preload("res://scenes/BulletHitEffect.tscn")
+onready var bomb_effect_prefab = preload("res://scenes/BombEffect.tscn")
 
 #Sounds
 onready var soundmanager = get_tree().get_root().get_node("World/NonPositionalSoundManager")
@@ -60,6 +61,9 @@ func take_damage(dmg : int):
 		emit_signal("health_changed", current_health)
 		print("Object: ", name , " damage taken: ", dmg , " current_health: ", current_health)
 		spawn_particles(blood_spray_prefab,dmg, Vector3(0,2,0))
+
+func bomb_effect():
+	spawn_particles(bomb_effect_prefab, 250, Vector3(0,2,0))
 
 func spawn_particles(prefab, dmg : int, offset : Vector3, amount_modifier = 2, looping : bool = false):
 	var prefab_instance = prefab.instance()

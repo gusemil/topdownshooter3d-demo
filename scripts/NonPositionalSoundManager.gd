@@ -4,6 +4,7 @@ extends Node
 onready var gun_player : AudioStreamPlayer = $GunPlayer
 onready var pickup_player : AudioStreamPlayer = $PickupPlayer
 onready var player_damage_player : AudioStreamPlayer = $PlayerDamagePlayer
+onready var bomb_player : AudioStreamPlayer = $BombPlayer
 
 var player_arrays = []
 
@@ -12,11 +13,15 @@ var sound_arrays = []
 var gun_sounds = []
 var pickup_sounds = []
 var player_damage_sounds = []
+var bomb_sounds = []
 
 #Guns
 onready var gun_sound0 : String = "res://audio/sounds/gun_machinegun_auto_heavy_shot_01.wav"
 onready var gun_sound1 : String = "res://audio/sounds/gun_shotgun_shot_02.wav"
 onready var gun_sound2 : String = "res://audio/sounds/gun_grenade_launcher_shot_01.wav"
+
+#Bomb
+onready var bomb_sound0 : String = "res://audio/sounds/BombActivate.wav"
 
 #Pickups
 onready var pickup_sound0 : String = "res://audio/sounds/pickup_machinegun.wav"
@@ -31,6 +36,7 @@ onready var pickup_sound8 : String = "res://audio/sounds/Quad_Off.wav"
 onready var pickup_sound9 : String = "res://audio/sounds/UndyingOff.wav"
 onready var pickup_sound10 : String = "res://audio/sounds/DashOff.wav"
 onready var pickup_sound11 : String = "res://audio/sounds/BossPickup.wav"
+onready var pickup_sound12 : String = "res://audio/sounds/PickupBomb.wav"
 
 #Player Damage sounds
 onready var player_damage_sound0 : String = "res://audio/sounds/player_damage.wav"
@@ -45,10 +51,13 @@ func _ready():
 	player_arrays.push_back(gun_player)
 	player_arrays.push_back(pickup_player)
 	player_arrays.push_back(player_damage_player)
+	player_arrays.push_back(bomb_player)
 	
 	gun_sounds.push_back(gun_sound0)
 	gun_sounds.push_back(gun_sound1)
 	gun_sounds.push_back(gun_sound2)
+	
+	bomb_sounds.push_back(bomb_sound0)
 	
 	pickup_sounds.push_back(pickup_sound0)
 	pickup_sounds.push_back(pickup_sound1)
@@ -62,6 +71,7 @@ func _ready():
 	pickup_sounds.push_back(pickup_sound9)
 	pickup_sounds.push_back(pickup_sound10)
 	pickup_sounds.push_back(pickup_sound11)
+	pickup_sounds.push_back(pickup_sound12)
 	
 	player_damage_sounds.push_back(player_damage_sound0)
 	player_damage_sounds.push_back(player_damage_sound1)
@@ -70,6 +80,7 @@ func _ready():
 	sound_arrays.push_back(gun_sounds)
 	sound_arrays.push_back(pickup_sounds)
 	sound_arrays.push_back(player_damage_sounds)
+	sound_arrays.push_back(bomb_sounds)
 	
 func play_sound(array_index, sound_index : int, pitch_scale = 1.0):
 	player_arrays[array_index].stream = load(sound_arrays[array_index][sound_index])

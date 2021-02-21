@@ -1,16 +1,21 @@
 extends Spatial
 
+#Essentials
 enum WEAPON_SLOTS {MACHINE_GUN, SHOTGUN, ROCKET_LAUNCHER}
-
 onready var weapons = $Weapons.get_children()
-
 var current_slot = 0
 var current_weapon = null
 var fire_point : Spatial
 var collision_bodies_to_ignore : Array = []
 
+#Bombs
+var bombs : int = 0
+var max_bombs : int = 3
+
+#Signals
 signal ammo_changed
 signal weapon_changed
+signal bombs_changed
 
 #Quad damage
 onready var quad_powerup_effect : Particles = $QuadPowerUpEffect
@@ -34,6 +39,10 @@ func _process(delta):
 		change_weapon(WEAPON_SLOTS.SHOTGUN)
 	elif Input.is_action_just_pressed("weapon3" + player_number) and current_slot != WEAPON_SLOTS.ROCKET_LAUNCHER:
 		change_weapon(WEAPON_SLOTS.ROCKET_LAUNCHER)
+
+	if Input.is_action_just_released("bomb1") and bombs > 0:
+		activate_bomb()
+
 
 func init(_fire_point: Spatial, _collision_bodies_to_ignore: Array):
 	fire_point = _fire_point
@@ -78,6 +87,14 @@ func add_ammo(pickup : Pickup):
 	weapons[pickup.pickup_type].add_ammo(pickup.amount, pickup)
 	emit_signal("ammo_changed", weapons[pickup.pickup_type].ammo)
 
+func add_bomb(pickup : Pickup):
+	if bombs + pickup.amount <= max_bombs:
+		bombs += 1
+		print("BOMB AMOUNT: ", bombs)
+		sound_manager.play_sound(1,12)
+		pickup.queue_free()
+		emit_signal("bombs_changed", bombs)
+
 func add_ammo_boss(weapon_index : int, amount : int):
 	weapons[weapon_index].add_ammo(amount)
 	emit_signal("ammo_changed", weapons[weapon_index].ammo)
@@ -114,3 +131,17 @@ func toggle_player_death():
 		is_player_dead = true
 	else:
 		is_player_dead = false
+
+func activate_bomb():
+	print("ACTIVATe BOMB!", bombs)
+	bombs -= 1
+	var enemies = get_tree().get_nodes_in_group("enemy")
+	for enemy in enemies:
+		if !enemy.is_dead:
+			enemy.get_node("HealthManager").take_damage(enemy.health_manager.max_health)
+			enemy.get_node("HealthManager").bomb_effect()
+
+	emit_signal("bombs_changed", bombs)
+	sound_manager.play_sound(3,0)
+
+	player.get_node("HealthManager").bomb_effect()
