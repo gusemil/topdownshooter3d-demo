@@ -115,7 +115,7 @@ func spawn_enemy(is_boss : bool = false):
 		print("ENEMIES_SPAWNED: ", enemies_spawned)
 
 func pause_spawning():
-	if wave_count > 3 and !has_boss_spawned:
+	if wave_count > 2 and !has_boss_spawned:
 		has_boss_spawned = true
 		spawn_enemy(true)
 	enemies_spawned = 0

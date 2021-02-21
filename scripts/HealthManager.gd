@@ -7,6 +7,8 @@ export var max_armor : int = 100
 export var starting_armor : int = 0
 onready var current_armor : int = starting_armor
 
+onready var player_canvas = get_node("../CanvasLayer")
+
 signal dead
 signal take_damage
 signal health_changed
@@ -86,6 +88,7 @@ func gain_health(pickup : Pickup):
 			current_health = max_health
 		print("hp: ", current_health)
 		soundmanager.play_sound(1,3)
+		player_canvas.show_ammo_hud("HEALTH")
 		emit_signal("health_changed", current_health)
 		pickup.queue_free()
 
@@ -97,6 +100,7 @@ func gain_armor(pickup : Pickup):
 			current_armor = max_armor
 		print("armor: ", current_armor)
 		soundmanager.play_sound(1,4)
+		player_canvas.show_ammo_hud("ARMOR")
 		emit_signal("armor_changed", current_armor)
 		pickup.queue_free()
 

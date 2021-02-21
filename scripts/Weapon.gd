@@ -2,6 +2,7 @@ extends Spatial
 
 #onready var animation_player = $AnimationPlayer
 onready var weapon_manager = get_node("../../")
+onready var player = weapon_manager.get_node("..")
 var bullet_spawners_base : Spatial
 var bullet_spawners : Array
 var projectile_spawners_base : Spatial
@@ -136,6 +137,7 @@ func add_ammo(amount : int, pickup : Pickup = null):
 			ammo += amount
 		else:
 			ammo = max_ammo
+		player.get_node("CanvasLayer").show_ammo_hud(name + " Ammo")
 		print("Weapon: ", name, " ammo amount: ", ammo)
 
 		if pickup != null:

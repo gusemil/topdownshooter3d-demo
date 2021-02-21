@@ -93,6 +93,7 @@ func add_bomb(pickup : Pickup):
 		print("BOMB AMOUNT: ", bombs)
 		sound_manager.play_sound(1,12)
 		pickup.queue_free()
+		player.get_node("CanvasLayer").show_ammo_hud("Bomb")
 		emit_signal("bombs_changed", bombs)
 
 func add_ammo_boss(weapon_index : int, amount : int):
@@ -117,6 +118,7 @@ func apply_quad_damage(powerup : Powerup):
 		quad_damage_timer.start()
 		sound_manager.play_sound(1,5)
 		quad_powerup_effect.emitting = true
+		player.get_node("CanvasLayer").show_pickup_hud("QUAD DAMAGE")
 		powerup.queue_free()
 
 func stop_quad_damage():

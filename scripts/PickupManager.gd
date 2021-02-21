@@ -7,6 +7,8 @@ onready var powerup_manager = get_node("../").get_node("PowerupManager")
 #Sounds
 onready var soundmanager = get_tree().get_root().get_node("World/NonPositionalSoundManager")
 
+onready var player_canvas_layer = get_node("../CanvasLayer")
+
 func _ready():
 	connect("area_entered", self, "on_pickup")
 	
@@ -25,6 +27,7 @@ func on_pickup(pickup):
 			health_manager.gain_health(pickup)
 			health_manager.gain_armor(pickup)
 			soundmanager.play_sound(1,11)
+			player_canvas_layer.show_pickup_hud("BOSS REFILL")
 			pickup.queue_free()
 		elif pickup.pickup_type == pickup.PICKUP_TYPES.BOMB:
 			weapon_manager.add_bomb(pickup)

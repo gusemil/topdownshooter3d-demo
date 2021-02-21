@@ -208,6 +208,7 @@ func init_speed_powerup(powerup : Powerup):
 		speed_boost_timer.connect("timeout", self, "stop_speed_boost")
 		add_child(speed_boost_timer)
 		is_speed_powerup_initialized = true
+		
 func apply_speed_boost(powerup : Powerup):
 	if !is_speed_boost_on:
 		speed *= 2
@@ -217,6 +218,7 @@ func apply_speed_boost(powerup : Powerup):
 		soundmanager.play_sound(1,7)
 		speed_powerup_effect.emitting = true
 		powerup.queue_free()
+		self.get_node("CanvasLayer").show_pickup_hud("SPEED BOOST")
 
 func stop_speed_boost():
 	is_speed_boost_on = false
@@ -233,6 +235,7 @@ func apply_invulnerability(powerup : Powerup):
 		soundmanager.play_sound(1,6)
 		powerup.queue_free()
 		undying_powerup_effect.show()
+		self.get_node("CanvasLayer").show_pickup_hud("UNDYING")
 
 func stop_invulnerability():
 	is_invulnerability_on = false
