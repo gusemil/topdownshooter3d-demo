@@ -39,10 +39,7 @@ func _input(event):
 func restart_game():
 	is_pause = false
 	Engine.time_scale = 1
-	var children = get_tree().get_root().get_children()
-	for child in children:
-		if child.name != "GlobalSceneManager":
-			child.queue_free()
+	remove_all_objects()
 	var temp_is_coop = is_coop
 	get_tree().reload_current_scene()
 
@@ -52,6 +49,7 @@ func exit_game():
 func quit_game():
 	Engine.time_scale = 1
 	is_pause = false
+	remove_all_objects()
 	get_tree().change_scene("res://scenes/MainMenu.tscn")
 
 
@@ -89,3 +87,9 @@ func toggle_pause():
 		is_pause = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		pause_canvas_node.hide()
+
+func remove_all_objects():
+	var children = get_tree().get_root().get_children()
+	for child in children:
+		if child.name != "GlobalSceneManager":
+			child.queue_free()
