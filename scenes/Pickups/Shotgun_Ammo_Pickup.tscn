@@ -20,13 +20,13 @@ shader_param/max_fog_distance = 40.0
 shader_param/uv_pan_velocity = Vector2( 0, 0 )
 shader_param/albedoTex = ExtResource( 2 )
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 4 )
 shader_param/precision_multiplier = 7.0
-shader_param/modulate_color = Color( 1, 1, 1, 1 )
+shader_param/modulate_color = Color( 1, 0.913725, 0, 1 )
 shader_param/uv_scale = Vector2( 1, 1 )
 shader_param/uv_offset = Vector2( 0, 0 )
-shader_param/color_depth = 15
+shader_param/color_depth = 50
 shader_param/dither_enabled = true
 shader_param/fog_enabled = false
 shader_param/fog_color = Color( 0.5, 0.7, 1, 1 )
@@ -56,7 +56,7 @@ surfaces/1 = {
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 135,
-"material": SubResource( 2 ),
+"material": SubResource( 6 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 105

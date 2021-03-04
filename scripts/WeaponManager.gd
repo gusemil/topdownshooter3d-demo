@@ -1,7 +1,7 @@
 extends Spatial
 
 #Essentials
-enum WEAPON_SLOTS {MACHINE_GUN, SHOTGUN, ROCKET_LAUNCHER, MINIGUN}
+enum WEAPON_SLOTS {MACHINE_GUN, SHOTGUN, ROCKET_LAUNCHER, MINIGUN, LIGHTNING_GUN}
 onready var weapons = $Weapons.get_children()
 var current_slot = 0
 var current_weapon = null
@@ -41,6 +41,8 @@ func _process(delta):
 		change_weapon(WEAPON_SLOTS.ROCKET_LAUNCHER)
 	elif Input.is_action_just_pressed("weapon4" + player_number) and current_slot != WEAPON_SLOTS.MINIGUN:
 		change_weapon(WEAPON_SLOTS.MINIGUN)
+	elif Input.is_action_just_pressed("weapon5" + player_number) and current_slot != WEAPON_SLOTS.LIGHTNING_GUN:
+		change_weapon(WEAPON_SLOTS.LIGHTNING_GUN)
 
 	if Input.is_action_just_released("bomb1") and bombs > 0:
 		activate_bomb()
@@ -86,9 +88,15 @@ func add_ammo(pickup : Pickup):
 		if current_slot == 3:
 			emit_signal("ammo_changed", weapons[3].ammo)
 	else:
-		weapons[pickup.pickup_type].add_ammo(pickup.amount, pickup)
-		if current_slot == pickup.pickup_type:
-			emit_signal("ammo_changed", weapons[pickup.pickup_type].ammo)
+		if pickup.pickup_type < 3:
+			weapons[pickup.pickup_type].add_ammo(pickup.amount, pickup)
+			if current_slot == pickup.pickup_type:
+				emit_signal("ammo_changed", weapons[pickup.pickup_type].ammo)
+		else:
+			weapons[pickup.pickup_type+1].add_ammo(pickup.amount, pickup)
+			if current_slot == pickup.pickup_type +1:
+				emit_signal("ammo_changed", weapons[pickup.pickup_type].ammo)
+
 
 func add_bomb(pickup : Pickup):
 	if bombs + pickup.amount <= max_bombs:

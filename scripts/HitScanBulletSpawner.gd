@@ -1,11 +1,22 @@
 extends Spatial
 
-var hit_effect = preload("res://scenes/BulletHitEffect.tscn")
+onready var bullet_hit_effect_prefab = preload("res://scenes/BulletHitEffect.tscn")
+onready var lightning_hit_effect_prefab = preload("res://scenes/LightningHitEffect.tscn")
+
+export var is_lightning_gun : bool = false
+
+var hit_effect
 
 export var distance = 10000
 var bodies_to_exclude = []
 var damage = 1 #add weapon damage to this
 var original_damage = damage
+
+func _ready():
+	if is_lightning_gun:
+		hit_effect = lightning_hit_effect_prefab
+	else:
+		hit_effect = bullet_hit_effect_prefab
 
 func set_damage(_damage: int):
 	damage = _damage

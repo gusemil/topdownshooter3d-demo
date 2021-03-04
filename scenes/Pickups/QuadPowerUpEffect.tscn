@@ -2,7 +2,7 @@
 
 [ext_resource path="res://graphics/psx_shaders/psx_unlit.shader" type="Shader" id=1]
 
-[sub_resource type="ShaderMaterial" id=8]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
 shader_param/precision_multiplier = 7.0
 shader_param/modulate_color = Color( 0.662745, 0, 1, 1 )
@@ -16,32 +16,32 @@ shader_param/min_fog_distance = 10.0
 shader_param/max_fog_distance = 40.0
 shader_param/uv_pan_velocity = Vector2( 0, 0 )
 
-[sub_resource type="Curve" id=4]
+[sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.7875 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=5]
-curve = SubResource( 4 )
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
 
-[sub_resource type="ParticlesMaterial" id=6]
+[sub_resource type="ParticlesMaterial" id=4]
 emission_shape = 1
 emission_sphere_radius = 1.0
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 10.0
 scale = 0.3
-scale_curve = SubResource( 5 )
+scale_curve = SubResource( 3 )
 
-[sub_resource type="SphereMesh" id=7]
+[sub_resource type="SphereMesh" id=5]
 radius = 0.5
 height = 1.0
 
 [node name="QuadPowerUpEffect" type="Particles"]
 transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 0, -1.61714, 0 )
-material_override = SubResource( 8 )
+material_override = SubResource( 1 )
 amount = 100
 lifetime = 0.5
 speed_scale = 1.5
 explosiveness = 0.2
 randomness = 1.0
-process_material = SubResource( 6 )
-draw_pass_1 = SubResource( 7 )
+process_material = SubResource( 4 )
+draw_pass_1 = SubResource( 5 )

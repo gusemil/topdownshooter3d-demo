@@ -14,7 +14,7 @@ func _ready():
 	
 func on_pickup(pickup):
 	if pickup is Pickup:
-		if pickup.pickup_type == pickup.PICKUP_TYPES.AMMO_MINIGUN || pickup.pickup_type == pickup.PICKUP_TYPES.AMMO_SHOTGUN ||pickup.pickup_type == pickup.PICKUP_TYPES.AMMO_ROCKET_LAUNCHER:
+		if pickup.pickup_type == pickup.PICKUP_TYPES.AMMO_MINIGUN || pickup.pickup_type == pickup.PICKUP_TYPES.AMMO_SHOTGUN || pickup.pickup_type == pickup.PICKUP_TYPES.AMMO_ROCKET_LAUNCHER || pickup.pickup_type == pickup.PICKUP_TYPES.AMMO_LIGHTNING_GUN:
 			weapon_manager.add_ammo(pickup)
 		elif pickup.pickup_type == pickup.PICKUP_TYPES.HEALTH:
 			health_manager.gain_health(pickup)
@@ -24,10 +24,11 @@ func on_pickup(pickup):
 			weapon_manager.add_ammo_boss(0,300)
 			weapon_manager.add_ammo_boss(1,300)
 			weapon_manager.add_ammo_boss(2,300)
+			weapon_manager.add_ammo_boss(3,300)
 			health_manager.gain_health(pickup)
 			health_manager.gain_armor(pickup)
 			soundmanager.play_sound(1,11)
-			player_canvas_layer.show_pickup_hud("BOSS REFILL")
+			player_canvas_layer.show_pickup_hud("BOSS PICKUP")
 			pickup.queue_free()
 		elif pickup.pickup_type == pickup.PICKUP_TYPES.BOMB:
 			weapon_manager.add_bomb(pickup)

@@ -43,7 +43,7 @@ shader_param/albedoTex = ExtResource( 4 )
 
 [node name="Armor_Pickup" instance=ExtResource( 1 )]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0 )
-pickup_type = 4
+pickup_type = 5
 amount = 10
 
 [node name="MeshInstance" parent="Graphics" index="0"]
