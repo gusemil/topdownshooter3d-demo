@@ -14,7 +14,7 @@ func _ready():
 	
 func on_pickup(pickup):
 	if pickup is Pickup:
-		if pickup.pickup_type == pickup.PICKUP_TYPES.AMMO_MACHINE_GUN || pickup.pickup_type == pickup.PICKUP_TYPES.AMMO_SHOTGUN ||pickup.pickup_type == pickup.PICKUP_TYPES.AMMO_ROCKET_LAUNCHER:
+		if pickup.pickup_type == pickup.PICKUP_TYPES.AMMO_MINIGUN || pickup.pickup_type == pickup.PICKUP_TYPES.AMMO_SHOTGUN ||pickup.pickup_type == pickup.PICKUP_TYPES.AMMO_ROCKET_LAUNCHER:
 			weapon_manager.add_ammo(pickup)
 		elif pickup.pickup_type == pickup.PICKUP_TYPES.HEALTH:
 			health_manager.gain_health(pickup)

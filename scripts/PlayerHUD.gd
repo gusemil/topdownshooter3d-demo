@@ -39,4 +39,9 @@ func update_bomb(amount):
 	update_hud()
 
 func update_hud():
-	text = "Player " + player_number + "\nHealth: " + str(health) + "\nArmor: " + str(armor) + "\nAmmo: " + str(ammo) + "/" + str(max_ammo) +"\nBombs: " + str(bombs) + "/3"
+	if weapon_manager != null:
+		if weapon_manager.current_slot == 0:
+			ammo = "INF"
+			max_ammo = "INF"
+
+		text = "Player " + player_number + "\nHealth: " + str(health) + "\nArmor: " + str(armor) + "\nAmmo: " + str(ammo) + "/" + str(max_ammo) +"\nBombs: " + str(bombs) + "/3"

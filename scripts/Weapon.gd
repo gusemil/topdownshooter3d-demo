@@ -102,6 +102,8 @@ func shoot(shoot_input_just_pressed: bool, shoot_input_held: bool):
 		soundmanager.play_sound(0,1,1.25)
 	elif self.name == "RocketLauncher":
 		soundmanager.play_sound(0,2)
+	elif self.name == "Minigun":
+		soundmanager.play_sound(0,0)
 	
 func finish_attack():
 	can_shoot = true
@@ -137,7 +139,7 @@ func add_ammo(amount : int, pickup : Pickup = null):
 		player.get_node("CanvasLayer").show_ammo_hud(name + " Ammo")
 
 		if pickup != null:
-			if pickup.pickup_type == pickup.PICKUP_TYPES.AMMO_MACHINE_GUN:
+			if pickup.pickup_type == pickup.PICKUP_TYPES.AMMO_MINIGUN:
 				soundmanager.play_sound(1,0)
 			if pickup.pickup_type == pickup.PICKUP_TYPES.AMMO_SHOTGUN:
 				soundmanager.play_sound(1,1)
