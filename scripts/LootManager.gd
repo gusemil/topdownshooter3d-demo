@@ -14,6 +14,7 @@ var armor_pickup_prefab = preload("res://scenes/Pickups/Armor_Pickup.tscn")
 var powerup_quad_prefab = preload("res://scenes/Pickups/Powerup_Quad_Damage.tscn")
 var powerup_undying_prefab = preload("res://scenes/Pickups/Powerup_Undying.tscn")
 var powerup_speed_prefab = preload("res://scenes/Pickups/Powerup_Speed_Boost.tscn")
+var powerup_bullet_time_prefab = preload("res://scenes/Pickups/Powerup_BulletTime.tscn")
 
 var boss_pickup_prefab = preload("res://scenes/Pickups/Boss_Pickup.tscn")
 
@@ -37,6 +38,7 @@ func _ready():
 	powerup_prefabs.push_back(powerup_quad_prefab)
 	powerup_prefabs.push_back(powerup_undying_prefab)
 	powerup_prefabs.push_back(powerup_speed_prefab)
+	powerup_prefabs.push_back(powerup_bullet_time_prefab)
 
 func drop_pickup(enemy_position : Vector3, is_boss : bool = false):
 

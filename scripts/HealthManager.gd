@@ -34,18 +34,13 @@ func _ready():
 func take_damage(dmg : int):
 	if current_armor > 0:
 		var armor_before_dmg = current_armor
-		print("DMG BEFORE ARMOR: ", dmg)
 		current_armor -= dmg
 		dmg -= armor_before_dmg
 		if current_armor < 0:
 			current_armor = 0
-		print("my armor", current_armor)
 		emit_signal("armor_damage")
 		spawn_particles(armor_sparks_prefab,dmg, Vector3(0,2,0))
 		emit_signal("armor_changed", current_armor)
-
-		print("FINAL DAMAGE: ", dmg)
-
 
 	if current_armor <= 0 and dmg > 0:
 		current_health -= dmg
@@ -57,7 +52,6 @@ func take_damage(dmg : int):
 			emit_signal("take_damage")
 
 		emit_signal("health_changed", current_health)
-		print("Object: ", name , " damage taken: ", dmg , " current_health: ", current_health)
 		spawn_particles(blood_spray_prefab,dmg, Vector3(0,2,0))
 
 func bomb_effect():
@@ -81,7 +75,6 @@ func gain_health(pickup : Pickup):
 			current_health += pickup.amount
 		else:
 			current_health = max_health
-		print("hp: ", current_health)
 		soundmanager.play_sound(1,3)
 		player_canvas.show_ammo_hud("HEALTH")
 		emit_signal("health_changed", current_health)
@@ -93,7 +86,6 @@ func gain_armor(pickup : Pickup):
 			current_armor += pickup.amount
 		else:
 			current_armor = max_armor
-		print("armor: ", current_armor)
 		soundmanager.play_sound(1,4)
 		player_canvas.show_ammo_hud("ARMOR")
 		emit_signal("armor_changed", current_armor)

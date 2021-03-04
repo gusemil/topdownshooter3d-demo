@@ -20,5 +20,6 @@ func undying(powerup : Powerup):
 	player.apply_invulnerability(powerup)
 
 func bullet_time(powerup : Powerup):
-	#game_manager.set_timescale(0.5)
-	print("BULLET TIME")
+	if !game_manager.is_bullet_time_powerup_initialized:
+		game_manager.init_bullet_time_powerup(powerup)
+	game_manager.apply_bullet_time(powerup)

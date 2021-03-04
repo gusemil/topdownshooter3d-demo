@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/bullet_time_start.wav-72e61bfc81d2b8acab82c73a74a369a5.sample"
+
+[deps]
+
+source_file="res://audio/sounds/bullet_time_start.wav"
+dest_files=[ "res://.import/bullet_time_start.wav-72e61bfc81d2b8acab82c73a74a369a5.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -40,6 +40,8 @@ var has_boss_spawned : bool = false
 
 onready var game_manager = get_tree().get_root().get_node("World/GameManager")
 
+signal wave_count_changed
+
 func _ready():
 	rng.randomize()
 	navmesh = get_tree().get_root().get_node("World/Navigation")
@@ -132,6 +134,7 @@ func increase_difficulty():
 	enemies_per_wave += 10
 	wave_delay_time += 0.5
 	wave_count += 1
+	emit_signal("wave_count_changed")
 	enemy_move_speed_bonus += 2
 	enemy_projectile_speed_bonus += 1
 	

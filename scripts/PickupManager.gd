@@ -38,3 +38,5 @@ func on_pickup(pickup):
 			powerup_manager.undying(pickup)
 		elif pickup.powerup_type == pickup.POWERUP_TYPES.SPEED_BOOST:
 			powerup_manager.speed_boost(pickup)
+		elif pickup.powerup_type == pickup.POWERUP_TYPES.BULLET_TIME:
+			powerup_manager.bullet_time(pickup)
