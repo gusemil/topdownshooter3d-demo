@@ -3,6 +3,7 @@ extends Spatial
 onready var weapon_manager = get_node("../").get_node("WeaponManager")
 onready var health_manager = get_node("../").get_node("HealthManager")
 onready var player = get_node("../")
+onready var game_manager = get_tree().get_root().get_node("World/GameManager")
 
 func quad_damage(powerup : Powerup):
 	if !weapon_manager.is_quad_powerup_initialized:
@@ -17,3 +18,7 @@ func undying(powerup : Powerup):
 	if !player.is_undying_powerup_initialized:
 		player.init_undying_powerup(powerup)
 	player.apply_invulnerability(powerup)
+
+func bullet_time(powerup : Powerup):
+	#game_manager.set_timescale(0.5)
+	print("BULLET TIME")

@@ -6,8 +6,10 @@ var current_state = STATE.IDLE
 onready var animation_player = $Graphics/AnimationPlayer
 onready var health_manager = $HealthManager
 onready var loot_manager = get_tree().get_root().get_node("World/LootManager")
+onready var wave_manager = get_tree().get_root().get_node("World/WaveManager")
 var damage_area
 export var is_melee : bool
+export var score_value : int
 
 # Movement
 export var turn_speed_per_second = 360.0
@@ -157,6 +159,7 @@ func on_death():
 	loot_manager.drop_pickup(global_transform.origin, is_boss)
 	var random_death_sound = rng.randi_range(0,3)
 	play_sound(random_death_sound,1.5, 25.0)
+	game_manager.add_score(score_value * (wave_manager.wave_count+1))
 
 func can_see_player():
 	var direction_to_player 

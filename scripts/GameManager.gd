@@ -4,9 +4,12 @@ var control_node
 export var is_coop : bool = true
 var is_game_over : bool = false
 var players = []
+var score : int = 0
 onready var solo_scene_prefab = preload("res://scenes/Solo_Scene.tscn")
 onready var coop_scene_prefab = preload("res://scenes/Coop_Scene.tscn")
 onready var pause_canvas_node = $PauseCanvas/PauseNode
+onready var score_canvas = $ScoreCanvas
+onready var score_hud = score_canvas.get_node("ScoreLabel")
 
 var is_pause : bool = false
 
@@ -27,6 +30,8 @@ func _ready():
 	players = get_tree().get_nodes_in_group("player")
 	for player in players:
 		player.connect("player_death", self, "check_if_game_over")
+
+	add_score(0)
 
 func _input(event):
 	if Input.is_action_just_pressed("exit_game"):
@@ -52,7 +57,6 @@ func quit_game():
 	remove_all_objects()
 	get_tree().change_scene("res://scenes/MainMenu.tscn")
 
-
 func setup_solo_play():
 	var scene_instance = solo_scene_prefab.instance()
 	control_node.add_child(scene_instance)
@@ -67,8 +71,15 @@ func game_over():
 	pause_canvas_node.show()
 	pause_canvas_node.get_node("PauseLabel").hide()
 	pause_canvas_node.get_node("GameOverLabel").show()
+	score_hud.hide()
+	pause_canvas_node.get_node("GameOverLabel/ScoreLabelFinal").text = "Score: " + score as String
 	pause_canvas_node.get_node("Buttons/ContinueButton").hide()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+func add_score(amount : int):
+	score += amount
+	score_hud.text = "Score: " + score as String
+	emit_signal("score_changed")
 
 func check_if_game_over():
 	if !is_coop:
@@ -87,6 +98,9 @@ func toggle_pause():
 		is_pause = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		pause_canvas_node.hide()
+
+func set_time_scale(amount : float):
+	Engine.time_scale = amount
 
 func remove_all_objects():
 	var children = get_tree().get_root().get_children()

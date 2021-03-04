@@ -21,6 +21,7 @@ transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
 collision_layer = 2147483696
 collision_mask = 2147483665
 script = ExtResource( 5 )
+score_value = 200
 turn_speed_per_second = 180.0
 attack_range = 30.0
 always_face_towards_player_when_attacking = true

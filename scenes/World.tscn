@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://graphics/textures/concrete_cracked_2070_2531_Small.jpg" type="Texture" id=1]
 [ext_resource path="res://graphics/fonts/AmazDooMLeft.ttf" type="DynamicFontData" id=2]
@@ -7,12 +7,21 @@
 [ext_resource path="res://graphics/ui_graphics/buttonStock1.png" type="Texture" id=5]
 [ext_resource path="res://scripts/NonPositionalSoundManager.gd" type="Script" id=6]
 [ext_resource path="res://scripts/MusicManager.gd" type="Script" id=7]
+[ext_resource path="res://scenes/Pickups/Powerup_BulletTime.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scripts/LootManager.gd" type="Script" id=9]
 [ext_resource path="res://graphics/materials/walls.material" type="Material" id=17]
 [ext_resource path="res://graphics/textures/skybox.png" type="Texture" id=18]
 
+[sub_resource type="DynamicFont" id=14]
+size = 75
+font_data = ExtResource( 2 )
+
 [sub_resource type="DynamicFont" id=1]
 size = 200
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 100
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=2]
@@ -65,6 +74,22 @@ __meta__ = {
 script = ExtResource( 3 )
 is_coop = false
 
+[node name="ScoreCanvas" type="CanvasLayer" parent="GameManager"]
+
+[node name="ScoreLabel" type="Label" parent="GameManager/ScoreCanvas"]
+margin_left = 730.747
+margin_top = 3.7742
+margin_right = 1279.75
+margin_bottom = 203.774
+custom_fonts/font = SubResource( 14 )
+custom_colors/font_color = Color( 0.101961, 1, 0, 1 )
+text = "Score: 12345678910"
+align = 2
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="PauseCanvas" type="CanvasLayer" parent="GameManager"]
 
 [node name="PauseNode" type="Node2D" parent="GameManager/PauseCanvas"]
@@ -91,6 +116,21 @@ margin_bottom = 344.86
 custom_fonts/font = SubResource( 1 )
 text = "GAME OVER"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreLabelFinal" type="Label" parent="GameManager/PauseCanvas/PauseNode/GameOverLabel"]
+margin_left = -343.984
+margin_top = 170.863
+margin_right = 936.016
+margin_bottom = 370.863
+custom_fonts/font = SubResource( 13 )
+custom_colors/font_color = Color( 0.101961, 1, 0, 1 )
+text = "Score: 12345678910"
+align = 1
+valign = 1
+autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -268,6 +308,9 @@ shape = SubResource( 9 )
 
 [node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="Navigation"]
 navmesh = SubResource( 10 )
+
+[node name="Powerup_BulletTime" parent="Navigation" instance=ExtResource( 8 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 13, 2, 0 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 12 )
