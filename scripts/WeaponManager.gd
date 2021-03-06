@@ -44,6 +44,22 @@ func _process(delta):
 	elif Input.is_action_just_pressed("weapon5" + player_number) and current_slot != WEAPON_SLOTS.LIGHTNING_GUN:
 		change_weapon(WEAPON_SLOTS.LIGHTNING_GUN)
 
+	if Input.is_action_just_released("next_weapon" + player_number):
+		if current_slot +1 >= weapons.size():
+			current_slot = 0
+		else:
+			current_slot += 1
+
+		change_weapon(current_slot)
+
+	if Input.is_action_just_released("previous_weapon" + player_number):
+		if current_slot -1 <= 0:
+			current_slot = weapons.size() -1
+		else:
+			current_slot -= 1
+
+		change_weapon(current_slot)
+
 	if Input.is_action_just_released("bomb1") and bombs > 0:
 		activate_bomb()
 

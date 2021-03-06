@@ -41,6 +41,7 @@ font_data = ExtResource( 2 )
 
 [sub_resource type="SpatialMaterial" id=8]
 flags_unshaded = true
+albedo_color = Color( 0.760784, 0.760784, 0.760784, 1 )
 albedo_texture = ExtResource( 1 )
 
 [sub_resource type="PlaneMesh" id=9]
@@ -63,6 +64,8 @@ panorama = ExtResource( 18 )
 [sub_resource type="Environment" id=15]
 background_mode = 2
 background_sky = SubResource( 14 )
+ambient_light_energy = 0.0
+auto_exposure_scale = 0.3
 
 [node name="World" type="Spatial"]
 
