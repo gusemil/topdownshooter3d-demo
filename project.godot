@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "Powerup",
 "language": "GDScript",
 "path": "res://scripts/Powerup.gd"
+}, {
+"base": "Reference",
+"class": "Upgrade",
+"language": "GDScript",
+"path": "res://scripts/Upgrade.gd"
 } ]
 _global_script_class_icons={
 "HitBox": "",
 "Pickup": "",
-"Powerup": ""
+"Powerup": "",
+"Upgrade": ""
 }
 
 [application]

@@ -159,9 +159,9 @@ __meta__ = {
 position = Vector2( -6.79522, 496.013 )
 
 [node name="ContinueButton" type="Button" parent="GameManager/PauseCanvas/PauseNode/Buttons"]
-margin_left = 474.913
+margin_left = 475.0
 margin_top = -250.0
-margin_right = 867.913
+margin_right = 787.0
 margin_bottom = -44.0
 icon = ExtResource( 5 )
 flat = true
@@ -182,9 +182,9 @@ __meta__ = {
 }
 
 [node name="RestartButton" type="Button" parent="GameManager/PauseCanvas/PauseNode/Buttons"]
-margin_left = 474.913
+margin_left = 475.0
 margin_top = -75.0
-margin_right = 867.913
+margin_right = 787.0
 margin_bottom = 131.0
 icon = ExtResource( 5 )
 flat = true
@@ -205,9 +205,9 @@ __meta__ = {
 }
 
 [node name="MainMenuButton" type="Button" parent="GameManager/PauseCanvas/PauseNode/Buttons"]
-margin_left = 474.913
+margin_left = 475.0
 margin_top = 100.0
-margin_right = 867.913
+margin_right = 787.0
 margin_bottom = 306.0
 icon = ExtResource( 5 )
 flat = true
@@ -228,9 +228,9 @@ __meta__ = {
 }
 
 [node name="QuitButton" type="Button" parent="GameManager/PauseCanvas/PauseNode/Buttons"]
-margin_left = 474.913
+margin_left = 475.0
 margin_top = 250.0
-margin_right = 867.913
+margin_right = 787.0
 margin_bottom = 456.0
 icon = ExtResource( 5 )
 flat = true
