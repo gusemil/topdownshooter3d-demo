@@ -7,7 +7,7 @@ const boss_pickup_drop_chance = 1
 var ammo_machinegun_prefab = preload("res://scenes/Pickups/Machinegun_Ammo_Pickup.tscn")
 var ammo_shotgun_prefab = preload("res://scenes/Pickups/Shotgun_Ammo_Pickup.tscn")
 var ammo_rocketlauncher_prefab = preload("res://scenes/Pickups/RocketLauncher_Ammo_Pickup.tscn")
-var ammo_lightning_gun_prefab = preload("res://scenes/Pickups/LightningGun_Ammo_Pickup.tscn")
+#var ammo_lightning_gun_prefab = preload("res://scenes/Pickups/LightningGun_Ammo_Pickup.tscn")
 
 var health_pickup_prefab = preload("res://scenes/Pickups/Health_Pickup.tscn")
 var armor_pickup_prefab = preload("res://scenes/Pickups/Armor_Pickup.tscn")
@@ -31,7 +31,7 @@ func _ready():
 	pickup_prefabs.push_back(ammo_machinegun_prefab)
 	pickup_prefabs.push_back(ammo_shotgun_prefab)
 	pickup_prefabs.push_back(ammo_rocketlauncher_prefab)
-	pickup_prefabs.push_back(ammo_lightning_gun_prefab)
+	#pickup_prefabs.push_back(ammo_lightning_gun_prefab)
 
 	pickup_prefabs.push_back(health_pickup_prefab)
 	pickup_prefabs.push_back(armor_pickup_prefab)

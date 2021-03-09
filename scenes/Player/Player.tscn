@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=2]
+[gd_scene load_steps=91 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/WeaponManager.gd" type="Script" id=2]
@@ -8,8 +8,6 @@
 [ext_resource path="res://scenes/ProjectileSpawner.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scripts/PickupManager.gd" type="Script" id=7]
 [ext_resource path="res://scripts/PowerupManager.gd" type="Script" id=8]
-[ext_resource path="res://graphics/textures/metal.jpg" type="Texture" id=9]
-[ext_resource path="res://graphics/materials/lightning_gun_material.material" type="Material" id=10]
 [ext_resource path="res://graphics/materials/undying_psx_material.material" type="Material" id=11]
 [ext_resource path="res://scenes/Pickups/QuadPowerUpEffect.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/Pickups/SpeedPowerUpEffect.tscn" type="PackedScene" id=13]
@@ -18,8 +16,6 @@
 [ext_resource path="res://scripts/PlayerHUD.gd" type="Script" id=16]
 [ext_resource path="res://graphics/fonts/AmazDooMLeft.ttf" type="DynamicFontData" id=17]
 [ext_resource path="res://scripts/PlayerUIManager.gd" type="Script" id=18]
-[ext_resource path="res://icon.png" type="Texture" id=19]
-[ext_resource path="res://scripts/UpgradeManager.gd" type="Script" id=20]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type spatial;
@@ -785,21 +781,6 @@ shader_param/fog_color = Color( 0.5, 0.7, 1, 1 )
 shader_param/min_fog_distance = 100.0
 shader_param/max_fog_distance = 100.0
 shader_param/uv_pan_velocity = Vector2( 0, 0 )
-
-[sub_resource type="ShaderMaterial" id=26]
-shader = ExtResource( 15 )
-shader_param/precision_multiplier = 7.0
-shader_param/modulate_color = Color( 1, 1, 1, 1 )
-shader_param/uv_scale = Vector2( 1, 1 )
-shader_param/uv_offset = Vector2( 0, 0 )
-shader_param/color_depth = 15
-shader_param/dither_enabled = true
-shader_param/fog_enabled = false
-shader_param/fog_color = Color( 0.5, 0.7, 1, 1 )
-shader_param/min_fog_distance = 100.0
-shader_param/max_fog_distance = 100.0
-shader_param/uv_pan_velocity = Vector2( 5, 5 )
-shader_param/albedoTex = ExtResource( 9 )
 
 [sub_resource type="Curve" id=27]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.217045 ), 0.0, 0.0, 0, 0 ]
@@ -7024,6 +7005,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -1 )
 visible = false
 script = ExtResource( 4 )
 automatic_fire = true
+damage = 3
 ammo = -1
 max_ammo = -1
 
@@ -7149,39 +7131,6 @@ transform = Transform( -1, 0, 3.25841e-07, 0, 1, 0, -3.25841e-07, 0, -1, 0, 0.51
 
 [node name="HitScanBulletSpawner" parent="WeaponManager/Weapons/Minigun/BulletSpawners" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 2.84217e-14, 0, 1, 0, -2.84217e-14, 0, 1, -0.150048, 0.17393, 1.89383 )
-
-[node name="LightningGun" type="Spatial" parent="WeaponManager/Weapons"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -1 )
-visible = false
-script = ExtResource( 4 )
-automatic_fire = true
-damage = 1
-ammo = 500
-max_ammo = 2000
-fire_rate = 0.01
-
-[node name="LightningGunGraphics" type="Spatial" parent="WeaponManager/Weapons/LightningGun"]
-transform = Transform( -2.5, 0, -9.73536e-07, 0, 2.5, 0, 9.73536e-07, 0, -2.5, 0.310849, 0.573811, -0.477798 )
-
-[node name="Rifle" type="MeshInstance" parent="WeaponManager/Weapons/LightningGun/LightningGunGraphics"]
-transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 0, -0.0944908, 0 )
-mesh = SubResource( 7 )
-material/0 = ExtResource( 10 )
-material/1 = null
-material/2 = null
-
-[node name="Flash" type="MeshInstance" parent="WeaponManager/Weapons/LightningGun/LightningGunGraphics"]
-transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 0.000674933, 0.0943628, 0.596853 )
-visible = false
-mesh = SubResource( 11 )
-material/0 = SubResource( 26 )
-
-[node name="BulletSpawners" type="Spatial" parent="WeaponManager/Weapons/LightningGun"]
-transform = Transform( -1, 0, 3.25841e-07, 0, 1, 0, -3.25841e-07, 0, -1, 0, 0.510188, 0 )
-
-[node name="HitScanBulletSpawner" parent="WeaponManager/Weapons/LightningGun/BulletSpawners" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 2.84217e-14, 0, 1, 0, -2.84217e-14, 0, 1, -0.150048, 0.17393, 1.89383 )
-is_lightning_gun = true
 
 [node name="FirePoint" type="Spatial" parent="WeaponManager"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.348694, 1.55154, -3.08891 )
@@ -7497,93 +7446,11 @@ one_shot = true
 [node name="AmmoTimer" type="Timer" parent="CanvasLayer"]
 wait_time = 2.0
 one_shot = true
-
-[node name="UpgradeManager" type="Node" parent="CanvasLayer"]
-script = ExtResource( 20 )
-
-[node name="UpgradeHUDController" type="Node2D" parent="CanvasLayer/UpgradeManager"]
-position = Vector2( 7.85724, -141.43 )
-
-[node name="UpgradeButton1" type="Button" parent="CanvasLayer/UpgradeManager/UpgradeHUDController"]
-margin_left = 78.1366
-margin_top = 243.825
-margin_right = 154.137
-margin_bottom = 313.825
-icon = ExtResource( 19 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="CanvasLayer/UpgradeManager/UpgradeHUDController/UpgradeButton1"]
-margin_left = -32.1919
-margin_top = 76.619
-margin_right = 117.808
-margin_bottom = 117.619
-custom_fonts/font = SubResource( 75 )
-custom_colors/font_color = Color( 0, 1, 0.12549, 1 )
-text = "UPGRADE 1"
-align = 1
-autowrap = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="UpgradeButton2" type="Button" parent="CanvasLayer/UpgradeManager/UpgradeHUDController"]
-margin_left = 261.402
-margin_top = 247.371
-margin_right = 337.402
-margin_bottom = 317.371
-icon = ExtResource( 19 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="CanvasLayer/UpgradeManager/UpgradeHUDController/UpgradeButton2"]
-margin_left = -32.1919
-margin_top = 75.4966
-margin_right = 117.808
-margin_bottom = 116.497
-custom_fonts/font = SubResource( 75 )
-custom_colors/font_color = Color( 0, 1, 0.12549, 1 )
-text = "UPGRADE 2"
-align = 1
-autowrap = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="UpgradeButton3" type="Button" parent="CanvasLayer/UpgradeManager/UpgradeHUDController"]
-margin_left = 445.382
-margin_top = 247.192
-margin_right = 521.382
-margin_bottom = 317.192
-icon = ExtResource( 19 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="CanvasLayer/UpgradeManager/UpgradeHUDController/UpgradeButton3"]
-margin_left = -33.3144
-margin_top = 75.4966
-margin_right = 116.686
-margin_bottom = 116.497
-custom_fonts/font = SubResource( 75 )
-custom_colors/font_color = Color( 0, 1, 0.12549, 1 )
-text = "UPGRADE 3"
-align = 1
-autowrap = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 [connection signal="player_death" from="." to="WeaponManager" method="player_is_dead"]
 [connection signal="ammo_changed" from="WeaponManager" to="CanvasLayer/PlayerHUD" method="update_ammo"]
 [connection signal="ammo_changed" from="WeaponManager/Weapons/MachineGun" to="CanvasLayer/PlayerHUD" method="update_ammo"]
 [connection signal="ammo_changed" from="WeaponManager/Weapons/Shotgun" to="CanvasLayer/PlayerHUD" method="update_ammo"]
 [connection signal="ammo_changed" from="WeaponManager/Weapons/RocketLauncher" to="CanvasLayer/PlayerHUD" method="update_ammo"]
 [connection signal="ammo_changed" from="WeaponManager/Weapons/Minigun" to="CanvasLayer/PlayerHUD" method="update_ammo"]
-[connection signal="ammo_changed" from="WeaponManager/Weapons/LightningGun" to="CanvasLayer/PlayerHUD" method="update_ammo"]
 [connection signal="armor_changed" from="HealthManager" to="CanvasLayer/PlayerHUD" method="update_armor"]
 [connection signal="health_changed" from="HealthManager" to="CanvasLayer/PlayerHUD" method="update_health"]
-[connection signal="button_up" from="CanvasLayer/UpgradeManager/UpgradeHUDController/UpgradeButton1" to="CanvasLayer/UpgradeManager" method="test"]
-[connection signal="button_up" from="CanvasLayer/UpgradeManager/UpgradeHUDController/UpgradeButton2" to="CanvasLayer/UpgradeManager" method="apply_upgrade" binds= [ 1 ]]
-[connection signal="button_up" from="CanvasLayer/UpgradeManager/UpgradeHUDController/UpgradeButton3" to="CanvasLayer/UpgradeManager" method="apply_upgrade" binds= [ 2 ]]

@@ -1,0 +1,90 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/UpgradeManager.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://graphics/fonts/AmazDooMLeft.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=75]
+size = 32
+font_data = ExtResource( 3 )
+
+[node name="UpgradeManager" type="Node"]
+script = ExtResource( 1 )
+
+[node name="UpgradeHUDController" type="Node2D" parent="."]
+position = Vector2( 7.85724, -141.43 )
+
+[node name="UpgradeButton1" type="Button" parent="UpgradeHUDController"]
+margin_left = 78.1366
+margin_top = 243.825
+margin_right = 154.137
+margin_bottom = 313.825
+icon = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UpgradeHUDController/UpgradeButton1"]
+margin_left = -32.1919
+margin_top = 76.619
+margin_right = 117.808
+margin_bottom = 117.619
+custom_fonts/font = SubResource( 75 )
+custom_colors/font_color = Color( 0, 1, 0.12549, 1 )
+text = "UPGRADE 1"
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UpgradeButton2" type="Button" parent="UpgradeHUDController"]
+margin_left = 261.402
+margin_top = 247.371
+margin_right = 337.402
+margin_bottom = 317.371
+icon = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UpgradeHUDController/UpgradeButton2"]
+margin_left = -32.1919
+margin_top = 75.4966
+margin_right = 117.808
+margin_bottom = 116.497
+custom_fonts/font = SubResource( 75 )
+custom_colors/font_color = Color( 0, 1, 0.12549, 1 )
+text = "UPGRADE 2"
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UpgradeButton3" type="Button" parent="UpgradeHUDController"]
+margin_left = 445.382
+margin_top = 247.192
+margin_right = 521.382
+margin_bottom = 317.192
+icon = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UpgradeHUDController/UpgradeButton3"]
+margin_left = -33.3144
+margin_top = 75.4966
+margin_right = 116.686
+margin_bottom = 116.497
+custom_fonts/font = SubResource( 75 )
+custom_colors/font_color = Color( 0, 1, 0.12549, 1 )
+text = "UPGRADE 3"
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="button_up" from="UpgradeHUDController/UpgradeButton1" to="." method="test"]
+[connection signal="button_up" from="UpgradeHUDController/UpgradeButton2" to="." method="apply_upgrade" binds= [ 1 ]]
+[connection signal="button_up" from="UpgradeHUDController/UpgradeButton3" to="." method="apply_upgrade" binds= [ 2 ]]

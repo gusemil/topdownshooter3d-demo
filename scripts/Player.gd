@@ -150,6 +150,7 @@ func controller_move_cursor(delta):
 func move(delta):
 	if !dead:
 		move_direction = Vector3()
+		var horizontal_move : bool = false
 		var camera_basis = camera.get_global_transform().basis
 		if Input.is_action_pressed("move_forward" + player_number):
 			move_direction -= camera_basis.z
@@ -157,15 +158,21 @@ func move(delta):
 			move_direction += camera_basis.z
 		if Input.is_action_pressed("move_left" + player_number):
 			move_direction -= camera_basis.x
+			horizontal_move = true
 		elif Input.is_action_pressed("move_right" + player_number):
 			move_direction += camera_basis.x
+			horizontal_move = true
 		move_direction.y = 0
 		move_direction = move_direction.normalized()
 		if Input.is_action_just_pressed("dash" + player_number) and (can_dash or is_speed_boost_on):
 			velocity += move_direction*speed*delta*dash_speed
 			start_dash_delay()
 		else:
-			velocity += move_direction*speed*delta
+			if is_coop and horizontal_move:
+				velocity += move_direction*speed*2*delta
+			else:
+				velocity += move_direction*speed*delta
+		horizontal_move = false
 
 func animate_move():
 	if !dead and !game_manager.is_pause:
